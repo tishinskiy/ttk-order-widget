@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+	<h1>12345</h1>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ea officia quibusdam, autem soluta dignissimos illum vitae pariatur quasi, temporibus quidem. Obcaecati impedit nam pariatur animi, eos maxime reiciendis culpa?</p>
+	<div id="order_1">hello</div>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, nihil quasi quos laboriosam delectus at ad reiciendis enim maxime, excepturi tempore corporis incidunt reprehenderit consectetur tempora suscipit temporibus aut obcaecati.</p>
+	<div id="order_2">hello</div>
+	<script type="text/javascript" src="jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="order-widget_2.js"></script>
+	<script>
+		$('#order_1').ttkOrderWidget({
+			test: 5,
+			clear: false
+		})
+		$('#order_2').ttkOrderWidget()
+	</script>
+</body>
+</html>
