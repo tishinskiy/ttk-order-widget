@@ -15,10 +15,12 @@
 	<script type="text/javascript" src="order-widget_2.js"></script>
 	<script>
 		$('#order_1').ttkOrderWidget({
-			test: 5,
-			clear: false
 		})
-		$('#order_2').ttkOrderWidget()
+		$('#order_2').ttkOrderWidget({
+			test: 5,
+			clear: false,
+			styles: false,
+		})
 	</script>
 </body>
 </html>

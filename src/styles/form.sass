@@ -1,0 +1,67 @@
+.ttk__order-widget
+
+	.ttk__input__wrap
+		position: relative
+		background-color: #fff
+		border-radius: 3px
+		margin: 10px
+
+
+	.ttk__input__wrap--button
+		border: 0
+
+	.ttk__input
+		position: relative
+		display: block
+		width: 100%
+		z-index: 3
+		background-color: transparent
+		border: 0
+		padding: 20px 15px 10px 
+		border-radius: 3px
+		border: 1px solid #ccc
+		font-size: 16px
+		font-family: 'PTSans', Arial, Helvetica, sans-serif
+
+		&:focus
+			border-color: #777
+
+		&:-internal-autofill-selected
+			z-index: 1
+
+
+	.ttk__input__label
+		position: absolute
+		font-size: 16px
+		z-index: 2
+		top: 15px
+		left: 15px
+		color: #333
+		transition: 0.2s linear
+		user-select: none
+		cursor: auto
+
+	.ttk__input__label--focused
+		border-color: #555
+		color: #ccc
+		top: 7px
+		font-size: 12px
+
+	.ttk__button
+		display: block
+		width: 100%
+		font-size: 16px
+		font-family: 'PTSans', Arial, Helvetica, sans-serif
+		color: #fff
+		padding: 15px
+		text-align: center
+		background-color: #E21A1A
+		border: 1px solid #C60C0C
+		border-radius: 3px
+		cursor: pointer
+		text-transform: uppercase
+
+		// &:focus,
+		&:hover
+			background-color: #C60C0C
+
