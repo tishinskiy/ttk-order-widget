@@ -2,8 +2,18 @@ import './styles/main.sass'
 import defaultParams from './scripts/defaultParams'
 import buildWidget   from './scripts/buildWidget'
 import fieldsAction  from './scripts/fieldsAction'
+import sendButtonActions  from './scripts/sendButtonActions'
 
 ;(function($) {
+
+	// const a = {
+	// 	a:'a',
+	// 	b:'b',
+	// 	c:'c',
+	// 	d:'d',
+	// }
+
+	// console.log(a?.a)
 
 	$.fn.ttkOrderWidget = function(params) {
 
@@ -25,6 +35,7 @@ import fieldsAction  from './scripts/fieldsAction'
 		const { inputs, sendButton } = buildWidget.call(this, params.fields)
 
 		fieldsAction(inputs)
+		sendButtonActions(sendButton)
 
 		console.log('sendButton', sendButton)
 
