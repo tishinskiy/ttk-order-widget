@@ -1,6 +1,4 @@
-export default function(name, event){
-
-	console.log(name, $(this).val())
+export default function(name: string, event: string){
 
 	switch (name) {
 		case 'city':

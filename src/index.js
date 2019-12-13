@@ -6,15 +6,6 @@ import sendButtonActions  from './scripts/sendButtonActions'
 
 ;(function($) {
 
-	// const a = {
-	// 	a:'a',
-	// 	b:'b',
-	// 	c:'c',
-	// 	d:'d',
-	// }
-
-	// console.log(a?.a)
-
 	$.fn.ttkOrderWidget = function(params) {
 
 		params = {

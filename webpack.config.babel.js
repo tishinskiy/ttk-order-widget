@@ -29,6 +29,10 @@ export default {
 				loader: 'babel-loader',
 			},
 			{
+				test: /\.ts$/,
+				loader: 'ts-loader',
+			},
+			{
 				test: /\.(c|s[ac])ss$/,
 				use: [
 					// MiniCssExtractPlugin.loader,

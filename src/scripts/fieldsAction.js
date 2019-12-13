@@ -1,4 +1,4 @@
-import fieldsInpitAction from './fieldsInpitAction'
+import fieldsInpitAction from './fieldsInpitAction.ts'
 
 export default function(inputs) {
 
@@ -9,7 +9,7 @@ export default function(inputs) {
 
 		inputs[key].on('input focus focusout', function(event){
 			console.log(event.type)
-			fieldsInpitAction.call(this, key)
+			fieldsInpitAction.call(this, key, 7)
 		})
 
 	}
