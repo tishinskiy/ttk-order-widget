@@ -1,4 +1,5 @@
-export default function(name: string, event: string){
+export default function(name){
+
 
 	switch (name) {
 		case 'city':

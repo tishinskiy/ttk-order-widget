@@ -3,6 +3,7 @@ import defaultParams from './scripts/defaultParams'
 import buildWidget   from './scripts/buildWidget'
 import fieldsAction  from './scripts/fieldsAction'
 import sendButtonActions  from './scripts/sendButtonActions'
+import cityInit from './scripts/cityInit'
 
 ;(function($) {
 
@@ -23,12 +24,12 @@ import sendButtonActions  from './scripts/sendButtonActions'
 			this.html('')
 		}
 
+
 		const { inputs, sendButton } = buildWidget.call(this, params.fields)
 
+		cityInit.call(inputs.city, params.currentCity)
 		fieldsAction(inputs)
 		sendButtonActions(sendButton)
-
-		console.log('sendButton', sendButton)
 
 	}
 

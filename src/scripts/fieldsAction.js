@@ -1,4 +1,5 @@
-import fieldsInpitAction from './fieldsInpitAction.ts'
+import fieldsActionInpit from './fieldsActionInpit'
+import fieldsActionFocus from './fieldsActionFocus'
 
 export default function(inputs) {
 
@@ -8,8 +9,23 @@ export default function(inputs) {
 		fields.push(inputs[key][0])
 
 		inputs[key].on('input focus focusout', function(event){
-			console.log(event.type)
-			fieldsInpitAction.call(this, key, 7)
+
+
+			switch (event.type) {
+
+				case 'focus':
+					console.log('focus')
+					fieldsActionFocus.call(this, key,)
+					break
+
+				case 'input':
+					console.log('input')
+					fieldsActionInpit.call(this, key,)
+					break
+
+				default:
+					break
+			}
 		})
 
 	}
