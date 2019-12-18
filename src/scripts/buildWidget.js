@@ -20,10 +20,10 @@ export default function() {
 
 		const { block, input } = createInputBlock(key, fields[key])
 		blocks[key] = block
-		inputs[key] = input
+		inputs[key] = input[0]
 	}
 
-	const {button:sendButton} = buildWidgetDOM.call(this, blocks)
+	const { button:sendButton } = buildWidgetDOM.call(this, blocks)
 
 	return { inputs, sendButton }
 }

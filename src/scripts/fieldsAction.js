@@ -6,9 +6,9 @@ export default function(inputs) {
 	const fields = $()
 
 	for (let key in inputs) {
-		fields.push(inputs[key][0])
+		fields.push(inputs[key])
 
-		inputs[key].on('input focus focusout', function(event){
+		$(inputs[key]).on('input focus focusout', function(event){
 
 
 			switch (event.type) {

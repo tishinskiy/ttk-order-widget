@@ -1,12 +1,20 @@
+import getWidgetStore from './getWidgetStore'
+
 export default function (params) {
+
+	const thas = $(this)
 
 	if (params) {
 
-		this.val(params['EXTERNAL_NAME'])
+		thas.val(params['EXTERNAL_NAME'])
+
+		getWidgetStore.call(this).City.updateState( state => ({
+			...params
+		}))
 	}
 
-	if (this.val() !== '') {
+	if (thas.val() !== '') {
 
-		this.next('label').addClass('ttk__input__label--focused')
+		thas.next('label').addClass('ttk__input__label--focused')
 	}
 }
