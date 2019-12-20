@@ -12,9 +12,9 @@ export default function( inputs ) {
 		action() {
 
 			$(inputs.city).val(Store.City.readState().current['EXTERNAL_NAME'])
-			$(inputs.street).val('')
-			$(inputs.building).val('')
-			$(inputs.street).val('')
+			$(inputs.street).val('').siblings('label').removeClass('ttk__input__label--focused')
+			$(inputs.building).val('').siblings('label').removeClass('ttk__input__label--focused')
+			$(inputs.street).val('').siblings('label').removeClass('ttk__input__label--focused')
 		}
 	})
 

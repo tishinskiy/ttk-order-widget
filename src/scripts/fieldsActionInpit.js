@@ -1,10 +1,20 @@
+import addDropDown from './addDropDown'
+
 export default function(name){
 
-	console.log($(this))
+	const thas = this
 
 	switch (name) {
 		case 'city':
-			console.log('city')
+
+			thas.dropdown.filterDropList(list => {
+
+				return list.filter(item => {
+
+					return (item['EXTERNAL_NAME'].toLowerCase().indexOf($(thas).val().toLowerCase()) != -1)
+				})
+			})
+			addDropDown.call(thas, thas.dropdown.buildDropList('city'))
 			break
 
 		default:
