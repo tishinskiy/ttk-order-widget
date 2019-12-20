@@ -2,20 +2,11 @@ const _Store = class {
 
 	constructor(state = {}) {
 		this.state = state;
-		this.observers = new Set();
-	}
-
-	addObserver(observer) {
-		this.observers.add(observer);
-	}
-
-	removeObserver(observer) {
-		this.observers.delete(observer);
 	}
 
 	updateState(updater) {
 		this.state = updater(this.state);
-		this.notifyObservers();
+		console.log('updateState => ', this.state)
 	}
 
 	readState() {
@@ -26,36 +17,43 @@ const _Store = class {
 		this.state = {}
 		this.notifyObservers();
 	}
-	
-	notifyObservers() {
-		for (let observer of this.observers) {
-			observer(this.state);
-		}
-	}
 }
 
 const Store = new _Store()
 
-const createStore = function(key) {
+const createStore = (key = false) => {
 
-	const City = new _Store();
-	const Requests = new _Store();
-	const Street = new _Store();
-	const Building = new _Store();
-	const Autocomplite = new _Store();
+	if (!!key) {
 
+		const City = new _Store();
+		const Requests = new _Store();
+		const Street = new _Store();
+		const Building = new _Store();
+		const Autocomplite = new _Store();
 
-	Store.updateState(state => ({
-		...state,
-		[key]: { City, Requests, Street, Building, Autocomplite }
-	}))
+		Store.updateState(state => ({
+			...state,
+			[key]: { City, Requests, Street, Building, Autocomplite }
+		}))
+
+		return Store.readState()[key]
+	}
+
+	else {
+		const err = new Error('WTF')
+		console.log('err', err)
+		return err
+	}
 
 }
 
-const readStore = function(key) {
+const readStore = function() {
 
-	return [key] in Store.readState() ? Store.readState()[key] : false
+	const thas = !!this.length ? this : $(this)
+	const key = !!thas.attr('ttk-widget-key') ? thas.attr('ttk-widget-key') : thas.closest('[ttk-widget-key]').attr('ttk-widget-key')
+
+	return [key] in Store.readState() ? Store.readState()[key] : createStore(key)
 }
 
 
-export { createStore, readStore }
+export { readStore }

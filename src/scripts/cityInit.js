@@ -1,16 +1,15 @@
-import getWidgetStore from './getWidgetStore'
+import { readStore } from './Store'
+import changeCity from './changeCity'
 
 export default function (params) {
 
 	const thas = $(this)
 
+	const store = readStore.call(thas).City
+
 	if (params) {
 
-		thas.val(params['EXTERNAL_NAME'])
-
-		getWidgetStore.call(this).City.updateState( state => ({
-			...params
-		}))
+		changeCity.call(this, params, store)
 	}
 
 	if (thas.val() !== '') {

@@ -1,21 +1,27 @@
 import jsonpRequest from './jsonpReqyest'
 import createDropDown from './dropDown'
+import addDropDown from './addDropDown'
+import {readStore} from './Store'
 
 export default function(name){
 
 	const thas = this
 
-	console.log('thas', thas.Store)
+	const Store = readStore.call(this)
 
 
 	switch (name) {
 		case 'city':
 
+			$(thas)
+				.val('')
+				.attr('placeholder', 'current' in Store.City.readState() ? Store.City.readState().current['EXTERNAL_NAME'] : '')
+
 			if (!('dropdown' in thas)) {
 
-				thas.dropdown = createDropDown(this.Store)
+				thas.dropdown = createDropDown(Store)
 			}
-			if (!('cities' in this.Store.Requests.readState())) {
+			if (!('cities' in Store.Requests.readState())) {
 
 				;( async function() {
 
@@ -23,22 +29,14 @@ export default function(name){
 
 						const result = await jsonpRequest('https://gate.myttk.ru/gate/jsonp/city.php', {name: thas.Store.City.readState()['EXTERNAL_NAME']})
 
-
 						thas.Store.Requests.updateState(state => ({
 							...state,
 							cities: result.results
 						}))
 
 						thas.dropdown.createDropList(result.results)
-
-						thas.Store.City.updateState(state => ({
-							...state,
-							cities: result.current
-						}))
-
 						thas.dropdown.filterDropList(list => ([...list]))
-						console.log(thas.dropdown.buildDropList('city'))
-
+						addDropDown.call(thas, thas.dropdown.buildDropList('city'))
 
 					} catch(error) {
 
@@ -49,12 +47,9 @@ export default function(name){
 			} else {
 
 				thas.dropdown.filterDropList(list => ([...list]))
-				thas.dropdown.buildDropList('city')
+				addDropDown.call(thas, thas.dropdown.buildDropList('city'))
 			}
 
-			console.log('thas.dropdown', thas.dropdown)
-			
-			$(...thas.dropdown.buildDropList('city')).insertAfter($(thas))
 
 			break
 

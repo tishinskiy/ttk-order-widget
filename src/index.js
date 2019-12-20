@@ -5,14 +5,13 @@ import buildWidget   from './scripts/buildWidget'
 import fieldsAction  from './scripts/fieldsAction'
 import sendButtonActions  from './scripts/sendButtonActions'
 import cityInit from './scripts/cityInit'
-import { createStore, readStore } from './scripts/Store'
-
+import { readStore } from './scripts/Store'
+import observerBehaviors from './scripts/observerBehaviors'
 
 
 ;(function($) {
 
 	$.fn.ttkOrderWidget = function(params) {
-
 
 
 
@@ -24,12 +23,8 @@ import { createStore, readStore } from './scripts/Store'
 
 		const key = (new Date()).getTime()
 
-		createStore(key)
-		this.Store = readStore(key)
-
-		console.log(this)
-
 		this.attr('ttk-widget-key', key)
+		this.Store = readStore.call(this)
 
 		if ( params.styles ) {
 
@@ -44,20 +39,17 @@ import { createStore, readStore } from './scripts/Store'
 
 		const { inputs, sendButton } = buildWidget.call(this, params.fields)
 
-		console.log(inputs)
-
 		for (let i in inputs) {
 
 			inputs[i].Store = this.Store
 		}
 
-
+		observerBehaviors.call(this, inputs)
 
 		cityInit.call(inputs.city, params.currentCity)
 		fieldsAction(inputs)
 		sendButtonActions(sendButton)
 
-		console.log('Store', this.Store)
 	}
 
 })(jQuery)
