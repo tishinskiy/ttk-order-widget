@@ -10,5 +10,8 @@ export default function (newCity, store) {
 		}))
 
 		getObserver.call(this).Observable.eventEmitter('changeCity')
+	} else {
+
+		$(this).closest('.ttk__input__wrap').find('.ttk__input').val(newCity['EXTERNAL_NAME'])
 	}
 }

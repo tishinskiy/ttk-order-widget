@@ -19,8 +19,8 @@ const DropList = class {
 		return this.filterList
 	}
 
-	buildDropList(name) {
-		return buildDropList(name, this.filterList)
+	buildDropList(name, str = false, current = false) {
+		return buildDropList(name, this.filterList, str, current)
 	}
 }
 

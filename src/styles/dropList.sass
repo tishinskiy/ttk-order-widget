@@ -7,7 +7,7 @@
 		background-color: #fff
 		font-size: 0
 		overflow-y: scroll
-		max-height: 200px
+		max-height: 500px
 		box-shadow: 0 5px 5px #ccc
 
 	.ttk__droplist
@@ -20,7 +20,23 @@
 		text-decoration: none
 		color: #333
 
+		span
+			color: #0854FF
+
+		&.ttk__droplist__item--focused,
 		&:hover,
 		&:focus
-			background-color: #022980
+			background-color: #0036AD
+			border-color: #0036AD
 			color: #fff
+
+			span
+				color: #A4C0FF
+
+		&.ttk__droplist__item--selected,
+			background-color: #022980
+			border-color: #022980
+			color: #fff
+
+			span
+				color: #A4C0FF
