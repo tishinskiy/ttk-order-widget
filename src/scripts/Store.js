@@ -30,10 +30,11 @@ const createStore = (key = false) => {
 		const Street = new _Store();
 		const Building = new _Store();
 		const Autocomplite = new _Store();
+		const EventBus = new _Store();
 
 		Store.updateState(state => ({
 			...state,
-			[key]: { City, Requests, Street, Building, Autocomplite }
+			[key]: { City, Requests, Street, Building, Autocomplite, EventBus }
 		}))
 
 		return Store.readState()[key]

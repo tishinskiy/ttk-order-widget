@@ -20,18 +20,29 @@ export default (name = false, list = [], str = false, current = false) => {
 
 				href: 'javascript:;',
 				html,
-				class:`ttk__droplist__item ${item['INTERNAL_ID'] == current['INTERNAL_ID'] ? 'ttk__droplist__item--selected' : ''}`
+				class:`ttk__droplist__item ${item['INTERNAL_ID'] == current['INTERNAL_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`
 			})
 
-			link.click(function() {
+			link
+				.click(function() {
 
-				$(this).closest('.ttk__input__droplist').css({
-					display: 'none'
+					$(this).closest('.ttk__input__droplist').css({
+						display: 'none'
+					})
+
+					changeCity.call(this, item, readStore.call(this).City)
+
 				})
 
-				changeCity.call(this, item, readStore.call(this).City)
+				.hover(function(e) {
 
-			})
+					if ( !readStore.call(this).EventBus.readState().droplistItemBloc ) {
+
+						$(this).siblings('.ttk__droplist__item--focused').removeClass('ttk__droplist__item--focused')
+						$(this).addClass('ttk__droplist__item--focused')
+					}
+
+				})
 
 			return link
 		})

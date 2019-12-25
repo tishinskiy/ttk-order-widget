@@ -3,6 +3,7 @@ import createDropDown from './dropDown'
 import addDropDown from './addDropDown'
 import {readStore} from './Store'
 import sortItems from './sortItems'
+import scrollDroplist from './scrollDroplist'
 // import changeCity from './changeCity'
 
 export default function(name){
@@ -17,6 +18,8 @@ export default function(name){
 		thas.dropdown.filterDropList(list => ([...list]))
 
 		addDropDown.call(thas, thas.dropdown.buildDropList('city', $(thas).val().length ? $(thas).val() : false, 'current' in Store.City.readState() ? Store.City.readState().current : false))
+
+		scrollDroplist.call(thas)
 	}
 
 	switch (name) {
@@ -38,7 +41,7 @@ export default function(name){
 
 						const result = await jsonpRequest('https://gate.myttk.ru/gate/jsonp/city.php', {name: thas.Store.City.readState()['EXTERNAL_NAME']})
 
-						thas.Store.Requests.updateState(state => ({
+						Store.Requests.updateState(state => ({
 							...state,
 							cities: sortItems(result.results)
 						}))
@@ -48,7 +51,7 @@ export default function(name){
 
 					} catch(error) {
 
-						console.log('error', error)
+						console.log('city error', error)
 						return false
 					}
 
@@ -56,33 +59,8 @@ export default function(name){
 			} else {
 
 				showDropdown(thas)
+
 			}
-
-
-
-			$(this).on('keydown', function(event){
-				console.log(event.key)
-				switch (event.key) {
-
-					case "ArrowDown":
-						console.log("ArrowDown")
-						return false
-						break
-
-					case "ArrowUp":
-						console.log("ArrowUp")
-						return false
-						break
-
-					case "Enter":
-						console.log("Enter")
-						return false
-						break
-
-					default:
-						break
-				}
-			})
 
 			break
 

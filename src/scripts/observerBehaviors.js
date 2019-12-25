@@ -10,8 +10,8 @@ export default function( inputs ) {
 	const changeCity = new Observer({
 		event: 'changeCity',
 		action() {
-
-			$(inputs.city).val(Store.City.readState().current['EXTERNAL_NAME'])
+			console.log($(inputs.city))
+			$(inputs.city).val(Store.City.readState().current['EXTERNAL_NAME']).blur()
 			$(inputs.street).val('').siblings('label').removeClass('ttk__input__label--focused')
 			$(inputs.building).val('').siblings('label').removeClass('ttk__input__label--focused')
 			$(inputs.street).val('').siblings('label').removeClass('ttk__input__label--focused')

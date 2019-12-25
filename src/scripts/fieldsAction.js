@@ -2,7 +2,8 @@ import fieldsActionInpit from './fieldsActionInpit'
 import fieldsActionFocus from './fieldsActionFocus'
 import fieldsActionblur from './fieldsActionblur'
 import {readStore} from './Store'
-
+import scrollDroplist from './scrollDroplist'
+import { hoverBlock } from './eventBusActions'
 
 export default function(inputs) {
 
@@ -45,10 +46,10 @@ export default function(inputs) {
 			.focusout(function(event) {
 
 				const thas = $(this)
-				console.log('thas', thas)
+
 				thas.attr('placeholder', '')
 
-				if ($(event.originalEvent.relatedTarget).hasClass('ttk__droplist__item')) {
+				if (event.originalEvent && $(event.originalEvent.relatedTarget).hasClass('ttk__droplist__item')) {
 					return false
 				}
 				if (!thas.val().length) {
@@ -60,6 +61,37 @@ export default function(inputs) {
 
 				thas.siblings('.ttk__input__droplist').hide()
 
+			})
+
+			.on('keydown', function(event){
+				switch (event.key) {
+
+					case "ArrowDown":
+					case "ArrowUp":
+
+						if (scrollDroplist.call(this, event.key)) hoverBlock.call(this)
+						return false
+						break
+
+					case "Enter":
+						console.log("Enter")
+
+						const dropList = $(this).siblings('.ttk__input__droplist')
+
+						if (dropList.length) {
+							const active = dropList.find('.ttk__droplist__item--focused')
+
+							if( !active.hasClass('ttk__droplist__item--selected') ) {
+								active.trigger('click');
+							}
+						}
+
+						return false
+						break
+
+					default:
+						break
+				}
 			})
 
 
