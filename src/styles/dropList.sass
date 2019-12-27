@@ -13,28 +13,41 @@
 	.ttk__droplist
 	.ttk__droplist__item
 		display: block
-		padding: 10px 15px
+		padding: 12px 15px
 		font-size: 16px
 		border: 1px solid #ccc
 		border-top: 0
 		text-decoration: none
+		line-height: 16px
 		color: #333
 
-		span
+		.ttk__droplist-item--blue
 			color: #0854FF
+
+		.ttk__droplist-item--gray
+			color: #aaa
+			font-size: 12px
+			line-height: 16px
 
 		&.ttk__droplist__item--focused
 			background-color: #0036AD
 			border-color: #0036AD
 			color: #fff
 
-			span
+			.ttk__droplist-item--blue
 				color: #A4C0FF
+			.ttk__droplist-item--gray
+				color: #eee
 
 		&.ttk__droplist__item--selected,
 			background-color: #022980
 			border-color: #022980
 			color: #fff
 
-			span
+			.ttk__droplist-item--blue
 				color: #A4C0FF
+			.ttk__droplist-item--gray
+				color: #eee
+
+	.ttk__droplist__item--street
+		padding-top: 10px

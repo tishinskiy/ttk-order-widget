@@ -10,14 +10,24 @@ export default function( inputs ) {
 	const changeCity = new Observer({
 		event: 'changeCity',
 		action() {
-			console.log($(inputs.city))
 			$(inputs.city).val(Store.City.readState().current['EXTERNAL_NAME']).blur()
 			$(inputs.street).val('').siblings('label').removeClass('ttk__input__label--focused')
 			$(inputs.building).val('').siblings('label').removeClass('ttk__input__label--focused')
-			$(inputs.street).val('').siblings('label').removeClass('ttk__input__label--focused')
+			$(inputs.city).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
 		}
 	})
 
-	Observable.addObserver([changeCity])
+	const changeStreet = new Observer({
+		event: 'changeStreet',
+		action() {
+			const street = Store.Street.readState().current
+			$(inputs.street).val(street['STREET_NAME'])
+			$(inputs.street).siblings('label').html(street['TYPE_NAME'])
+			$(inputs.street).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
+			$(inputs.building).val('').siblings('label').removeClass('ttk__input__label--focused')
+		}
+	})
+
+	Observable.addObserver([changeCity, changeStreet])
 
 }

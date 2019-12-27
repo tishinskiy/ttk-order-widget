@@ -4,6 +4,7 @@ import addDropDown from './addDropDown'
 import {readStore} from './Store'
 import sortItems from './sortItems'
 import scrollDroplist from './scrollDroplist'
+import streetDropDown from './streetDropDown'
 // import changeCity from './changeCity'
 
 export default function(name){
@@ -60,6 +61,17 @@ export default function(name){
 
 				showDropdown(thas)
 
+
+
+			}
+
+			break
+
+		case 'street': 
+
+			if ($(thas).val().length >= 3) {
+
+				streetDropDown.call(this)
 			}
 
 			break
