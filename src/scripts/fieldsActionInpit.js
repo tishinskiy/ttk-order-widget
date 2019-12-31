@@ -30,15 +30,15 @@ export default function(name){
 			if ($(thas).val().length < 3) {
 
 				$(thas).siblings('.ttk__input__droplist').remove()
+				return false
 			}
 
 			streetDropDown.call(this)
 
-
-			// }
 			break
 
 		default:
+
 			break
 	}
 }

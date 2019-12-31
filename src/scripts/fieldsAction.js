@@ -24,6 +24,12 @@ export default function(inputs) {
 
 					case 'input':
 						console.log('input')
+
+						if ($(this).val().indexOf(' ') === 0) {
+							$(this).val($(this).val().slice(0, 0))
+							return false
+						}
+
 						fieldsActionInpit.call(this, key)
 						break
 

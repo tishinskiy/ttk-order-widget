@@ -4,39 +4,118 @@ import {readStore} from './Store'
 import jsonpRequest from './jsonpReqyest'
 import createDropDown from './dropDown'
 import scrollDroplist from './scrollDroplist'
+import { typeInValue } from './streetTypes'
 
-export default function(){
+export default function(go = false){
 
 	const thas = this
 	const Store = readStore.call(thas)
 	const city = Store.City.readState().current
 
+	let str = $(thas).val()
+
+	let type = typeInValue(str)
+
+	console.log('type', type)
+
+	if (!!type) {
+
+		str = str.replace(type, '').replace(' ', '', 0)
+		$(thas).val(str)
+		$(thas).siblings('label').html(type)
+		Store.Street.updateState(state => ({
+			...state,
+			type
+		}))
+	}
+
+	const findStreetInAPI = async (str) => {
+
+		str = str.slice(0, 3)
+
+		try {
+
+			const result = await jsonpRequest('https://gate.myttk.ru/gate/jsonp/street.php', {
+					city: city['INTERNAL_ID'],
+					search: str
+				})
+
+			let results
+
+			try {
+
+				results = result.results
+			} catch(e) {
+
+				results = []
+			}
+
+			const newStreet = {
+				city: city['INTERNAL_ID'],
+				search: str,
+				results
+			}
+
+			Store.Requests.updateState(state => ({
+				...state,
+				street: !!state.street ? [ ...state.street, newStreet ] : [ newStreet ]
+			}))
+
+			return results
+
+		} catch(error) {
+
+			console.log('street error', error)
+			return false
+		}
+	}
+
 	const showDropdown = (thas) => {
 
 		thas.dropdown.filterDropList(list => {
 
-			const newList = list.filter(item => {
+			const type = Store.Street.readSate().type
 
-				return (item['STREET_NAME'].toLowerCase().indexOf($(thas).val().toLowerCase()) != -1)
-			})
+			if (!!type) {
 
-			const listName = sortItems(newList, $(thas).val(), 'STREET_NAME')
+				const newList = list.filter(item => {
 
-			const newList2 = list.filter(item => {
+					return (item['STREET_NAME'].toLowerCase() === type && item['TYPE_NAME'].toLowerCase().indexOf($(thas).val().toLowerCase()) != -1)
+				})
 
-				return (item['TYPE_NAME'].toLowerCase().indexOf($(thas).val().toLowerCase()) != -1)
-			})
+				return sortItems(newList, str, 'STREET_NAME')
 
-			const listType = sortItems(newList2, '', 'STREET_NAME')
+			} else {
 
-			return [...listName, ...listType]
+				const newList = list.filter(item => {
+
+					return (item['STREET_NAME'].toLowerCase().indexOf($(thas).val().toLowerCase().slice(0, 3)) != -1)
+				})
+
+				const listName = sortItems(newList, str, 'STREET_NAME')
+
+				const newList2 = list.filter(item => {
+
+					return (item['TYPE_NAME'].toLowerCase().indexOf($(thas).val().toLowerCase()) != -1)
+				})
+
+				const listType = sortItems(newList2, '', 'STREET_NAME')
+
+				return [...listName, ...listType]
+			}
+
 		})
 
-		if(addDropDown.call(thas, thas.dropdown.buildDropList('street', $(thas).val().length ? $(thas).val() : false, 'current' in Store.Street.readState() ? Store.Street.readState().current : false))) {
+
+
+		if(addDropDown.call(thas, thas.dropdown.buildDropList('street', str.length ? str : false, 'current' in Store.Street.readState() ? Store.Street.readState().current : false))) {
+
+			// console.log(111111111)
 
 			// scrollDroplist.call(thas)
 		}
 	}
+
 
 	if (!city) {
 		console.log('SHOW ERROR!!!')
@@ -47,74 +126,48 @@ export default function(){
 
 		let Result
 
-		const requests  = Store.Requests.readState()
+		const requests = Store.Requests.readState()
 
 		if ('street' in requests) {
 
 			const exist = requests.street.some(item => {
-				return item.city === city['INTERNAL_ID'] && item.search === $(thas).val()
+				return item.city === city['INTERNAL_ID'] && item.search === str.slice(0, 3)
 			})
 
 			if (exist) {
 
 				Result =  requests.street.filter(item => {
-					return item.city === city['INTERNAL_ID'] && item.search === $(thas).val()
+					return item.city === city['INTERNAL_ID'] && item.search === str.slice(0, 3)
 				})[0].results
 
 			}
 		}
 
+		console.log($(thas).val())
+
 		if (!Result) {
 
-			try {
-
-				const result = await jsonpRequest('https://gate.myttk.ru/gate/jsonp/street.php', {
-						city: city['INTERNAL_ID'],
-						search: $(thas).val()
-					})
-
-				let results
-
-				try {
-
-					results = result.results
-				} catch(e) {
-
-					results = []
-				}
-
-				const newStreet = {
-					city: city['INTERNAL_ID'],
-					search: $(thas).val(),
-					results
-				}
-
-				Store.Requests.updateState(state => ({
-					...state,
-					street: !!state.street ? [ ...state.street, newStreet ] : [ newStreet ]
-				}))
-
-				Result = results
-
-			// 	return true
-
-			} catch(error) {
-
-				console.log('street error', error)
-				return false
-			}
-
-		} 
+			Result = await findStreetInAPI(str)
+		}
 
 		console.log('Result => ', Result)
 
-		if (Result.length) {
-			thas.dropdown = createDropDown(Store)
-			thas.dropdown.createDropList(Result)
-			showDropdown(thas)
-		} else {
+		try {
+
+			if (Result.length) {
+
+				thas.dropdown = createDropDown(Store)
+				thas.dropdown.createDropList(Result)
+				showDropdown(thas)
+
+			} else {
+
+				$(thas).siblings('.ttk__input__droplist').remove()
+			}
+		} catch(err) {
+
 			$(thas).siblings('.ttk__input__droplist').remove()
 		}
-	
+
 	})()
 }
