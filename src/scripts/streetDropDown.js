@@ -74,14 +74,19 @@ export default function(go = false){
 
 		thas.dropdown.filterDropList(list => {
 
-			const type = Store.Street.readSate().type
+			try {
+				type = Store.Street.readState().type
+
+			} catch(err) {}
 
 			if (!!type) {
 
 				const newList = list.filter(item => {
 
-					return (item['STREET_NAME'].toLowerCase() === type && item['TYPE_NAME'].toLowerCase().indexOf($(thas).val().toLowerCase()) != -1)
+					return (item['TYPE_NAME'].toLowerCase() === type && item['STREET_NAME'].toLowerCase().indexOf($(thas).val().toLowerCase()) != -1)
 				})
+
+				console.log('newList', newList);
 
 				return sortItems(newList, str, 'STREET_NAME')
 
@@ -110,7 +115,7 @@ export default function(go = false){
 
 		if(addDropDown.call(thas, thas.dropdown.buildDropList('street', str.length ? str : false, 'current' in Store.Street.readState() ? Store.Street.readState().current : false))) {
 
-			// console.log(111111111)
+			console.log('1111=======11111')
 
 			// scrollDroplist.call(thas)
 		}
