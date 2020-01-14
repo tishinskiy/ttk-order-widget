@@ -1,12 +1,14 @@
 import './styles/main.sass'
 import "@babel/polyfill";
-import defaultParams from './scripts/defaultParams'
-import buildWidget   from './scripts/buildWidget'
-import fieldsAction  from './scripts/fieldsAction'
-import sendButtonActions  from './scripts/sendButtonActions'
-import cityInit from './scripts/cityInit'
-import { readStore } from './scripts/Store'
-import observerBehaviors from './scripts/observerBehaviors'
+import { Widget } from './scripts/Classes'
+
+
+// import fieldsAction  from './scripts/fieldsAction'
+// import sendButtonActions  from './scripts/sendButtonActions'
+// import cityInit from './scripts/cityInit'
+// import { readStore } from './scripts/Store'
+// import buildWidget from './scripts/buildWidget'
+// import observerBehaviors from './scripts/observerBehaviors'
 
 
 ;(function($) {
@@ -14,41 +16,29 @@ import observerBehaviors from './scripts/observerBehaviors'
 	$.fn.ttkOrderWidget = function(params) {
 
 
-
-		params = {
-			...defaultParams,
-			...params
-		}
-
-
-		const key = (new Date()).getTime()
-
-		this.attr('ttk-widget-key', key)
-		this.Store = readStore.call(this)
-
-		if ( params.styles ) {
-
+		if ( params.styles !== false ) {
 			this.addClass('ttk__order-widget')
 		}
-
-		if ( params.clear ) {
-
+		if ( params.clear !== false ) {
 			this.html('')
 		}
+		const widget = new Widget(this[0], params)
+		// widget.buildWidget()
+		widget.show()
 
 
-		const { inputs, sendButton } = buildWidget.call(this, params.fields)
+		// const { inputs, sendButton } = buildWidget.call(this, params.fields)
 
-		for (let i in inputs) {
+		// for (let i in inputs) {
 
-			inputs[i].Store = this.Store
-		}
+		// 	inputs[i].Store = this.Store
+		// }
 
-		observerBehaviors.call(this, inputs)
+		// observerBehaviors.call(this, inputs)
 
-		cityInit.call(inputs.city, params.currentCity)
-		fieldsAction(inputs)
-		sendButtonActions(sendButton)
+		// cityInit.call(inputs.city, params.currentCity)
+		// fieldsAction(inputs)
+		// sendButtonActions(sendButton)
 
 	}
 

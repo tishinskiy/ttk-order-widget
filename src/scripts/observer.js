@@ -1,5 +1,3 @@
-const Observers = []
-
 const Observable = class {
 
 	constructor(state = {}) {
@@ -43,22 +41,11 @@ const Observable = class {
 
 const Observer = function( behavior) {
 
+	console.log('behavior', behavior)
 	this.event = behavior.event
 	this.action = function(){
 		behavior.action()
 	}
 }
 
-const createObserver = (key) => {
-
-	Observers[key] = { Observable: new Observable(), Observer }
-
-	return Observers[key]
-}
-
-export default function() {
-	
-	const thas = !!this.length ? this : $(this)
-	const key = !!thas.attr('ttk-widget-key') ? thas.attr('ttk-widget-key') : thas.closest('[ttk-widget-key]').attr('ttk-widget-key')
-	return [key] in Observers ? Observers[key] : createObserver(key)
-}
+export default () => ({ Observable: new Observable(), Observer })

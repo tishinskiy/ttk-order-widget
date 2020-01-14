@@ -26,7 +26,7 @@ export default function(blocks) {
 
 	form.append(buttonBlock)
 
-	this.append(formBlock)
+	$(this).append(formBlock)
 
 	return { button }
 }

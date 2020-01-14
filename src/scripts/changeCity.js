@@ -1,17 +1,21 @@
 import getObserver from './observer'
 
-export default function (newCity, store) {
+export default function (newCity) {
 
-	if (!store.readState().current || store.readState().current['EXTERNAL_ID'] != newCity['EXTERNAL_ID']) {
+	const store = this.store.readState().city
+	const current = store.current
+
+	if (!current || current['EXTERNAL_ID'] != newCity['EXTERNAL_ID']) {
 
 		store.updateState(state => ({
 			...state,
 			current: newCity
 		}))
 
-		getObserver.call(this).Observable.eventEmitter('changeCity')
+		// getObserver.call(this).Observable.eventEmitter('changeCity')
+		this.observable.eventEmitter('changeCity')
 	} else {
 
-		$(this).closest('.ttk__input__wrap').find('.ttk__input').val(newCity['EXTERNAL_NAME'])
+		$(store.block).val(newCity['EXTERNAL_NAME'])
 	}
 }

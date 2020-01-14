@@ -1,19 +1,20 @@
-import { readStore } from './Store'
 import changeCity from './changeCity'
 
-export default function (params) {
+export default function () {
 
-	const thas = $(this)
+	this.changeCity = changeCity
 
-	const store = readStore.call(thas).City
+	const input = $(this.store.readState().city.block)
 
-	if (params) {
+	const current = this.store.readState().params.currentCity
 
-		changeCity.call(this, params, store)
+	if (current) {
+
+		this.changeCity(current)
 	}
 
-	if (thas.val() !== '') {
+	if (input.val() !== '') {
 
-		thas.next('label').addClass('ttk__input__label--focused')
+		input.next('label').addClass('ttk__input__label--focused')
 	}
 }
