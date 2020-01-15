@@ -1,34 +1,30 @@
 import createInputBlock from './createInputBlock'
 import buildWidgetDOM from './buildWidgetDOM'
-import { Input, createInput } from './Classes'
+import { fields } from './fieldsParams'
 
 export default function() {
 
-	const fields = {
-		'city': 'Город',
-		'street': 'Улица',
-		'building': 'Здание',
-		'apartment': 'Квартира',
-		'family': 'Фамилия',
-		'name': 'Имя',
-		'phone': 'Телефон',
-	}
+	console.log(222, this)
 
 	const blocks = {}
 	const inputs = {}
 
-	for(let key in fields) {
+	fields.forEach(field => {
 
-		const { block, input } = createInputBlock(key, fields[key])
-		blocks[key] = block
-		inputs[key] = input[0]
+		const { block, input } = createInputBlock(field)
+		blocks[field.name] = block
+		inputs[field.name] = input[0]
 
-		const a = this.createInput(input[0], key,)
-		// console.log(a)
-		a.test()
-	}
+		const Input = this.createInput(input[0], field.name)
 
-	const { button:sendButton } = buildWidgetDOM.call(this.block, blocks)
+		if (field.droplist) {
+
+			Input.addDropList()
+		}
+		// console.log(Input)
+	})
+
+	const { button:sendButton } = buildWidgetDOM.call(this, blocks)
 
 	return { inputs, sendButton }
 }

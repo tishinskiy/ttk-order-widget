@@ -1,5 +1,3 @@
-import getObserver from './observer'
-
 export default function (newCity) {
 
 	const store = this.store.readState().city
@@ -12,10 +10,9 @@ export default function (newCity) {
 			current: newCity
 		}))
 
-		// getObserver.call(this).Observable.eventEmitter('changeCity')
 		this.observable.eventEmitter('changeCity')
 	} else {
 
-		$(store.block).val(newCity['EXTERNAL_NAME'])
+		$(store.node).val(newCity['EXTERNAL_NAME'])
 	}
 }

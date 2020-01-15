@@ -1,29 +1,26 @@
-import fieldsProps from './fieldsProps'
-
-const createInput = (name,) => {
-
-	const props = fieldsProps[name] ? fieldsProps[name] : {}
+// import fieldsProps from './fieldsProps'
+const time = (new Date()).getTime()
+const createInput = (field,) => {
 
 	return $('<input>', {
 		type: 'text',
-		class: `ttk__input${ name ? ` ttk__input--${name}` : '' }`,
-		maxlength: 20,
-		autocomplete: false,
-		name,
-		...props
+		class: `ttk__input${ field.name ? ` ttk__input--${field.name}` : '' }`,
+		maxlength: field.maxlength,
+		autocomplete: field.droplist ? `ttk__${time}` : false,
+		name: field.name,
 	})
 }
 
-export default function(name, label) {
+export default function(field) {
 
-	const input = createInput(name);
+	const input = createInput(field);
 
 	const block = $('<div>', {
 
-		class: `ttk__input__wrap${ name ? ` ttk__input__wrap--${name}` : '' }`
+		class: `ttk__input__wrap ttk__input__wrap--${field.name}`
 	}).append(input, $('<label>', {
-		html: label,
-		class: `ttk__input__label${ name ? ` ttk__input__label--${name}` : '' }`
+		html: field.label,
+		class: `ttk__input__label ttk__input__label--${field.name}`
 	}))
 
 	return { input, block }

@@ -1,15 +1,6 @@
 import './styles/main.sass'
 import "@babel/polyfill";
-import { Widget } from './scripts/Classes'
-
-
-// import fieldsAction  from './scripts/fieldsAction'
-// import sendButtonActions  from './scripts/sendButtonActions'
-// import cityInit from './scripts/cityInit'
-// import { readStore } from './scripts/Store'
-// import buildWidget from './scripts/buildWidget'
-// import observerBehaviors from './scripts/observerBehaviors'
-
+import { Widget } from './scripts/Widget'
 
 ;(function($) {
 
@@ -23,23 +14,7 @@ import { Widget } from './scripts/Classes'
 			this.html('')
 		}
 		const widget = new Widget(this[0], params)
-		// widget.buildWidget()
 		widget.show()
-
-
-		// const { inputs, sendButton } = buildWidget.call(this, params.fields)
-
-		// for (let i in inputs) {
-
-		// 	inputs[i].Store = this.Store
-		// }
-
-		// observerBehaviors.call(this, inputs)
-
-		// cityInit.call(inputs.city, params.currentCity)
-		// fieldsAction(inputs)
-		// sendButtonActions(sendButton)
-
 	}
 
 })(jQuery)

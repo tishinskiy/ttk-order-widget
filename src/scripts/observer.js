@@ -1,4 +1,4 @@
-const Observable = class {
+export class Observable {
 
 	constructor(state = {}) {
 
@@ -23,9 +23,12 @@ const Observable = class {
 		this.observers.delete(observer);
 	}
 
-	eventEmitter(event) {
-		console.log('eventEmitter', event)
-		this.notifyObservers(event);
+	eventEmitter(event = false) {
+		if (event) {
+
+			console.log('eventEmitter', event)
+			this.notifyObservers(event);
+		}
 	}
 
 	notifyObservers(event) {
@@ -39,7 +42,7 @@ const Observable = class {
 	}
 }
 
-const Observer = function( behavior) {
+export const Observer = function( behavior ) {
 
 	console.log('behavior', behavior)
 	this.event = behavior.event
@@ -47,5 +50,3 @@ const Observer = function( behavior) {
 		behavior.action()
 	}
 }
-
-export default () => ({ Observable: new Observable(), Observer })

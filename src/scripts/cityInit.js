@@ -2,9 +2,11 @@ import changeCity from './changeCity'
 
 export default function () {
 
+	// console.log('cityInit', this)
+
 	this.changeCity = changeCity
 
-	const input = $(this.store.readState().city.block)
+	const node = $(this.store.readState().city.node)
 
 	const current = this.store.readState().params.currentCity
 
@@ -13,8 +15,8 @@ export default function () {
 		this.changeCity(current)
 	}
 
-	if (input.val() !== '') {
+	if (node.val() !== '') {
 
-		input.next('label').addClass('ttk__input__label--focused')
+		node.next('label').addClass('ttk__input__label--focused')
 	}
 }
