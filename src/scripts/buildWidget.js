@@ -4,8 +4,6 @@ import { fields } from './fieldsParams'
 
 export default function() {
 
-	console.log(222, this)
-
 	const blocks = {}
 	const inputs = {}
 
@@ -21,7 +19,6 @@ export default function() {
 
 			Input.addDropList()
 		}
-		// console.log(Input)
 	})
 
 	const { button:sendButton } = buildWidgetDOM.call(this, blocks)

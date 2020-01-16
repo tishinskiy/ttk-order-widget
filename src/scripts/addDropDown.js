@@ -1,18 +1,21 @@
-export default function(list) {
+import buildDropList from './buildDropList'
 
+export default function() {
+
+	const list = buildDropList.call(this)
 	if (list.length) {
 
 		let block
 
-		if (! $(this).siblings(".ttk__input__droplist").length) {
+		if (! $(this.node).siblings(".ttk__input__droplist").length) {
 
 			block = $('<div>', {
 				class: 'ttk__input__droplist ttk__droplist'
 			})
-			block.insertAfter($(this))
+			block.insertAfter($(this.node))
 		} else {
 
-			block = $(this).siblings(".ttk__input__droplist")
+			block = $(this.node).siblings(".ttk__input__droplist")
 		}
 
 		block
@@ -23,6 +26,8 @@ export default function(list) {
 
 		return true
 	} else {
+
+		$(this.node).siblings(".ttk__input__droplist").remove()
 		return false
 	}
 

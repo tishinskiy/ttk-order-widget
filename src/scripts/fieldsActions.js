@@ -1,4 +1,6 @@
 import fieldsActionFocus from './fieldsActionFocus'
+import fieldsActionInpit from './fieldsActionInpit'
+import scrollDroplist from './scrollDroplist'
 
 export default function() {
 
@@ -6,16 +8,9 @@ export default function() {
 
 	$(node)
 
-		.on('input', () => {
-			console.log($(node).val())
-		})
+		.on('input', fieldsActionInpit.bind(this))
 
 		.on('focus', fieldsActionFocus.bind(this))
-		// .on('focus', () => {
-
-		// 	$(node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
-		// 	$(node).closest('.ttk__input__wrap').addClass('ttk__input__wrap--focused')
-		// })
 
 		.on('focusout', event => {
 
@@ -33,5 +28,52 @@ export default function() {
 
 			$(node).siblings('.ttk__input__droplist').hide()
 
+		})
+
+		.on('keydown', (event) => {
+
+			switch (event.key) {
+
+				case "ArrowDown":
+				case "ArrowUp":
+					let timer
+					if (scrollDroplist.call(this, event.key)) {
+
+						if (timer) clearTimeout(timer)
+
+						this.store.readState()[this.name].updateState(state => ({
+							...state,
+							droplistItemBloc: true
+						}))
+
+						timer = setTimeout(() => {
+							this.store.readState()[this.name].updateState(state => ({
+								...state,
+								droplistItemBloc: false
+							}))
+						}, 100)
+					}
+					return false
+					break
+
+				case "Enter":
+					console.log("Enter")
+
+					const dropList = $(this).siblings('.ttk__input__droplist')
+
+					if (dropList.length) {
+						const active = dropList.find('.ttk__droplist__item--focused')
+
+						if( !active.hasClass('ttk__droplist__item--selected') ) {
+							active.trigger('click');
+						}
+					}
+
+					return false
+					break
+
+				default:
+					break
+			}
 		})
 }

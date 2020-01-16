@@ -1,11 +1,9 @@
-// import buildDropList from './buildDropList'
+import buildDropList from './buildDropList'
 
 export class DropList {
 
 	constructor(store) {
-		// this.Store = store;
 		this.list = [];
-		// this.filter = '';
 		this.filterList = []
 	}
 
@@ -18,8 +16,4 @@ export class DropList {
 		this.filterList = filter(this.list)
 		return this.filterList
 	}
-
-	// buildDropList(name, str = false, current = false) {
-	// 	return buildDropList(name, this.filterList, str, current)
-	// }
 }

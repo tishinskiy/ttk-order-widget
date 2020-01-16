@@ -1,18 +1,19 @@
-import addDropDown from './addDropDown'
+// import addDropDown from './addDropDown'
 import sortItems from './sortItems'
-import {readStore} from './Store'
+// import {readStore} from './Store'
 import jsonpRequest from './jsonpReqyest'
-import createDropDown from './dropDown'
+// import createDropDown from './dropDown'
 import scrollDroplist from './scrollDroplist'
 import { typeInValue } from './streetTypes'
 
 export default function(go = false){
-
+	console.log(this)
 	const thas = this
-	const Store = readStore.call(thas)
-	const city = Store.City.readState().current
+	const node = this.node
+	const Store = this.store.readState()[this.name]
+	const city =  this.store.readState().city.readState().current
 
-	let str = $(thas).val()
+	let str = $(this.node).val()
 
 	let type = typeInValue(str)
 
@@ -113,7 +114,7 @@ export default function(go = false){
 
 
 
-		if(addDropDown.call(thas, thas.dropdown.buildDropList('street', str.length ? str : false, 'current' in Store.Street.readState() ? Store.Street.readState().current : false))) {
+		if(this.addDropDown()) {
 
 			console.log('1111=======11111')
 

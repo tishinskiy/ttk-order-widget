@@ -1,7 +1,7 @@
 export default function (newCity) {
 
 	const store = this.store.readState().city
-	const current = store.current
+	const current = store.readState().current
 
 	if (!current || current['EXTERNAL_ID'] != newCity['EXTERNAL_ID']) {
 
@@ -13,6 +13,6 @@ export default function (newCity) {
 		this.observable.eventEmitter('changeCity')
 	} else {
 
-		$(store.node).val(newCity['EXTERNAL_NAME'])
+		$(this.node).val(newCity['EXTERNAL_NAME'])
 	}
 }

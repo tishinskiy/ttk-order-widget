@@ -1,6 +1,6 @@
 export default function( direction ) {
 
-	const dropList = $(this).siblings('.ttk__input__droplist')
+	const dropList = $(this.node).siblings('.ttk__input__droplist')
 
 	if (dropList.length) {
 
@@ -25,7 +25,7 @@ export default function( direction ) {
 				break
 
 			case 'ArrowDown' :
-				console.log(direction)
+
 				const next = active.next('.ttk__droplist__item')
 				if (next.length) {
 					next.addClass('ttk__droplist__item--focused')
@@ -44,7 +44,11 @@ export default function( direction ) {
 				break
 
 			default : //auto
-				dropList.scrollTop(active.offset().top - dropList.offset().top + dropList.scrollTop())
+
+				if (active.length) {
+					
+					dropList.scrollTop(active.offset().top - dropList.offset().top + dropList.scrollTop())
+				}
 				break
 		}
 	}

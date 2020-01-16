@@ -1,6 +1,5 @@
 import changeCity from './changeCity'
-import changeStreet from './changeStreet'
-import { readStore } from './Store'
+// import changeStreet from './changeStreet'
 
 const buildValue = (value, str) => {
 
@@ -13,10 +12,16 @@ const buildValue = (value, str) => {
 		
 		return `${value.slice(0, start)}<span class="ttk__droplist-item--blue">${value.slice(start, finish)}</span>${value.slice(finish, value.length)}`
 	}
-
 }
 
-export default (name = false, list = [], str = false, current = false) => {
+export default function () {
+
+	const thas = this
+	const name = this.name
+	const store = this.store.readState()[this.name]
+	const list = this.dropList.filterList
+	const str = $(this.node).val().length ? $(this.node).val() : false
+	const current = 'current' in store.readState() ? store.readState().current : false
 
 	switch (name) {
 		case 'city':
@@ -27,7 +32,7 @@ export default (name = false, list = [], str = false, current = false) => {
 
 					href: 'javascript:;',
 					html,
-					class:`ttk__droplist__item ttk__droplist__item--${name} ${item['INTERNAL_ID'] == current['INTERNAL_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`
+					class:`ttk__droplist__item ttk__droplist__item--${name} ${item['INTERNAL_ID'] === current['INTERNAL_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`
 				})
 
 				link
@@ -37,13 +42,13 @@ export default (name = false, list = [], str = false, current = false) => {
 							display: 'none'
 						})
 
-						changeCity.call(this, item, readStore.call(this).City)
+						changeCity.call(thas, item)
 
 					})
 
 					.hover(function(e) {
 
-						if ( !readStore.call(this).EventBus.readState().droplistItemBloc ) {
+						if ( !store.readState().droplistItemBloc ) {
 
 							$(this).siblings('.ttk__droplist__item--focused').removeClass('ttk__droplist__item--focused')
 							$(this).addClass('ttk__droplist__item--focused')
@@ -56,43 +61,43 @@ export default (name = false, list = [], str = false, current = false) => {
 
 			break
 
-		case 'street': 
+		// case 'street': 
 
-			return list.map(item => {
+		// 	return list.map(item => {
 
-				const html = !!str ? buildValue(item['STREET_NAME'], str) : item['STREET_NAME']
-				const type = !!str ? buildValue(item['TYPE_NAME'], str) : item['TYPE_NAME']
-				const link = $('<a>', {
+		// 		const html = !!str ? buildValue(item['STREET_NAME'], str) : item['STREET_NAME']
+		// 		const type = !!str ? buildValue(item['TYPE_NAME'], str) : item['TYPE_NAME']
+		// 		const link = $('<a>', {
 
-					href: 'javascript:;',
-					html: `<span class="ttk__droplist-item--gray">${type}</span><br>${html}`,
-					class:`ttk__droplist__item ttk__droplist__item--${name} ${item['STREET_ID'] == current['STREET_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`
-				})
+		// 			href: 'javascript:;',
+		// 			html: `<span class="ttk__droplist-item--gray">${type}</span><br>${html}`,
+		// 			class:`ttk__droplist__item ttk__droplist__item--${name} ${item['STREET_ID'] == current['STREET_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`
+		// 		})
 
-				link
-					.click(function() {
+		// 		link
+		// 			.click(function() {
 
-						$(this).closest('.ttk__input__droplist').css({
-							display: 'none'
-						})
+		// 				$(this).closest('.ttk__input__droplist').css({
+		// 					display: 'none'
+		// 				})
 
-						changeStreet.call(this, item, readStore.call(this).Street)
+		// 				changeStreet.call(this, item, readStore.call(this).Street)
 
-					})
+		// 			})
 
-					.hover(function(e) {
+		// 			.hover(function(e) {
 
-						if ( !readStore.call(this).EventBus.readState().droplistItemBloc ) {
+		// 				if ( !readStore.call(this).EventBus.readState().droplistItemBloc ) {
 
-							$(this).siblings('.ttk__droplist__item--focused').removeClass('ttk__droplist__item--focused')
-							$(this).addClass('ttk__droplist__item--focused')
-						}
+		// 					$(this).siblings('.ttk__droplist__item--focused').removeClass('ttk__droplist__item--focused')
+		// 					$(this).addClass('ttk__droplist__item--focused')
+		// 				}
 
-					})
+		// 			})
 
-				return link
-			})
-			break
+		// 		return link
+		// 	})
+		// 	break
 
 		default:
 			break

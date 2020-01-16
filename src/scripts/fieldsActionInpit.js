@@ -1,35 +1,34 @@
-import addDropDown from './addDropDown'
 import sortItems from './sortItems'
-import {readStore} from './Store'
-
 import streetDropDown from './streetDropDown'
 
-export default function(name){
+export default function(){
 
-	const thas = this
+	const node = this.node
 
-	const Store = readStore.call(this)
+	const Store = this.store.readState()[this.name]
 
-	switch (name) {
+	switch (this.name) {
+
 		case 'city':
 
-			thas.dropdown.filterDropList(list => {
+			this.dropList.filterDropList(list => {
 
 				const newList =  list.filter(item => {
 
-					return (item['EXTERNAL_NAME'].toLowerCase().indexOf($(thas).val().toLowerCase()) != -1)
+					return (item['EXTERNAL_NAME'].toLowerCase().indexOf($(node).val().toLowerCase()) != -1)
 				})
 
-				return sortItems(newList, $(thas).val())
+				return sortItems(newList, $(node).val())
 			})
-			addDropDown.call(thas, thas.dropdown.buildDropList('city', $(thas).val().length ? $(thas).val() : false, 'current' in Store.City.readState() ? Store.City.readState().current : false))
+
+			this.addDropDown()
 			break
 
 		case 'street':
 
-			if ($(thas).val().length < 3) {
+			if ($(node).val().length < 3) {
 
-				$(thas).siblings('.ttk__input__droplist').remove()
+				$(node).siblings('.ttk__input__droplist').remove()
 				return false
 			}
 

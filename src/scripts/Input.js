@@ -3,11 +3,12 @@ import { DropList } from './DropList'
 import fieldsActions from './fieldsActions'
 import eventActions from './eventActions'
 
-const store = new Store()
+import addDropDown from './addDropDown'
 
 export class Input {
 
 	constructor(node = $(), name = false, options = {}) {
+		const store = new Store()
 		this.node = node;
 		this.name = name
 
@@ -29,6 +30,7 @@ export class Input {
 
 	addDropList() {
 		this.dropList = new DropList()
+		this.addDropDown = addDropDown
 	}
 
 }

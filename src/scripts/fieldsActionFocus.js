@@ -1,9 +1,8 @@
-// import jsonpRequest from './jsonpReqyest'
-// import createDropDown from './dropDown'
-// import addDropDown from './addDropDown'
-// import {readStore} from './Store'
-// import sortItems from './sortItems'
-// import scrollDroplist from './scrollDroplist'
+import jsonpRequest from './jsonpReqyest'
+import addDropDown from './addDropDown'
+import sortItems from './sortItems'
+import buildDropList from './buildDropList'
+import scrollDroplist from './scrollDroplist'
 // import streetDropDown from './streetDropDown'
 // import changeCity from './changeCity'
 
@@ -14,46 +13,39 @@ export default function(){
 
 
 	const thas = this
-
-
 	const store = this.store.readState()[this.name]
 	const requests = this.store.readState().Requests
 
-	const showDropdown = (thas) => {
+	const showDropdown = () => {
 
-		thas.dropdown.filterDropList(list => ([...list]))
-
-		addDropDown.call(thas, thas.dropdown.buildDropList('city', $(thas).val().length ? $(thas).val() : false, 'current' in store.readState() ? Store.City.readState().current : false))
-
-		scrollDroplist.call(thas)
+		this.dropList.filterDropList(list => ([...list]))
+		this.addDropDown()
+		scrollDroplist.call(this)
 	}
 
 	switch (this.name) {
 		case 'city':
-			console.log(8888, this.store.readState().city)
-			$(thas.node)
+
+			$(this.node)
 				.val('')
 				.attr('placeholder', 'current' in store.readState() ? store.readState().current['EXTERNAL_NAME'] : '')
 
-			// if (!('dropdown' in thas)) {
-
-			// 	thas.dropdown = createDropDown(Store)
-			// }
 			if (!('cities' in requests.readState())) {
 
-				;( async function() {
+				;( async () => {
 
 					try {
 
-						const result = await jsonpRequest('https://gate.myttk.ru/gate/jsonp/city.php', {name: thas.store.readState()['EXTERNAL_NAME']})
+						const result = await jsonpRequest('https://gate.myttk.ru/gate/jsonp/city.php', {name: store.readState()['EXTERNAL_NAME']})
 
 						requests.updateState(state => ({
 							...state,
 							cities: sortItems(result.results)
 						}))
 
-						thas.dropdown.createDropList(result.results)
-						showDropdown(thas)
+						this.dropList.createDropList(result.results)
+
+						showDropdown()
 
 					} catch(error) {
 
@@ -64,20 +56,17 @@ export default function(){
 				})()
 			} else {
 
-				showDropdown(thas)
-
-
-
+				showDropdown()
 			}
 
 			break
 
 		case 'street': 
 
-			if ($(thas).val().length >= 3) {
+			// if ($(thas).val().length >= 3) {
 
-				streetDropDown.call(this)
-			}
+			// 	streetDropDown.call(this)
+			// }
 
 			break
 

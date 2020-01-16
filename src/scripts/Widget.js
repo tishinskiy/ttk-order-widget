@@ -1,9 +1,7 @@
 import defaultParams from './defaultParams'
 import buildWidget from './buildWidget'
-
 import cityInit from './cityInit'
 import { Observable, Observer } from './Observer'
-
 import { Store } from './Store'
 import { Input } from './Input'
 

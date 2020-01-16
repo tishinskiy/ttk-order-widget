@@ -1,5 +1,5 @@
 export default function() {
-	console.log('event', this)
+	// console.log('event', this)
 	const input = this
 
 
@@ -7,15 +7,14 @@ export default function() {
 
 		case 'city':
 
-			const node = this.node
+			const node = input.node
 			return {
 				event: 'changeCity',
 				action() {
 
-					$(node).focus()
 					$(node).val(input.store.readState().city.readState().current['EXTERNAL_NAME'])
-					$(node).blur()
-
+					$(node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
+					$(node).closest('.ttk__input__wrap').addClass('ttk__input__wrap--focused')
 				}
 			}
 			break
@@ -24,11 +23,4 @@ export default function() {
 			return false
 			break
 	}
-
-	// return {
-	// 	event: 'changeCity',
-	// 	action() {
-	// 		console.log(333, input.name)
-	// 	}
-	// }
 }
