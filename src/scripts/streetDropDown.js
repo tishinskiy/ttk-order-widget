@@ -1,8 +1,5 @@
-// import addDropDown from './addDropDown'
 import sortItems from './sortItems'
-// import {readStore} from './Store'
 import jsonpRequest from './jsonpReqyest'
-// import createDropDown from './dropDown'
 import scrollDroplist from './scrollDroplist'
 import { typeInValue } from './streetTypes'
 
@@ -12,6 +9,7 @@ export default function(go = false){
 	const node = this.node
 	const Store = this.store.readState()[this.name]
 	const city =  this.store.readState().city.readState().current
+	const requests = this.store.readState().Requests
 
 	let str = $(this.node).val()
 
@@ -57,7 +55,7 @@ export default function(go = false){
 				results
 			}
 
-			Store.Requests.updateState(state => ({
+			requests.updateState(state => ({
 				...state,
 				street: !!state.street ? [ ...state.street, newStreet ] : [ newStreet ]
 			}))
@@ -132,24 +130,24 @@ export default function(go = false){
 
 		let Result
 
-		const requests = Store.Requests.readState()
 
-		if ('street' in requests) {
 
-			const exist = requests.street.some(item => {
+		if ('street' in requests.readState()) {
+
+			const exist = requests.readState().street.some(item => {
 				return item.city === city['INTERNAL_ID'] && item.search === str.slice(0, 3)
 			})
 
 			if (exist) {
 
-				Result =  requests.street.filter(item => {
+				Result =  requests.readState().street.filter(item => {
 					return item.city === city['INTERNAL_ID'] && item.search === str.slice(0, 3)
 				})[0].results
 
 			}
 		}
 
-		console.log($(thas).val())
+		console.log($(node).val())
 
 		if (!Result) {
 
@@ -162,17 +160,24 @@ export default function(go = false){
 
 			if (Result.length) {
 
-				thas.dropdown = createDropDown(Store)
-				thas.dropdown.createDropList(Result)
-				showDropdown(thas)
+				// thas.dropdown = createDropDown(Store)
+				// thas.dropdown.createDropList(Result)
+				// showDropdown(thas)
+
+				this.dropList.filterDropList(list => {
+					
+				})
+console.log(			55555555, 	this);
+				this.addDropDown()
+
 
 			} else {
 
-				$(thas).siblings('.ttk__input__droplist').remove()
+				$(node).siblings('.ttk__input__droplist').remove()
 			}
 		} catch(err) {
 
-			$(thas).siblings('.ttk__input__droplist').remove()
+			$(node).siblings('.ttk__input__droplist').remove()
 		}
 
 	})()
