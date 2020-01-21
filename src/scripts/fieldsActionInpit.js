@@ -5,6 +5,8 @@ export default function(){
 
 	const node = this.node
 
+	$(node).val($(node).val().replace(/^\s*/,''))
+
 	const Store = this.store.readState()[this.name]
 
 	switch (this.name) {

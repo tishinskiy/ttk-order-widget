@@ -14,6 +14,7 @@ export default function() {
 		.on('focus', fieldsActionFocus.bind(this))
 
 		.on('focusout', event => {
+			$(node).val($(node).val().replace(/\s*$/,''))
 
 			fieldsActionFocusout.call(this)
 			$(node).attr('placeholder', '')
@@ -29,7 +30,6 @@ export default function() {
 			$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
 
 			$(node).siblings('.ttk__input__droplist').hide()
-
 
 		})
 
