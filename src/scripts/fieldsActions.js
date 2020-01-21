@@ -1,4 +1,5 @@
 import fieldsActionFocus from './fieldsActionFocus'
+import fieldsActionFocusout from './fieldsActionFocusout'
 import fieldsActionInpit from './fieldsActionInpit'
 import scrollDroplist from './scrollDroplist'
 
@@ -14,6 +15,7 @@ export default function() {
 
 		.on('focusout', event => {
 
+			fieldsActionFocusout.call(this)
 			$(node).attr('placeholder', '')
 
 			if (event.originalEvent && $(event.originalEvent.relatedTarget).hasClass('ttk__droplist__item')) {
@@ -27,6 +29,7 @@ export default function() {
 			$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
 
 			$(node).siblings('.ttk__input__droplist').hide()
+
 
 		})
 
