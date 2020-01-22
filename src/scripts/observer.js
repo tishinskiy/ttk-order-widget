@@ -7,15 +7,7 @@ export class Observable {
 
 	addObserver(observer) {
 
-		if (!observer.length) {
-
-			this.observers.add(observer);
-		} else {
-			for (let item of observer) {
-
-				this.observers.add(item);
-			}
-		}
+		this.observers.add(observer);
 	}
 
 	removeObserver(observer) {

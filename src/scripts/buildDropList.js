@@ -1,5 +1,5 @@
 import changeCity from './changeCity'
-// import changeStreet from './changeStreet'
+import changeStreet from './changeStreet'
 
 const buildValue = (value, str) => {
 
@@ -61,43 +61,43 @@ export default function () {
 
 			break
 
-		// case 'street': 
+		case 'street': 
 
-		// 	return list.map(item => {
+			return list.map(item => {
 
-		// 		const html = !!str ? buildValue(item['STREET_NAME'], str) : item['STREET_NAME']
-		// 		const type = !!str ? buildValue(item['TYPE_NAME'], str) : item['TYPE_NAME']
-		// 		const link = $('<a>', {
+				const html = !!str ? buildValue(item['STREET_NAME'], str) : item['STREET_NAME']
+				const type = !!str ? buildValue(item['TYPE_NAME'], str) : item['TYPE_NAME']
+				const link = $('<a>', {
 
-		// 			href: 'javascript:;',
-		// 			html: `<span class="ttk__droplist-item--gray">${type}</span><br>${html}`,
-		// 			class:`ttk__droplist__item ttk__droplist__item--${name} ${item['STREET_ID'] == current['STREET_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`
-		// 		})
+					href: 'javascript:;',
+					html: `<span class="ttk__droplist-item--gray">${type}</span><br>${html}`,
+					class:`ttk__droplist__item ttk__droplist__item--${name} ${item['STREET_ID'] == current['STREET_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`
+				})
 
-		// 		link
-		// 			.click(function() {
+				link
+					.click(function() {
 
-		// 				$(this).closest('.ttk__input__droplist').css({
-		// 					display: 'none'
-		// 				})
+						$(this).closest('.ttk__input__droplist').css({
+							display: 'none'
+						})
 
-		// 				changeStreet.call(this, item, readStore.call(this).Street)
+						changeStreet.call(thas, item)
 
-		// 			})
+					})
 
-		// 			.hover(function(e) {
+					.hover(function(e) {
 
-		// 				if ( !readStore.call(this).EventBus.readState().droplistItemBloc ) {
+						if ( !store.readState().droplistItemBloc ) {
 
-		// 					$(this).siblings('.ttk__droplist__item--focused').removeClass('ttk__droplist__item--focused')
-		// 					$(this).addClass('ttk__droplist__item--focused')
-		// 				}
+							$(this).siblings('.ttk__droplist__item--focused').removeClass('ttk__droplist__item--focused')
+							$(this).addClass('ttk__droplist__item--focused')
+						}
 
-		// 			})
+					})
 
-		// 		return link
-		// 	})
-		// 	break
+				return link
+			})
+			break
 
 		default:
 			break

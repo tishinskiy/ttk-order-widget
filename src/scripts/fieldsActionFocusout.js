@@ -48,7 +48,7 @@ export default function(name){
 							}
 						}
 					}
-				}, 100)
+				}, 300)
 			}
 
 			break

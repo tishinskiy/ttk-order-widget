@@ -1,21 +1,18 @@
-import getObserver from './observer'
+export default function (newStreet) {
 
-export default function (newStreet, store) {
+	const store = this.store.readState().street
+	const current = store.readState().current
 
-	console.log('changeStreet', newStreet)
-
-	if (!store.readState().current || store.readState().current['STREET_ID'] != newStreet['STREET_ID']) {
+	if (!current || current['STREET_ID'] != newStreet['STREET_ID']) {
 
 		store.updateState(state => ({
 			...state,
 			current: newStreet
 		}))
 
-		getObserver.call(this).Observable.eventEmitter('changeStreet')
+		this.observable.eventEmitter('changeStreet')
 	} else {
 
-		$(this).closest('.ttk__input__wrap').find('.ttk__input').val(newStreet['STREET_NAME'])
-		$(this).closest('.ttk__input__wrap').find('label').html(newStreet['TYPE_NAME'])
-		$(this).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
+		$(this.node).val(newCity['STREET_NAME'])
 	}
 }

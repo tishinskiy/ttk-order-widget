@@ -23,7 +23,6 @@ export class Input {
 		}))
 
 		fieldsActions.call(this)
-
 		this.addEmitter(eventActions.call(this))
 
 	}

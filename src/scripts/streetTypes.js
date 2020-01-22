@@ -2,7 +2,7 @@ const streetTypes = ["абонентский ящик", "аллея", "балк�
 
 const typeInValue = (str) => {
 
-	const arr = streetTypes.filter(item => str.toLowerCase().indexOf(item.toLowerCase()) === 0)
+	const arr = streetTypes.filter(item => str.toLowerCase().indexOf(item.toLowerCase() + ' ') === 0)
 
 	return arr.length ? arr[arr.length - 1] : false
 }

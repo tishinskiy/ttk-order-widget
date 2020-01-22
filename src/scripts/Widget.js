@@ -32,6 +32,11 @@ export class Widget {
 		this.observable = new Observable()
 
 		this.addEmitter = (action) => {
+			if (action.length) {
+				for (let item of action) {
+					this.observable.addObserver(new Observer(item))
+				}
+			}
 			this.observable.addObserver(new Observer(action))
 		}
 

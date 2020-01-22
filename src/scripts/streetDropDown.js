@@ -4,7 +4,7 @@ import scrollDroplist from './scrollDroplist'
 import { typeInValue } from './streetTypes'
 
 export default function(go = false){
-	console.log(this)
+
 	const thas = this
 	const node = this.node
 	const Store = this.store.readState()[this.name]
@@ -13,20 +13,16 @@ export default function(go = false){
 
 	let str = $(this.node).val()
 
-	let type = typeInValue(str)
-
-	console.log('type', type)
-
+	const type = typeInValue(str)
 	if (!!type) {
 
-		str = str.replace(type, '').replace(' ', '', 0)
-		$(thas).val(str)
-		$(thas).siblings('label').html(type)
-		Store.Street.updateState(state => ({
-			...state,
-			type
-		}))
+		this.type = typeInValue(str)
+		str = str.slice(this.type.length + 1)
+		$(node).val(str)
+		$(node).siblings('label').html(this.type[0].toUpperCase() + this.type.slice(1)).addClass('ttk__input__label--fixed')
 	}
+
+	if (str.length < 3) return false
 
 	const findStreetInAPI = async (str) => {
 
@@ -69,58 +65,6 @@ export default function(go = false){
 		}
 	}
 
-	const showDropdown = (thas) => {
-
-		thas.dropdown.filterDropList(list => {
-
-			try {
-				type = Store.Street.readState().type
-
-			} catch(err) {}
-
-			if (!!type) {
-
-				const newList = list.filter(item => {
-
-					return (item['TYPE_NAME'].toLowerCase() === type && item['STREET_NAME'].toLowerCase().indexOf($(thas).val().toLowerCase()) != -1)
-				})
-
-				console.log('newList', newList);
-
-				return sortItems(newList, str, 'STREET_NAME')
-
-			} else {
-
-				const newList = list.filter(item => {
-
-					return (item['STREET_NAME'].toLowerCase().indexOf($(thas).val().toLowerCase().slice(0, 3)) != -1)
-				})
-
-				const listName = sortItems(newList, str, 'STREET_NAME')
-
-				const newList2 = list.filter(item => {
-
-					return (item['TYPE_NAME'].toLowerCase().indexOf($(thas).val().toLowerCase()) != -1)
-				})
-
-				const listType = sortItems(newList2, '', 'STREET_NAME')
-
-				return [...listName, ...listType]
-			}
-
-		})
-
-
-
-		if(this.addDropDown()) {
-
-			console.log('1111=======11111')
-
-			// scrollDroplist.call(thas)
-		}
-	}
-
-
 	if (!city) {
 		console.log('SHOW ERROR!!!')
 		return false
@@ -130,55 +74,45 @@ export default function(go = false){
 
 		let Result
 
-
-
 		if ('street' in requests.readState()) {
 
-			const exist = requests.readState().street.some(item => {
+
+			const arr =  requests.readState().street.filter(item => {
 				return item.city === city['INTERNAL_ID'] && item.search === str.slice(0, 3)
 			})
 
-			if (exist) {
-
-				Result =  requests.readState().street.filter(item => {
-					return item.city === city['INTERNAL_ID'] && item.search === str.slice(0, 3)
-				})[0].results
-
+			if (arr.length) {
+				Result = arr[0].results
 			}
 		}
-
-		console.log($(node).val())
 
 		if (!Result) {
 
 			Result = await findStreetInAPI(str)
 		}
 
-		console.log('Result => ', Result)
+		if (Result.length) {
 
-		try {
+			this.dropList.createDropList(Result)
+			this.dropList.filterDropList(list => {
 
-			if (Result.length) {
-
-				// thas.dropdown = createDropDown(Store)
-				// thas.dropdown.createDropList(Result)
-				// showDropdown(thas)
-
-				this.dropList.filterDropList(list => {
-					
+				const newList = list.filter(item => {
+					return (item['STREET_NAME'].toLowerCase().indexOf(str.toLowerCase().slice(0, 3)) != -1)
 				})
-console.log(			55555555, 	this);
-				this.addDropDown()
 
+				const sortArr = sortItems(newList, str, 'STREET_NAME')
+				const sortArrType = sortArr.filter(item => item['TYPE_NAME'].toLowerCase() === this.type)
+				const sortArrName = sortArr.filter(item => item['TYPE_NAME'].toLowerCase() !== this.type)
 
-			} else {
+				return !!this.type ? [...sortArrType, ...sortArrName] : [ ...sortArrName, ...sortArrType]
 
-				$(node).siblings('.ttk__input__droplist').remove()
-			}
-		} catch(err) {
+			})
+
+			this.addDropDown()
+
+		} else {
 
 			$(node).siblings('.ttk__input__droplist').remove()
 		}
-
 	})()
 }
