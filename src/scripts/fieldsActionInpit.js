@@ -23,6 +23,11 @@ export default function(){
 				return sortItems(newList, $(node).val())
 			})
 
+			if (this.dropList.filterList.length === 1 && $(node).val().toLowerCase() === Store.readState().current['EXTERNAL_NAME'].toLowerCase()) {
+				$(node).siblings('.ttk__input__droplist').remove()
+				return false
+			}
+
 			this.addDropDown()
 			break
 

@@ -8,6 +8,7 @@ import addDropDown from './addDropDown'
 export class Input {
 
 	constructor(node = $(), name = false, options = {}) {
+
 		const store = new Store()
 		this.node = node;
 		this.name = name
@@ -31,5 +32,4 @@ export class Input {
 		this.dropList = new DropList()
 		this.addDropDown = addDropDown
 	}
-
 }

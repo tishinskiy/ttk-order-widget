@@ -108,6 +108,11 @@ export default function(go = false){
 
 			})
 
+			if (this.dropList.filterList.length === 1 && (Store.readState().current ? $(node).val().toLowerCase() === Store.readState().current['STREET_NAME'].toLowerCase() : false)) {
+				$(node).siblings('.ttk__input__droplist').remove()
+				return false
+			}
+
 			this.addDropDown()
 
 		} else {

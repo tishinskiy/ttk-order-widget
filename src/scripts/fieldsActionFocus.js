@@ -3,7 +3,7 @@ import addDropDown from './addDropDown'
 import sortItems from './sortItems'
 import buildDropList from './buildDropList'
 import scrollDroplist from './scrollDroplist'
-// import streetDropDown from './streetDropDown'
+import streetDropDown from './streetDropDown'
 // import changeCity from './changeCity'
 
 export default function(){
@@ -63,10 +63,10 @@ export default function(){
 
 		case 'street': 
 
-			// if ($(thas).val().length >= 3) {
+			if ($(this.node).val().length >= 3) {
 
-			// 	streetDropDown.call(this)
-			// }
+				streetDropDown.call(this)
+			}
 
 			break
 

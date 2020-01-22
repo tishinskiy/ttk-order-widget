@@ -13,6 +13,6 @@ export default function (newStreet) {
 		this.observable.eventEmitter('changeStreet')
 	} else {
 
-		$(this.node).val(newCity['STREET_NAME'])
+		$(this.node).val(newStreet['STREET_NAME'])
 	}
 }
