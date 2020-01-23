@@ -101,6 +101,44 @@ export default function () {
 			})
 			break
 
+		case 'building':
+			return list.map(item => {
+
+				const html = !!str ? buildValue(item['HOUSE_NUMBER'], str) : item['HOUSE_NUMBER']
+				const link = $('<a>', {
+
+					href: 'javascript:;',
+					html,
+					class:`ttk__droplist__item ttk__droplist__item--${name} ${item['BUILDING_ID'] === current['BUILDING_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`,
+					key: item['BUILDING_ID']
+				})
+
+				link
+					.click(function() {
+
+						$(this).closest('.ttk__input__droplist').css({
+							display: 'none'
+						})
+
+						changeCity.call(thas, item)
+
+					})
+
+					.hover(function(e) {
+
+						if ( !store.readState().droplistItemBloc ) {
+
+							$(this).siblings('.ttk__droplist__item--focused').removeClass('ttk__droplist__item--focused')
+							$(this).addClass('ttk__droplist__item--focused')
+						}
+
+					})
+
+				return link
+			})
+
+			break
+
 		default:
 			break
 

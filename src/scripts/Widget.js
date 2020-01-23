@@ -25,10 +25,6 @@ export class Widget {
 
 		this.key = (new Date()).getTime()
 
-
-		// this.buildWidget = buildWidget
-		// this.cityInit = cityInit
-
 		this.observable = new Observable()
 
 		this.addEmitter = (action) => {

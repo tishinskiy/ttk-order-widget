@@ -1,5 +1,6 @@
 import sortItems from './sortItems'
 import streetDropDown from './streetDropDown'
+import buildingDropDown from './buildingDropDown'
 
 export default function(){
 
@@ -10,7 +11,7 @@ export default function(){
 	const Store = this.store.readState()[this.name]
 
 	if (this.lang) {
-		
+
 		this.invertKeyboard()
 	}
 
@@ -45,6 +46,19 @@ export default function(){
 			}
 
 			streetDropDown.call(this)
+
+			break
+
+		case 'building':
+
+			if ($(node).val().length < 1) {
+
+				$(node).siblings('.ttk__input__droplist').remove()
+				return false
+			}
+
+			buildingDropDown.call(this)
+			console.log(7777777)
 
 			break
 

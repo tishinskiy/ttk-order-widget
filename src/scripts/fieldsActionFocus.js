@@ -15,6 +15,11 @@ export default function(){
 	const store = this.store.readState()[this.name]
 	const requests = this.store.readState().Requests
 
+	store.updateState(state => ({
+		...state,
+		focus: false
+	}))
+
 	const showDropdown = () => {
 
 		this.dropList.filterDropList(list => ([...list]))
@@ -50,10 +55,7 @@ export default function(){
 
 						} catch(e) {
 							console.log('ERR => ', e)
-							// results = {}
 						}
-
-						console.log('CITY', results)
 
 						store.updateState(state => ({
 							...state,
@@ -88,6 +90,15 @@ export default function(){
 			if ($(this.node).val().length >= 3) {
 
 				streetDropDown.call(this)
+			}
+
+			break
+
+		case 'building': 
+
+			if ($(this.node).val().length >= 1) {
+
+				console.log(44444444)
 			}
 
 			break

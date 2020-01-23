@@ -70,8 +70,12 @@ export default function(e) {
 							focus: false
 						}))
 						this.observable.eventEmitter(changeEvent)
-						console.log($(`[tabindex=${1 + +$(node).attr('tabindex')}]`).focus())
 
+					}
+
+					if ($(node).val() !== '') {
+						
+						$(`[tabindex=${1 + +$(node).attr('tabindex')}]`).focus()
 					}
 
 					return false
