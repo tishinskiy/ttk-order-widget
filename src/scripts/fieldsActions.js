@@ -3,9 +3,11 @@ import fieldsActionFocusout from './fieldsActionFocusout'
 import fieldsActionInpit from './fieldsActionInpit'
 import scrollDroplist from './scrollDroplist'
 
-export default function() {
+export default function(e) {
 
 	const node = this.node
+	const store = this.store.readState()[this.name]
+	const changeEvent = `change${this.name[0].toUpperCase()}${this.name.slice(1)}`
 
 	$(node)
 
@@ -44,13 +46,13 @@ export default function() {
 
 						if (timer) clearTimeout(timer)
 
-						this.store.readState()[this.name].updateState(state => ({
+						store.updateState(state => ({
 							...state,
 							droplistItemBloc: true
 						}))
 
 						timer = setTimeout(() => {
-							this.store.readState()[this.name].updateState(state => ({
+							store.updateState(state => ({
 								...state,
 								droplistItemBloc: false
 							}))
@@ -60,16 +62,16 @@ export default function() {
 					break
 
 				case "Enter":
-					console.log("Enter")
 
-					const dropList = $(this).siblings('.ttk__input__droplist')
+					if (store.readState().focus) {
+						store.updateState(state => ({
+							...state,
+							current: store.readState().focus,
+							focus: false
+						}))
+						this.observable.eventEmitter(changeEvent)
+						console.log($(`[tabindex=${1 + +$(node).attr('tabindex')}]`).focus())
 
-					if (dropList.length) {
-						const active = dropList.find('.ttk__droplist__item--focused')
-
-						if( !active.hasClass('ttk__droplist__item--selected') ) {
-							active.trigger('click');
-						}
 					}
 
 					return false

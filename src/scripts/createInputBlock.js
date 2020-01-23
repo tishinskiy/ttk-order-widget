@@ -1,4 +1,4 @@
-// import fieldsProps from './fieldsProps'
+let tabindex = 1000
 const time = (new Date()).getTime()
 const createInput = (field,) => {
 
@@ -8,6 +8,7 @@ const createInput = (field,) => {
 		maxlength: field.maxlength,
 		autocomplete: field.droplist ? `ttk__${time}` : false,
 		name: field.name,
+		tabindex: tabindex++
 	})
 }
 

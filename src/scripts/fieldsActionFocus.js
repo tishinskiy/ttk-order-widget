@@ -4,7 +4,6 @@ import sortItems from './sortItems'
 import buildDropList from './buildDropList'
 import scrollDroplist from './scrollDroplist'
 import streetDropDown from './streetDropDown'
-// import changeCity from './changeCity'
 
 export default function(){
 
@@ -38,9 +37,32 @@ export default function(){
 
 						const result = await jsonpRequest('https://gate.myttk.ru/gate/jsonp/city.php', {name: store.readState()['EXTERNAL_NAME']})
 
+						const results = {}
+
+						try {
+
+							for (let i = 0; i < result.results.length; i++) {
+								results[result.results[i]['INTERNAL_ID']] = {
+									...result.results[i],
+									key: result.results[i]['INTERNAL_ID']
+								}
+							}
+
+						} catch(e) {
+							console.log('ERR => ', e)
+							// results = {}
+						}
+
+						console.log('CITY', results)
+
+						store.updateState(state => ({
+							...state,
+							results
+						}))
+
 						requests.updateState(state => ({
 							...state,
-							cities: sortItems(result.results)
+							cities: result.results
 						}))
 
 						this.dropList.createDropList(result.results)

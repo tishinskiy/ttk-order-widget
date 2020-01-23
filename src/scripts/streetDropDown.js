@@ -35,14 +35,17 @@ export default function(go = false){
 					search: str
 				})
 
-			let results
+			const results = {}
 
 			try {
 
-				results = result.results
-			} catch(e) {
+				for (let i = 0; i < result.results.length; i++) {
+					results[result.results[i]['STREET_ID']] = result.results[i]
+				}
 
-				results = []
+			} catch(e) {
+				console.log('ERR => ', e)
+				// results = {}
 			}
 
 			const newStreet = {
@@ -56,7 +59,12 @@ export default function(go = false){
 				street: !!state.street ? [ ...state.street, newStreet ] : [ newStreet ]
 			}))
 
-			return results
+			Store.updateState(state => ({
+				...state,
+				results
+			}))
+
+			return result.results
 
 		} catch(error) {
 

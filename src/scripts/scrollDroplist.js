@@ -1,5 +1,14 @@
 export default function( direction ) {
 
+	const store = this.store.readState()[this.name]
+
+	const addFocusItem = (key) => {
+
+		store.updateState(state => ({
+			...state,
+			focus: store.readState().results[key]
+		}))
+	}
 	const dropList = $(this.node).siblings('.ttk__input__droplist')
 
 	if (dropList.length) {
@@ -16,6 +25,8 @@ export default function( direction ) {
 				const prev = active.length ? active.prev('.ttk__droplist__item') : dropList.find('.ttk__droplist__item').eq(0)
 
 				if (prev.length) {
+
+					addFocusItem(prev.attr('key'))
 					prev.addClass('ttk__droplist__item--focused')
 					active.removeClass('ttk__droplist__item--focused')
 
@@ -32,6 +43,8 @@ export default function( direction ) {
 				const next = active.length ? active.next('.ttk__droplist__item') : dropList.find('.ttk__droplist__item').eq(0)
 
 				if (next.length) {
+
+					addFocusItem(next.attr('key'))
 					next.addClass('ttk__droplist__item--focused')
 					active.removeClass('ttk__droplist__item--focused')
 
