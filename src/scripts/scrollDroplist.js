@@ -5,13 +5,16 @@ export default function( direction ) {
 	if (dropList.length) {
 
 		const listHeight = dropList[0].scrollHeight
-		let active = dropList.find('.ttk__droplist__item--focused')
+		const active = dropList.find('.ttk__droplist__item--focused')
+
 
 		switch (direction) {
 
 			case 'ArrowUp' :
-				console.log(direction)
-				const prev = active.prev('.ttk__droplist__item')
+				
+				
+				const prev = active.length ? active.prev('.ttk__droplist__item') : dropList.find('.ttk__droplist__item').eq(0)
+
 				if (prev.length) {
 					prev.addClass('ttk__droplist__item--focused')
 					active.removeClass('ttk__droplist__item--focused')
@@ -26,7 +29,8 @@ export default function( direction ) {
 
 			case 'ArrowDown' :
 
-				const next = active.next('.ttk__droplist__item')
+				const next = active.length ? active.next('.ttk__droplist__item') : dropList.find('.ttk__droplist__item').eq(0)
+
 				if (next.length) {
 					next.addClass('ttk__droplist__item--focused')
 					active.removeClass('ttk__droplist__item--focused')

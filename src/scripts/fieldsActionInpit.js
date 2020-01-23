@@ -8,7 +8,11 @@ export default function(){
 	$(node).val($(node).val().replace(/^\s*/,''))
 
 	const Store = this.store.readState()[this.name]
-	this.invertKeyboard()
+
+	if (this.lang) {
+		
+		this.invertKeyboard()
+	}
 
 	switch (this.name) {
 

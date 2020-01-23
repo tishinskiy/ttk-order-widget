@@ -32,7 +32,8 @@ export default function () {
 
 					href: 'javascript:;',
 					html,
-					class:`ttk__droplist__item ttk__droplist__item--${name} ${item['INTERNAL_ID'] === current['INTERNAL_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`
+					class:`ttk__droplist__item ttk__droplist__item--${name} ${item['INTERNAL_ID'] === current['INTERNAL_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`,
+					key: item['INTERNAL_ID']
 				})
 
 				link
@@ -71,7 +72,8 @@ export default function () {
 
 					href: 'javascript:;',
 					html: `<span class="ttk__droplist-item--gray">${type}</span><br>${html}`,
-					class:`ttk__droplist__item ttk__droplist__item--${name} ${item['STREET_ID'] == current['STREET_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`
+					class:`ttk__droplist__item ttk__droplist__item--${name} ${item['STREET_ID'] == current['STREET_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`,
+					key: item['STREET_ID']
 				})
 
 				link
