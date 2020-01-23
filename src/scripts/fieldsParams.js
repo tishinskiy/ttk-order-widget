@@ -3,24 +3,28 @@ export const fields = [
 		name: 'city',
 		label: 'Город',
 		maxlength: 20,
+		language: 'ru',
 		droplist: true
 	},
 	{
 		name: 'street',
 		label: 'Улица',
 		maxlength: 30,
+		language: 'ru',
 		droplist: true
 	},
 	{
 		name: 'building',
 		label: 'Здание',
 		maxlength: 5,
+		language: 'ru',
 		droplist: true
 	},
 	{
 		name: 'apartment',
 		label: 'Квартира',
 		maxlength: 5,
+		language: 'ru',
 		droplist: false
 	},
 	{

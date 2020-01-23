@@ -2,6 +2,7 @@ import { Store } from './Store'
 import { DropList } from './DropList'
 import fieldsActions from './fieldsActions'
 import eventActions from './eventActions'
+import invertKeyboard from './invertKeyboard'
 
 import addDropDown from './addDropDown'
 
@@ -12,6 +13,7 @@ export class Input {
 		const store = new Store()
 		this.node = node;
 		this.name = name
+		this.invertKeyboard = invertKeyboard
 
 		for (let option in options) {
 			this[option] = options[option]

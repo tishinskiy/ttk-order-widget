@@ -19,6 +19,10 @@ export default function() {
 
 			Input.addDropList()
 		}
+		if (field.language) {
+
+			Input.lang = field.language
+		}
 	})
 
 	const { button:sendButton } = buildWidgetDOM.call(this, blocks)
