@@ -33,8 +33,8 @@ export default function () {
 
 					href: 'javascript:;',
 					html,
-					class:`ttk__droplist__item ttk__droplist__item--${name} ${item['INTERNAL_ID'] === current['INTERNAL_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`,
-					key: item['INTERNAL_ID']
+					class:`ttk__droplist__item ttk__droplist__item--${name} ${item['EXTERNAL_ID'] === current['EXTERNAL_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`,
+					key: item['EXTERNAL_ID']
 				})
 
 				link

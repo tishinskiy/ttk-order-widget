@@ -29,6 +29,7 @@ export default function() {
 
 				for (let i = 0; i < result.results.length; i++) {
 					results[result.results[i]['BUILDING_ID']] = result.results[i]
+					result.results[i]['key'] = result.results[i]['BUILDING_ID']
 				}
 
 			} catch(e) {
@@ -36,19 +37,25 @@ export default function() {
 				// results = {}
 			}
 
-			const newBuilding = {
+			const newItems = {
 				street: street['STREET_ID'],
-				results
+				resuts: result.results
 			}
 
 			requests.updateState(state => ({
 				...state,
-				building: !!state.building ? [ ...state.building, newBuilding ] : [ newBuilding ]
+				[this.name]: !!state[this.name] ? [ ...state[this.name], newItems ] : [ newItems ]
 			}))
 
 			Store.updateState(state => ({
 				...state,
-				results
+				resuts: result.results,
+				items: state.items ? {
+					...state.items,
+					...results
+				} : {
+					...results
+				}
 			}))
 
 			return result.results

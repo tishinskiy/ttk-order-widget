@@ -6,7 +6,7 @@ export default function( direction ) {
 
 		store.updateState(state => ({
 			...state,
-			focus: store.readState().results[key]
+			focus: store.readState().items[key]
 		}))
 	}
 	

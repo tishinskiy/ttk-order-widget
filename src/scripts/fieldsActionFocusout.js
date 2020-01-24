@@ -53,14 +53,9 @@ export default function(name){
 
 			fieldAction(() => {
 
-				const cities = this.store.readState().Requests.readState().cities
+				const arr = this.dropList.list.filter(item => $(node).val().toLowerCase() === item['EXTERNAL_NAME'].toLowerCase())
 
-				if (cities && cities.length) {
-
-					const arr = cities.filter(item => $(node).val().toLowerCase() === item['EXTERNAL_NAME'].toLowerCase())
-
-					func(arr, 'EXTERNAL_ID', 'EXTERNAL_NAME')
-				}
+				func(arr, 'EXTERNAL_ID', 'EXTERNAL_NAME')
 			},
 
 			() => {

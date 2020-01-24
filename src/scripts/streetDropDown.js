@@ -40,6 +40,7 @@ export default function(){
 
 				for (let i = 0; i < result.results.length; i++) {
 					results[result.results[i]['STREET_ID']] = result.results[i]
+					result.results[i]['key'] = result.results[i]['STREET_ID']
 				}
 
 			} catch(e) {
@@ -47,20 +48,27 @@ export default function(){
 				// results = {}
 			}
 
-			const newStreet = {
-				city: city['INTERNAL_ID'],
+			const newItems = {
+
+				city: city['EXTERNAL_ID'],
 				search: str,
-				results
+				results: result.results
 			}
 
 			requests.updateState(state => ({
 				...state,
-				street: !!state.street ? [ ...state.street, newStreet ] : [ newStreet ]
+				[this.name]: !!state[this.name] ? [ ...state[this.name], newItems ] : [ newItems ]
 			}))
 
 			Store.updateState(state => ({
 				...state,
-				results: result.results
+				results: result.results,
+				items: state.items ? {
+					...state.items,
+					...results
+				} : {
+					...results
+				}
 			}))
 
 			return result.results
@@ -83,9 +91,9 @@ export default function(){
 
 		if ('results' in Store.readState()) {
 
-
+			console.log(4444444, Store.readState().results)
 			const arr = Store.readState().results.filter(item => {
-				return item.city === city['INTERNAL_ID'] && item.search === str.slice(0, 3)
+				return item.city === city['EXTERNAL_ID'] && item.search === str.slice(0, 3)
 			})
 
 			if (arr.length) {
