@@ -78,6 +78,8 @@ export default function(e) {
 						$(`[tabindex=${1 + +$(node).attr('tabindex')}]`).focus()
 					}
 
+					console.log(55555, store)
+
 					return false
 					break
 

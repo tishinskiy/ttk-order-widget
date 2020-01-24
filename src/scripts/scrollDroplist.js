@@ -9,6 +9,7 @@ export default function( direction ) {
 			focus: store.readState().results[key]
 		}))
 	}
+	
 	const dropList = $(this.node).siblings('.ttk__input__droplist')
 
 	if (dropList.length) {

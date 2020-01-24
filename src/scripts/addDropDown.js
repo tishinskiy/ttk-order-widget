@@ -4,8 +4,6 @@ export default function() {
 
 	const list = buildDropList.call(this)
 
-	console.log('list', list)
-
 	if (list.length) {
 
 		let block

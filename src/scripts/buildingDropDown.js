@@ -14,15 +14,6 @@ export default function(go = false){
 
 	let str = $(this.node).val()
 
-	// const type = typeInValue(str)
-	// if (!!type) {
-
-	// 	this.type = typeInValue(str)
-	// 	str = str.slice(this.type.length + 1)
-	// 	$(node).val(str)
-	// 	$(node).siblings('label').html(this.type[0].toUpperCase() + this.type.slice(1)).addClass('ttk__input__label--fixed')
-	// }
-
 	if (str.length < 1) return false
 
 	const findBuildingInAPI = async () => {
@@ -38,7 +29,7 @@ export default function(go = false){
 			try {
 
 				for (let i = 0; i < result.results.length; i++) {
-					results[result.results[i]['STREET_ID']] = result.results[i]
+					results[result.results[i]['BUILDING_ID']] = result.results[i]
 				}
 
 			} catch(e) {
@@ -104,16 +95,14 @@ export default function(go = false){
 				})
 
 				const sortArr = sortItems(newList, str, 'HOUSE_NUMBER')
-
 				return sortArr
-
 			})
 
 			if (this.dropList.filterList.length === 1 && (Store.readState().current ? $(node).val().toLowerCase() === Store.readState().current['sortArr'].toLowerCase() : false)) {
 				$(node).siblings('.ttk__input__droplist').remove()
 				return false
 			}
-			console.log(this)
+
 			this.addDropDown()
 
 		} else {

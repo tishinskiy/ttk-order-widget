@@ -2,6 +2,8 @@ export default function() {
 
 	const input = this
 	const node = input.node
+	const inputCurrent = () => input.store.readState()[input.name].readState().current
+
 
 	switch (input.name) {
 
@@ -10,9 +12,7 @@ export default function() {
 			return {
 				event: 'changeCity',
 				action() {
-
-					const current = input.store.readState().city.readState().current
-
+					const current = inputCurrent()
 					if (current) {
 						
 						$(node).val(current['EXTERNAL_NAME'])
@@ -49,9 +49,7 @@ export default function() {
 				{
 					event: 'changeStreet',
 					action() {
-
-						const current = input.store.readState().street.readState().current
-
+						const current = inputCurrent()
 						if (current) {
 							
 							$(node).val(current['STREET_NAME'])
@@ -65,6 +63,53 @@ export default function() {
 						$(node).siblings('.ttk__input__droplist').hide()
 					}
 				}
+			]
+
+			break
+
+		case 'building':
+
+			const clear = () => {
+				console.log('CLEAR', input)
+
+				if ($(node).val() != '') {
+
+					$(node).val('')
+					$(node).siblings('.ttk__input__label')
+						.removeClass('ttk__input__label--focused')
+				}
+
+				input.store.readState()[input.name].updateState(state => ({
+					...state,
+					current: false
+				}))
+			}
+
+			return [
+
+				{
+					event: 'changeBuilding',
+					action() {
+						const current = inputCurrent()
+
+						if (current) {
+							
+							$(node).val(current['HOUSE_NUMBER'])
+						}
+
+						$(node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
+						$(node).siblings('.ttk__input__droplist').hide()
+						$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
+					}
+				},
+				{
+					event: 'changeCity',
+					action: clear
+				},
+				{
+					event: 'changeStreet',
+					action: clear
+				},
 			]
 
 			break

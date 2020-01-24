@@ -58,7 +58,6 @@ export default function(){
 			}
 
 			buildingDropDown.call(this)
-			console.log(7777777)
 
 			break
 

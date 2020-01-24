@@ -1,5 +1,6 @@
 import changeCity from './changeCity'
 import changeStreet from './changeStreet'
+import changeBuilding from './changeBuilding'
 
 const buildValue = (value, str) => {
 
@@ -120,7 +121,7 @@ export default function () {
 							display: 'none'
 						})
 
-						changeCity.call(thas, item)
+						changeBuilding.call(thas, item)
 
 					})
 
