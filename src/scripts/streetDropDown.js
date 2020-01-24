@@ -13,6 +13,7 @@ export default function(){
 	let str = $(this.node).val()
 
 	const type = typeInValue(str)
+	
 	if (!!type) {
 
 		this.type = typeInValue(str)
@@ -91,7 +92,6 @@ export default function(){
 
 		if ('results' in Store.readState()) {
 
-			console.log(4444444, Store.readState().results)
 			const arr = Store.readState().results.filter(item => {
 				return item.city === city['EXTERNAL_ID'] && item.search === str.slice(0, 3)
 			})

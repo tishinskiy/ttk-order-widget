@@ -105,7 +105,9 @@ export default function () {
 		case 'building':
 			return list.map(item => {
 
-				const html = !!str ? buildValue(item['HOUSE_NUMBER'], str) : item['HOUSE_NUMBER']
+				const fullNmae = `${item['HOUSE_NUMBER']}${item['CORPUS'] ? ` корпус ${item['CORPUS']}` : '' }`
+
+				const html = !!str ? buildValue(fullNmae, str) : fullNmae
 				const link = $('<a>', {
 
 					href: 'javascript:;',
