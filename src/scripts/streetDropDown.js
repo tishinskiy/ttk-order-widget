@@ -3,8 +3,7 @@ import jsonpRequest from './jsonpReqyest'
 import scrollDroplist from './scrollDroplist'
 import { typeInValue } from './streetTypes'
 
-export default function(go = false){
-
+export default function(){
 	const thas = this
 	const node = this.node
 	const Store = this.store.readState()[this.name]
@@ -61,7 +60,7 @@ export default function(go = false){
 
 			Store.updateState(state => ({
 				...state,
-				results
+				results: result.results
 			}))
 
 			return result.results
@@ -82,10 +81,10 @@ export default function(go = false){
 
 		let Result
 
-		if ('street' in requests.readState()) {
+		if ('results' in Store.readState()) {
 
 
-			const arr =  requests.readState().street.filter(item => {
+			const arr = Store.readState().results.filter(item => {
 				return item.city === city['INTERNAL_ID'] && item.search === str.slice(0, 3)
 			})
 
@@ -116,7 +115,7 @@ export default function(go = false){
 
 			})
 
-			if (this.dropList.filterList.length === 1 && (Store.readState().current ? $(node).val().toLowerCase() === Store.readState().current['STREET_NAME'].toLowerCase() : false)) {
+			if (this.dropList.filterList.length === 1 && $(node).val().toLowerCase() === this.dropList.filterList[0]['STREET_NAME'].toLowerCase()) {
 				$(node).siblings('.ttk__input__droplist').remove()
 				return false
 			}
@@ -124,7 +123,6 @@ export default function(go = false){
 			this.addDropDown()
 
 		} else {
-
 			$(node).siblings('.ttk__input__droplist').remove()
 		}
 	})()

@@ -3,12 +3,11 @@ import jsonpRequest from './jsonpReqyest'
 import scrollDroplist from './scrollDroplist'
 import { typeInValue } from './streetTypes'
 
-export default function(go = false){
+export default function() {
 
 	const thas = this
 	const node = this.node
 	const Store = this.store.readState()[this.name]
-	// const city =  this.store.readState().city.readState().current
 	const street =  this.store.readState().street.readState().current
 	const requests = this.store.readState().Requests
 
@@ -98,7 +97,7 @@ export default function(go = false){
 				return sortArr
 			})
 
-			if (this.dropList.filterList.length === 1 && (Store.readState().current ? $(node).val().toLowerCase() === Store.readState().current['sortArr'].toLowerCase() : false)) {
+			if (this.dropList.filterList.length === 1 && ($(node).val().toLowerCase() === this.dropList.filterList[0]['HOUSE_NUMBER'].toLowerCase())) {
 				$(node).siblings('.ttk__input__droplist').remove()
 				return false
 			}

@@ -4,6 +4,7 @@ import sortItems from './sortItems'
 import buildDropList from './buildDropList'
 import scrollDroplist from './scrollDroplist'
 import streetDropDown from './streetDropDown'
+import buildingDropDown from './buildingDropDown'
 
 export default function(){
 
@@ -98,7 +99,7 @@ export default function(){
 
 			if ($(this.node).val().length >= 1) {
 
-				console.log(44444444)
+				buildingDropDown.call(this)
 			}
 
 			break

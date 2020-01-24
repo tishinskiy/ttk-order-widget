@@ -70,7 +70,6 @@ export default function() {
 		case 'building':
 
 			const clear = () => {
-				console.log('CLEAR', input)
 
 				if ($(node).val() != '') {
 

@@ -69,16 +69,14 @@ export default function(e) {
 							current: store.readState().focus,
 							focus: false
 						}))
-						this.observable.eventEmitter(changeEvent)
 
+						this.observable.eventEmitter(changeEvent)
 					}
 
 					if ($(node).val() !== '') {
 						
 						$(`[tabindex=${1 + +$(node).attr('tabindex')}]`).focus()
 					}
-
-					console.log(55555, store)
 
 					return false
 					break
