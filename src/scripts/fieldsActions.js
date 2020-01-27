@@ -2,6 +2,7 @@ import fieldsActionFocus from './fieldsActionFocus'
 import fieldsActionFocusout from './fieldsActionFocusout'
 import fieldsActionInpit from './fieldsActionInpit'
 import scrollDroplist from './scrollDroplist'
+let timer
 
 export default function(e) {
 
@@ -18,12 +19,17 @@ export default function(e) {
 		.on('focusout', event => {
 			$(node).val($(node).val().replace(/\s*$/,''))
 
-			fieldsActionFocusout.call(this)
-			$(node).attr('placeholder', '')
 
 			if (event.originalEvent && $(event.originalEvent.relatedTarget).hasClass('ttk__droplist__item')) {
+				store.updateState(state => ({
+					...state,
+					itemClick: true
+				}))
 				return false
 			}
+
+			fieldsActionFocusout.call(this)
+			$(node).attr('placeholder', '')
 			if (!$(node).val().length) {
 
 				$(node).siblings('.ttk__input__label').removeClass('ttk__input__label--focused')
@@ -41,7 +47,6 @@ export default function(e) {
 
 				case "ArrowDown":
 				case "ArrowUp":
-					let timer
 					if (scrollDroplist.call(this, event.key)) {
 
 						if (timer) clearTimeout(timer)
@@ -56,7 +61,7 @@ export default function(e) {
 								...state,
 								droplistItemBloc: false
 							}))
-						}, 100)
+						}, 50)
 					}
 					return false
 					break

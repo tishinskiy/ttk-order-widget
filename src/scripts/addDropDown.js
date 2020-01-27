@@ -31,5 +31,4 @@ export default function() {
 		$(this.node).siblings(".ttk__input__droplist").remove()
 		return false
 	}
-
 }

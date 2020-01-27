@@ -7,21 +7,22 @@ export default function(name){
 	const changeEvent = `change${this.name[0].toUpperCase()}${this.name.slice(1)}`
 
 	const fieldAction = (func_1, func_2,) => {
+		if (Store.readState().itemClick) {
+
+			Store.updateState(state => ({
+				...state,
+				itemClick: false
+			}))
+
+			return false
+		}
 
 		if ($(node).val() === '') {
 
 			func_2()
 		} else {
 
-			this.addEmitter({
-				event: changeEvent,
-
-				action() {
-					clearTimeout(timer)
-				}
-			})
-
-			const timer = setTimeout(func_1, 300)
+			func_1()
 		}
 	}
 

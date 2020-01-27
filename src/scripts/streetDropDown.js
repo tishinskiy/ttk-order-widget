@@ -26,7 +26,7 @@ export default function(){
 
 	const findStreetInAPI = async (str) => {
 
-		str = str.slice(0, 3)
+		str = str.slice(0, 3).toLowerCase()
 
 		try {
 
@@ -90,10 +90,10 @@ export default function(){
 
 		let Result
 
-		if ('results' in Store.readState()) {
+		if ('street' in requests.readState()) {
 
-			const arr = Store.readState().results.filter(item => {
-				return item.city === city['EXTERNAL_ID'] && item.search === str.slice(0, 3)
+			const arr = requests.readState().street.filter(item => {
+				return item.city === city['EXTERNAL_ID'] && item.search === str.slice(0, 3).toLowerCase()
 			})
 
 			if (arr.length) {
@@ -129,6 +129,8 @@ export default function(){
 			}
 
 			this.addDropDown()
+
+			console.log(444444, requests)
 
 		} else {
 			$(node).siblings('.ttk__input__droplist').remove()

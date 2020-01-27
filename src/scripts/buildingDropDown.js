@@ -39,7 +39,7 @@ export default function() {
 
 			const newItems = {
 				street: street['STREET_ID'],
-				resuts: result.results
+				results: result.results
 			}
 
 			requests.updateState(state => ({
@@ -79,13 +79,12 @@ export default function() {
 		if ('building' in requests.readState()) {
 
 
-			const arr =  requests.readState().street.filter(item => item.street === street['STREET_ID'])
+			const arr =  requests.readState().building.filter(item => item.street === street['STREET_ID'])
 
 			if (arr.length) {
 				Result = arr[0].results
 			}
 		}
-
 		if (!Result) {
 
 			Result = await findBuildingInAPI()

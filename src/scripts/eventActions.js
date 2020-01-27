@@ -21,6 +21,10 @@ export default function() {
 					$(node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
 					$(node).siblings('.ttk__input__droplist').hide()
 					$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
+					input.store.readState()[input.name].updateState(state => ({
+						...state,
+						itemClick: false
+					}))
 				}
 			}
 			break
@@ -44,6 +48,7 @@ export default function() {
 							...state,
 							current: false
 						}))
+
 					}
 				},
 				{
@@ -61,6 +66,11 @@ export default function() {
 							.html(current['TYPE_NAME'])
 						$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
 						$(node).siblings('.ttk__input__droplist').hide()
+
+						input.store.readState()[input.name].updateState(state => ({
+							...state,
+							itemClick: false
+						}))
 					}
 				}
 			]
@@ -93,12 +103,16 @@ export default function() {
 
 						if (current) {
 							
-							$(node).val(current['HOUSE_NUMBER'])
+							$(node).val(`${current['HOUSE_NUMBER']}${current['CORPUS'] ? ` корпус ${current['CORPUS']}` : '' }`)
 						}
 
 						$(node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
 						$(node).siblings('.ttk__input__droplist').hide()
 						$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
+						input.store.readState()[input.name].updateState(state => ({
+							...state,
+							itemClick: false
+						}))
 					}
 				},
 				{
