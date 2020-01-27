@@ -3,8 +3,6 @@ export default function (newBuilding) {
 	const store = this.store.readState().building
 	const current = store.readState().current
 
-	console.log('newBuilding', newBuilding)
-
 	if (!current || current['BUILDING_ID'] != newBuilding['BUILDING_ID']) {
 
 		store.updateState(state => ({

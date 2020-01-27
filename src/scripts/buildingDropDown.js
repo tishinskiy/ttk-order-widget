@@ -8,10 +8,38 @@ export default function() {
 	const thas = this
 	const node = this.node
 	const Store = this.store.readState()[this.name]
-	const street =  this.store.readState().street.readState().current
+	const city = this.store.readState().city.readState().current
+	const street = this.store.readState().street.readState().current
 	const requests = this.store.readState().Requests
 
 	let str = $(this.node).val()
+
+
+	if (!city) {
+		this.store.updateState(state => ({
+			...state,
+			error: {
+				code: 'err_2',
+				node: this.store.readState().city.readState().node
+			}
+		}))
+		this.observable.eventEmitter('showError')
+		$(node).blur()
+		return false
+	}
+
+	if (!street) {
+		this.store.updateState(state => ({
+			...state,
+			error: {
+				code: 'err_3',
+				node: this.store.readState().street.readState().node
+			}
+		}))
+		this.observable.eventEmitter('showError')
+		$(node).blur()
+		return false
+	}
 
 	if (str.length < 1) return false
 

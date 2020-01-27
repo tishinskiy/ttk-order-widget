@@ -17,13 +17,7 @@ export default function(name){
 			return false
 		}
 
-		if ($(node).val() === '') {
-
-			func_2()
-		} else {
-
-			func_1()
-		}
+		$(node).val() === '' ? func_2() : func_1()
 	}
 
 	const func = (arr, fieldId, fieldName) => {
@@ -42,6 +36,7 @@ export default function(name){
 		if (!current) {
 
 			if (arr.length) {
+
 				$(node).val(arr[0][fieldName])
 			}
 		}
@@ -79,6 +74,8 @@ export default function(name){
 				func(arr, 'STREET_ID', 'STREET_NAME')
 
 			}, () => {
+
+				if (!current) return false
 
 				$(node).val(current ? Store.readState().current['STREET_NAME'] : '')
 				$(node).siblings('.ttk__input__label').html(current['TYPE_NAME'])

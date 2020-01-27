@@ -15,6 +15,8 @@ export default function(){
 		this.invertKeyboard()
 	}
 
+	$(node).removeClass('ttk__input--error')
+
 	switch (this.name) {
 
 		case 'city':
@@ -38,12 +40,6 @@ export default function(){
 			break
 
 		case 'street':
-
-			if ($(node).val().length < 3) {
-
-				$(node).siblings('.ttk__input__droplist').remove()
-				return false
-			}
 
 			streetDropDown.call(this)
 

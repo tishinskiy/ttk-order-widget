@@ -1,5 +1,6 @@
 import defaultParams from './defaultParams'
 import buildWidget from './buildWidget'
+import showError from './showError'
 import cityInit from './cityInit'
 import { Observable, Observer } from './Observer'
 import { Store } from './Store'
@@ -26,6 +27,7 @@ export class Widget {
 		this.key = (new Date()).getTime()
 
 		this.observable = new Observable()
+		this.showError = showError.bind(this)
 
 		this.addEmitter = (action) => {
 			if (action.length) {
@@ -38,6 +40,11 @@ export class Widget {
 
 		buildWidget.call(this)
 		cityInit.call(this)
+
+		this.addEmitter({
+			event: 'showError',
+			action: this.showError
+		})
 	}
 	
 	createInput(node = $('<input>'), name = 'undefined') {

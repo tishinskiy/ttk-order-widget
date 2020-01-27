@@ -7,7 +7,6 @@ export default function(){
 	$(this.node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
 	$(this.node).closest('.ttk__input__wrap').addClass('ttk__input__wrap--focused')
 
-
 	const thas = this
 	const store = this.store.readState()[this.name]
 	const requests = this.store.readState().Requests
@@ -27,19 +26,13 @@ export default function(){
 
 		case 'street': 
 
-			if ($(this.node).val().length >= 3) {
-
-				streetDropDown.call(this)
-			}
+			streetDropDown.call(this)
 
 			break
 
 		case 'building': 
 
-			if ($(this.node).val().length >= 1) {
-
-				buildingDropDown.call(this)
-			}
+			buildingDropDown.call(this)
 
 			break
 

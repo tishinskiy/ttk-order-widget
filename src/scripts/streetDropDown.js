@@ -10,6 +10,24 @@ export default function(){
 	const city =  this.store.readState().city.readState().current
 	const requests = this.store.readState().Requests
 
+	if (!city) {
+		this.store.updateState(state => ({
+			...state,
+			error: {
+				code: 'err_2',
+				node: this.store.readState().city.readState().node
+			}
+		}))
+		this.observable.eventEmitter('showError')
+		$(node).blur()
+		return false
+	}
+
+	if ($(node).val().length < 3) {
+		$(node).siblings('.ttk__input__droplist').remove()
+		return false
+	}
+
 	let str = $(this.node).val()
 
 	const type = typeInValue(str)
