@@ -7,6 +7,9 @@ export default function(){
 	$(this.node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
 	$(this.node).closest('.ttk__input__wrap').addClass('ttk__input__wrap--focused')
 
+	$(this.node).removeClass('ttk__input--error')
+
+
 	const thas = this
 	const store = this.store.readState()[this.name]
 	const requests = this.store.readState().Requests

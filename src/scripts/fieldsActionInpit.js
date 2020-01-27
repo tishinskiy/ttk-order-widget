@@ -15,8 +15,6 @@ export default function(){
 		this.invertKeyboard()
 	}
 
-	$(node).removeClass('ttk__input--error')
-
 	switch (this.name) {
 
 		case 'city':

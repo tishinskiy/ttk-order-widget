@@ -72,6 +72,4 @@ export default function() {
 
 		showDropdown()
 	}
-
-	console.log(this)
 }

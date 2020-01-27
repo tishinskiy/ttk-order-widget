@@ -30,6 +30,11 @@ export default function() {
 		}
 	})()
 
+	block.on('click', function(){
+		console.log(4444444444)
+		block.slideUp(200)
+	})
+
 
 	const error = this.store.readState().error
 
@@ -40,7 +45,6 @@ export default function() {
 		block.slideDown('fast')
 		$(error.node)
 			.addClass('ttk__input--error')
-			.focus()
 	}
 
 	this.timer = setTimeout(() => {
