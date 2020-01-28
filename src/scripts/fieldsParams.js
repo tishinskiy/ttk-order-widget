@@ -16,7 +16,7 @@ export const fields = [
 	{
 		name: 'building',
 		label: 'Здание',
-		maxlength: 10,
+		maxlength: 15,
 		language: 'ru',
 		droplist: true
 	},

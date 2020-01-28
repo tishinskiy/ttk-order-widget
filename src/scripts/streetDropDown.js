@@ -148,8 +148,6 @@ export default function(){
 
 			this.addDropDown()
 
-			console.log(444444, requests)
-
 		} else {
 			$(node).siblings('.ttk__input__droplist').remove()
 		}

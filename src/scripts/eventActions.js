@@ -113,6 +113,8 @@ export default function() {
 							...state,
 							itemClick: false
 						}))
+
+						console.log('Building', current)
 					}
 				},
 				{

@@ -56,8 +56,10 @@ export default function() {
 			try {
 
 				for (let i = 0; i < result.results.length; i++) {
-					results[result.results[i]['BUILDING_ID']] = result.results[i]
-					result.results[i]['key'] = result.results[i]['BUILDING_ID']
+					const item = result.results[i]
+					results[item['BUILDING_ID']] = item
+					item['key'] = item['BUILDING_ID']
+					item['FULL_NAME'] = `${item['HOUSE_NUMBER']}${item['CORPUS'] !== '' ? ` корпус ${item['CORPUS']}` : '' }`
 				}
 
 			} catch(e) {
@@ -123,15 +125,17 @@ export default function() {
 			this.dropList.createDropList(Result)
 			this.dropList.filterDropList(list => {
 
+
 				const newList = list.filter(item => {
-					return (item['HOUSE_NUMBER'].toLowerCase().indexOf(str.toLowerCase()) != -1)
+					return (item['FULL_NAME'].toLowerCase().indexOf(str.toLowerCase()) != -1)
 				})
 
-				const sortArr = sortItems(newList, str, 'HOUSE_NUMBER')
+				const sortArr = sortItems(newList, str, 'FULL_NAME')
+
 				return sortArr
 			})
 
-			if (this.dropList.filterList.length === 1 && ($(node).val().toLowerCase() === this.dropList.filterList[0]['HOUSE_NUMBER'].toLowerCase())) {
+			if (this.dropList.filterList.length === 1 && ($(node).val().toLowerCase() === this.dropList.filterList[0]['FULL_NAME'].toLowerCase())) {
 				$(node).siblings('.ttk__input__droplist').remove()
 				return false
 			}

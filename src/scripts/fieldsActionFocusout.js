@@ -84,6 +84,27 @@ export default function(name){
 			break
 		}
 
+		case 'building': {
+
+			fieldAction(() => {
+
+				const arr = this.dropList.list.filter(item => {
+
+					return $(node).val().toLowerCase() === item['FULL_NAME'].toLowerCase()
+				})
+
+				func(arr, 'BUILDING_ID', 'FULL_NAME')
+
+			}, () => {
+
+				if (!current) return false
+
+				$(node).val(current ? Store.readState().current['FULL_NAME'] : '')
+			})
+
+			break
+		}
+
 		default:
 			break
 	}
