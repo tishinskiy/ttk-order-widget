@@ -14,7 +14,7 @@
 	.ttk__input__wrap--button
 		border: 0
 
-	.ttk__input
+	.ttk__input,
 		position: relative
 		display: block
 		width: 100%
@@ -32,6 +32,13 @@
 
 		&:-internal-autofill-selected
 			z-index: 1
+
+	.ttk__input__fake
+		position: absolute
+		top: 0
+		left: 0
+		color: #ccc
+		z-index: 1
 
 	.ttk__input--error
 		border-color: #E21A1A

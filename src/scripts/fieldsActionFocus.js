@@ -1,6 +1,7 @@
 import cityDropDown from './cityDropDown'
 import streetDropDown from './streetDropDown'
 import buildingDropDown from './buildingDropDown'
+import phoneMask from './phoneMask'
 
 export default function(){
 
@@ -36,6 +37,14 @@ export default function(){
 		case 'building': 
 
 			buildingDropDown.call(this)
+
+			break
+
+		case 'phone': 
+
+			// buildingDropDown.call(this)
+			console.log(1111111)
+			phoneMask.call(this)
 
 			break
 
