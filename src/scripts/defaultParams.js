@@ -8,4 +8,5 @@ export default {
 	fields: false,
 	hideCity: false,
 	currentCity: false,
+	coverage: true,
 }

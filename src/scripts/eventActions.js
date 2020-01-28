@@ -2,7 +2,8 @@ export default function() {
 
 	const input = this
 	const node = input.node
-	const inputCurrent = () => input.store.readState()[input.name].readState().current
+	const store = input.store.readState()[input.name]
+	const inputCurrent = () => store.readState().current
 
 
 	switch (input.name) {
@@ -21,7 +22,7 @@ export default function() {
 					$(node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
 					$(node).siblings('.ttk__input__droplist').hide()
 					$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
-					input.store.readState()[input.name].updateState(state => ({
+					store.updateState(state => ({
 						...state,
 						itemClick: false
 					}))
@@ -44,7 +45,7 @@ export default function() {
 
 						input.type = false
 
-						input.store.readState().street.updateState(state => ({
+						store.updateState(state => ({
 							...state,
 							current: false
 						}))
@@ -67,7 +68,7 @@ export default function() {
 						$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
 						$(node).siblings('.ttk__input__droplist').hide()
 
-						input.store.readState()[input.name].updateState(state => ({
+						store.updateState(state => ({
 							...state,
 							itemClick: false
 						}))
@@ -88,7 +89,7 @@ export default function() {
 						.removeClass('ttk__input__label--focused')
 				}
 
-				input.store.readState()[input.name].updateState(state => ({
+				store.updateState(state => ({
 					...state,
 					current: false
 				}))
@@ -103,18 +104,38 @@ export default function() {
 
 						if (current) {
 							
-							$(node).val(`${current['HOUSE_NUMBER']}${current['CORPUS'] ? ` корпус ${current['CORPUS']}` : '' }`)
+							$(node).val(current['FULL_NAME'])
 						}
 
 						$(node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
 						$(node).siblings('.ttk__input__droplist').hide()
 						$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
-						input.store.readState()[input.name].updateState(state => ({
+						store.updateState(state => ({
 							...state,
 							itemClick: false
 						}))
 
-						console.log('Building', current)
+						if(current['TC'] === null ) {
+
+							if (input.store.readState().params.collector) {
+
+								console.log(`SEND TO ${input.store.readState().params.collector}`, current)
+							}
+
+							if (input.store.readState().params.coverage) {
+
+								input.store.updateState(state => ({
+									...state,
+									error: {
+										code: 'err_7',
+									}
+								}))
+								input.observable.eventEmitter('showError')
+								$(node).blur()
+								return false
+							}
+
+						}
 					}
 				},
 				{
