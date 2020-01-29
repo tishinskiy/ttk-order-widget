@@ -1,3 +1,5 @@
+import errorsRevision from './errorsRevision'
+
 export default function() {
 	const store = this.store.readState()
 	const City = store.city.readState().current
@@ -8,39 +10,7 @@ export default function() {
 	const family = store.family.readState().node.value
 	const phone = store.phone.readState().node.value
 
-
-	if (!City) {
-		this.store.updateState(state => ({
-			...state,
-			error: {
-				code: 'err_2',
-			}
-		}))
-		this.observable.eventEmitter('showError')
-		return false
-	}
-
-	if (!Street) {
-		this.store.updateState(state => ({
-			...state,
-			error: {
-				code: 'err_3',
-			}
-		}))
-		this.observable.eventEmitter('showError')
-		return false
-	}
-
-	if (!Building) {
-		this.store.updateState(state => ({
-			...state,
-			error: {
-				code: 'err_4',
-			}
-		}))
-		this.observable.eventEmitter('showError')
-		return false
-	}
+	errorsRevision.call(this)
 
 	const sendData = {
 
@@ -48,11 +18,10 @@ export default function() {
 		City_ID: City['EXTERNAL_ID'],
 		street: `${Street['TYPE_NAME']} ${Street['STREET_NAME']}`,
 		building: Building['FULL_NAME'],
+		Building_ID: Building['BUILDING_ID'],
 		ofice,
-		name,
 		family,
 		phone,
-		Building_ID: Building['BUILDING_ID'],
 	}
 
 	const params = this.store.readState().params
