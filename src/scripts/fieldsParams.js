@@ -31,12 +31,14 @@ export const fields = [
 		name: 'family',
 		label: 'Фамилия',
 		maxlength: 20,
+		language: 'ru',
 		droplist: false
 	},
 	{
 		name: 'name',
 		label: 'Имя',
 		maxlength: 20,
+		language: 'ru',
 		droplist: false
 	},
 	{

@@ -25,7 +25,7 @@ export default function() {
 		}
 	})
 
-	const { button:sendButton } = buildWidgetDOM.call(this, blocks)
+	buildWidgetDOM.call(this, blocks)
 
-	return { inputs, sendButton }
+	// return { inputs, sendButton }
 }

@@ -10,4 +10,6 @@ export default {
 	currentCity: false,
 	coverage: true,
 	collector: false,
+	comment: false,
+	other: false
 }

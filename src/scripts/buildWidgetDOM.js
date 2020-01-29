@@ -1,3 +1,5 @@
+import buttonClickAction from './buttonClickAction'
+
 export default function(blocks) {
 
 	const form = $('<div>', {
@@ -28,5 +30,5 @@ export default function(blocks) {
 
 	$(this.node).append(formBlock)
 
-	return { button }
+	button.on('click', buttonClickAction.bind(this))
 }

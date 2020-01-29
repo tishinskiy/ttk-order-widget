@@ -2,17 +2,13 @@ import changeCity from './changeCity'
 
 export default function () {
 
-	// console.log('cityInit', this)
-
-	this.changeCity = changeCity
-
 	const node = $(this.store.readState().city.node)
 
 	const current = this.store.readState().params.currentCity
 
 	if (current) {
 
-		this.changeCity(current)
+		changeCity.call(this, current)
 	}
 
 	if (node.val() !== '') {
