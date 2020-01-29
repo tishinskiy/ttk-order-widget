@@ -41,9 +41,6 @@ export default function(){
 			break
 
 		case 'phone': 
-
-			// buildingDropDown.call(this)
-			console.log(1111111)
 			phoneMask.call(this)
 
 			break

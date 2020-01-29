@@ -9,4 +9,5 @@ export default {
 	hideCity: false,
 	currentCity: false,
 	coverage: true,
+	collector: false,
 }

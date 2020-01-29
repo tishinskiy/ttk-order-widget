@@ -1,6 +1,7 @@
 import sortItems from './sortItems'
 import streetDropDown from './streetDropDown'
 import buildingDropDown from './buildingDropDown'
+import phoneMask from './phoneMask'
 
 export default function(){
 
@@ -52,6 +53,11 @@ export default function(){
 			}
 
 			buildingDropDown.call(this)
+
+			break
+
+		case 'phone': 
+			phoneMask.call(this)
 
 			break
 

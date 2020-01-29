@@ -105,6 +105,14 @@ export default function(name){
 			break
 		}
 
+		case 'phone': 
+			if ($(node).val() === '+7 (') {
+				$(node).val('')
+				$(node).next('.ttk__input__fake').remove()
+			}
+
+			break
+
 		default:
 			break
 	}
