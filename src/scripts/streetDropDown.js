@@ -1,5 +1,5 @@
 import sortItems from './sortItems'
-import jsonpRequest from './jsonpReqyest'
+import jsonpRequest from './jsonpRequest'
 import scrollDroplist from './scrollDroplist'
 import { typeInValue } from './streetTypes'
 
@@ -10,18 +10,7 @@ export default function(){
 	const city =  this.store.readState().city.readState().current
 	const requests = this.store.readState().Requests
 
-	if (!city) {
-		this.store.updateState(state => ({
-			...state,
-			error: {
-				code: 'err_2',
-				node: this.store.readState().city.readState().node
-			}
-		}))
-		this.observable.eventEmitter('showError')
-		$(node).blur()
-		return false
-	}
+	if (!this.store.readState().city.readState().Input.errorRevision()) return false
 
 	if ($(node).val().length < 3) {
 		$(node).siblings('.ttk__input__droplist').remove()
@@ -31,7 +20,7 @@ export default function(){
 	let str = $(this.node).val()
 
 	const type = typeInValue(str)
-	
+
 	if (!!type) {
 
 		this.type = typeInValue(str)

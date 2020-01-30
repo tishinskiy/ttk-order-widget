@@ -1,4 +1,4 @@
-import jsonpRequest from './jsonpReqyest'
+import jsonpRequest from './jsonpRequest'
 import addDropDown from './addDropDown'
 import scrollDroplist from './scrollDroplist'
 

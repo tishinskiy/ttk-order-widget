@@ -20,8 +20,8 @@ const jsonpRequest = async function(url, data = {}) {
 
 		})
 	}).then(
-		result => (result),
-		error => (error)
+		result => result,
+		error => error
 	)
 
 	const result = await promise

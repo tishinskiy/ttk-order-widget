@@ -30,6 +30,7 @@ export const fields = [
 	{
 		name: 'family',
 		label: 'Фамилия',
+		minLength: 2,
 		maxlength: 20,
 		language: 'ru',
 		droplist: false
@@ -37,6 +38,7 @@ export const fields = [
 	{
 		name: 'name',
 		label: 'Имя',
+		minLength: 2,
 		maxlength: 20,
 		language: 'ru',
 		droplist: false
@@ -44,6 +46,7 @@ export const fields = [
 	{
 		name: 'phone',
 		label: 'Телефон',
+		minLength: 17,
 		droplist: false
 	}
 ]

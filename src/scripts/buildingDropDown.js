@@ -1,5 +1,5 @@
 import sortItems from './sortItems'
-import jsonpRequest from './jsonpReqyest'
+import jsonpRequest from './jsonpRequest'
 import scrollDroplist from './scrollDroplist'
 import { typeInValue } from './streetTypes'
 
@@ -15,31 +15,8 @@ export default function() {
 	let str = $(this.node).val()
 
 
-	if (!city) {
-		this.store.updateState(state => ({
-			...state,
-			error: {
-				code: 'err_2',
-				node: this.store.readState().city.readState().node
-			}
-		}))
-		this.observable.eventEmitter('showError')
-		$(node).blur()
-		return false
-	}
-
-	if (!street) {
-		this.store.updateState(state => ({
-			...state,
-			error: {
-				code: 'err_3',
-				node: this.store.readState().street.readState().node
-			}
-		}))
-		this.observable.eventEmitter('showError')
-		$(node).blur()
-		return false
-	}
+	if (!this.store.readState().city.readState().Input.errorRevision()) return false
+	if (!this.store.readState().street.readState().Input.errorRevision()) return false
 
 	if (str.length < 1) return false
 

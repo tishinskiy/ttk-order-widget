@@ -23,6 +23,10 @@ export default function() {
 
 			Input.lang = field.language
 		}
+		if (field.minLength) {
+
+			Input.minLength = field.minLength
+		}
 	})
 
 	buildWidgetDOM.call(this, blocks)

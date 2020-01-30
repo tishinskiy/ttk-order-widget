@@ -11,9 +11,7 @@ export default function(){
 	$(this.node).removeClass('ttk__input--error')
 
 
-	const thas = this
 	const store = this.store.readState()[this.name]
-	const requests = this.store.readState().Requests
 
 	store.updateState(state => ({
 		...state,
@@ -28,19 +26,27 @@ export default function(){
 
 			break
 
-		case 'street': 
+		case 'street':
 
 			streetDropDown.call(this)
 
 			break
 
-		case 'building': 
+		case 'building':
 
 			buildingDropDown.call(this)
 
 			break
 
-		case 'phone': 
+		case 'apartment':
+
+			if (this.store.readState().city.readState().Input.errorRevision()) return false
+			if (this.store.readState().street.readState().Input.errorRevision()) return false
+			if (this.store.readState().building.readState().Input.errorRevision()) return false
+
+			break
+
+		case 'phone':
 			phoneMask.call(this)
 
 			break

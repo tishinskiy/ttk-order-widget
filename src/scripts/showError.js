@@ -11,7 +11,7 @@ export default function() {
 	const block = (() => {
 
 		if (!$(this.node).find('.ttk__error__wrap').length) {
-			
+
 			const block = $('<diV>', {
 				class: 'ttk__error__wrap',
 			}).append(
@@ -31,10 +31,8 @@ export default function() {
 	})()
 
 	block.on('click', function(){
-		console.log(4444444444)
 		block.slideUp(200)
 	})
-
 
 	const error = this.store.readState().error
 
@@ -52,5 +50,5 @@ export default function() {
 
 			content.html('')
 		})
-	}, 1500)
+	}, 2000)
 }

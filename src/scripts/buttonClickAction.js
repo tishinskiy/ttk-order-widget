@@ -1,16 +1,32 @@
-import errorsRevision from './errorsRevision'
+import jsonpRequest from './jsonpRequest'
+
+const sendWidget = async (data, url) => {
+	try {
+
+		const result = await jsonpRequest(url, data)
+		return result
+	} catch(e) {
+		console.log('err => ', e)
+		return e
+	}
+}
 
 export default function() {
+
 	const store = this.store.readState()
+
+	if (!store.city.readState().Input.errorRevision()) return false
+	if (!store.street.readState().Input.errorRevision()) return false
+	if (!store.building.readState().Input.errorRevision()) return false
+	if (!store.apartment.readState().Input.errorRevision()) return false
+	if (!store.family.readState().Input.errorRevision()) return false
+	if (!store.name.readState().Input.errorRevision()) return false
+	if (!store.phone.readState().Input.errorRevision()) return false
+
 	const City = store.city.readState().current
 	const Street = store.street.readState().current
 	const Building = store.building.readState().current
-	const ofice = store.apartment.readState().node.value
-	const name = store.name.readState().node.value
-	const family = store.family.readState().node.value
-	const phone = store.phone.readState().node.value
 
-	errorsRevision.call(this)
 
 	const sendData = {
 
@@ -19,9 +35,10 @@ export default function() {
 		street: `${Street['TYPE_NAME']} ${Street['STREET_NAME']}`,
 		building: Building['FULL_NAME'],
 		Building_ID: Building['BUILDING_ID'],
-		ofice,
-		family,
-		phone,
+		ofice: store.apartment.readState().node.value,
+		family: store.family.readState().node.value,
+		name: store.name.readState().node.value,
+		phone: store.phone.readState().node.value,
 	}
 
 	const params = this.store.readState().params
@@ -39,5 +56,9 @@ export default function() {
 		}
 	}
 
-	console.log('sendData', sendData)
+	;(async () => {
+
+		const result = await sendWidget(sendData, 'http://localhost:7000/jsonp/200')
+		console.log(result)
+	})()
 }
