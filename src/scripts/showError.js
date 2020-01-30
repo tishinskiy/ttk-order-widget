@@ -1,6 +1,4 @@
 import errors from './errors'
-// let code
-
 export default function() {
 
 	if (this.timer) {

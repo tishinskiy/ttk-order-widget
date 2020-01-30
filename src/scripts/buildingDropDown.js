@@ -2,21 +2,19 @@ import sortItems from './sortItems'
 import jsonpRequest from './jsonpRequest'
 import scrollDroplist from './scrollDroplist'
 import { typeInValue } from './streetTypes'
-import {fieldsRevision} from './buttonClickAction'
+import fieldsRevision from './fieldsRevision'
 
 export default function() {
 
-	const thas = this
 	const node = this.node
 	const Store = this.store.readState()[this.name]
-	const city = this.store.readState().city.readState().current
 	const street = this.store.readState().street.readState().current
 	const requests = this.store.readState().Requests
 
-	let str = $(this.node).val()
+	let str = $(node).val()
 
 
-	if (!fieldsRevision.call(this['city', 'street'])) return false
+	if (!fieldsRevision.call(this, ['city', 'street'])) return false
 
 	if (str.length < 1) return false
 

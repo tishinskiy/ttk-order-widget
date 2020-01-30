@@ -2,6 +2,7 @@ import fieldsActionFocus from './fieldsActionFocus'
 import fieldsActionFocusout from './fieldsActionFocusout'
 import fieldsActionInpit from './fieldsActionInpit'
 import scrollDroplist from './scrollDroplist'
+
 let timer
 
 export default function(e) {
@@ -79,7 +80,7 @@ export default function(e) {
 					}
 
 					if ($(node).val() !== '') {
-						
+
 						$(`[tabindex=${1 + +$(node).attr('tabindex')}]`).focus()
 					}
 

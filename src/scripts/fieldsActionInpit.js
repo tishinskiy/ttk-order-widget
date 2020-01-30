@@ -2,12 +2,18 @@ import sortItems from './sortItems'
 import streetDropDown from './streetDropDown'
 import buildingDropDown from './buildingDropDown'
 import phoneMask from './phoneMask'
+import { getCaretPosition, setCaretPosition } from './inputCaretPosition'
 
 export default function(){
 
+
 	const node = this.node
 
+	const caret = getCaretPosition(node)
+
 	$(node).val($(node).val().replace(/^\s*/,''))
+
+	setCaretPosition($(node), caret)
 
 	const Store = this.store.readState()[this.name]
 
@@ -55,8 +61,19 @@ export default function(){
 			buildingDropDown.call(this)
 
 			break
+		case 'family':
+		case 'name':
+		const str = $(node).val().replace(/\d/,'')
 
-		case 'phone': 
+			if (str.length) {
+				$(node).val(str[0].toUpperCase() + str.slice(1))
+				console.log('caret', caret)
+				setCaretPosition(node, caret)
+			}
+
+			break
+
+		case 'phone':
 			phoneMask.call(this)
 
 			break

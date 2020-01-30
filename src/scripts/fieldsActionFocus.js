@@ -2,7 +2,7 @@ import cityDropDown from './cityDropDown'
 import streetDropDown from './streetDropDown'
 import buildingDropDown from './buildingDropDown'
 import phoneMask from './phoneMask'
-import {fieldsRevision} from './buttonClickAction'
+import fieldsRevision from './fieldsRevision'
 
 
 export default function(){

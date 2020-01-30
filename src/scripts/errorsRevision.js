@@ -1,4 +1,5 @@
 export default function() {
+
 	if (this.node.value === '') {
 		this.store.updateState(state => ({
 			...state,
@@ -16,6 +17,7 @@ export default function() {
 			...state,
 			error: {
 				code: `err_${this.name}`,
+				node: this.node
 			}
 		}))
 		this.observable.eventEmitter('showError')
@@ -27,6 +29,7 @@ export default function() {
 			...state,
 			error: {
 				code: `err_${this.name}`,
+				node: this.node
 			}
 		}))
 		this.observable.eventEmitter('showError')

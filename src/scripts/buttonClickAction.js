@@ -1,4 +1,5 @@
 import jsonpRequest from './jsonpRequest'
+import fieldsRevision from './fieldsRevision'
 
 const sendWidget = async (data, url) => {
 	try {
@@ -11,27 +12,6 @@ const sendWidget = async (data, url) => {
 	}
 }
 
-const fieldsRevision = function(fields) {
-
-	const store = this.store.readState()
-	let result = true
-	const revision = (item) => store[item].readState().Input.errorRevision()
-
-	if (typeof fields == 'string') {
-		return revision(fields)
-	}
-
-	for (let i = 0; i < fields.length; i++) {
-
-		if (!revision(fields[i])) {
-
-			result = false
-			break
-		}
-	}
-
-	return result
-}
 
 export default function() {
 
@@ -67,7 +47,7 @@ export default function() {
 
 	if (params.other && typeof params.other === 'object') {
 		for (let key in params.other) {
-			console.log(key, typeof params.other[key])
+
 			if (typeof sendData[key] === 'undefined' && (typeof params.other[key] === 'string')) {
 				sendData[key] = params.other[key]
 			}

@@ -10,7 +10,7 @@ const buildValue = (value, str) => {
 
 		const start = value.toLowerCase().indexOf(str.toLowerCase())
 		const finish = start + str.length
-		
+
 		return `${value.slice(0, start)}<span class="ttk__droplist-item--blue">${value.slice(start, finish)}</span>${value.slice(finish, value.length)}`
 	}
 }
@@ -63,7 +63,7 @@ export default function () {
 
 			break
 
-		case 'street': 
+		case 'street':
 
 			return list.map(item => {
 
@@ -146,11 +146,4 @@ export default function () {
 
 
 	}
-
-	// if (name) {
-
-
-	// } else {
-	// 	return false
-	// }
 }
