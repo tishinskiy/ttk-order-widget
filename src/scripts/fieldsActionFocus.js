@@ -2,6 +2,8 @@ import cityDropDown from './cityDropDown'
 import streetDropDown from './streetDropDown'
 import buildingDropDown from './buildingDropDown'
 import phoneMask from './phoneMask'
+import {fieldsRevision} from './buttonClickAction'
+
 
 export default function(){
 
@@ -40,9 +42,8 @@ export default function(){
 
 		case 'apartment':
 
-			if (this.store.readState().city.readState().Input.errorRevision()) return false
-			if (this.store.readState().street.readState().Input.errorRevision()) return false
-			if (this.store.readState().building.readState().Input.errorRevision()) return false
+
+			if (!fieldsRevision.call(this, ['city', 'street', 'building'])) return false
 
 			break
 

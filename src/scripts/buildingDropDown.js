@@ -2,6 +2,7 @@ import sortItems from './sortItems'
 import jsonpRequest from './jsonpRequest'
 import scrollDroplist from './scrollDroplist'
 import { typeInValue } from './streetTypes'
+import {fieldsRevision} from './buttonClickAction'
 
 export default function() {
 
@@ -15,8 +16,7 @@ export default function() {
 	let str = $(this.node).val()
 
 
-	if (!this.store.readState().city.readState().Input.errorRevision()) return false
-	if (!this.store.readState().street.readState().Input.errorRevision()) return false
+	if (!fieldsRevision.call(this['city', 'street'])) return false
 
 	if (str.length < 1) return false
 

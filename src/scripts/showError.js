@@ -46,9 +46,6 @@ export default function() {
 	}
 
 	this.timer = setTimeout(() => {
-		block.slideUp('fast', () => {
-
-			content.html('')
-		})
+		block.slideUp('fast')
 	}, 2000)
 }

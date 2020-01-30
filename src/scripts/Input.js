@@ -7,11 +7,6 @@ import errorRevision from './errorsRevision'
 
 import addDropDown from './addDropDown'
 
-const test = function (name) {
-
-		console.log(11111111, this.name)
-}
-
 export class Input {
 
 	constructor(node = $(), name = false, options = {}) {

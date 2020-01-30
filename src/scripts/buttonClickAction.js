@@ -11,17 +11,35 @@ const sendWidget = async (data, url) => {
 	}
 }
 
+const fieldsRevision = function(fields) {
+
+	const store = this.store.readState()
+	let result = true
+	const revision = (item) => store[item].readState().Input.errorRevision()
+
+	if (typeof fields == 'string') {
+		return revision(fields)
+	}
+
+	for (let i = 0; i < fields.length; i++) {
+
+		if (!revision(fields[i])) {
+
+			result = false
+			break
+		}
+	}
+
+	return result
+}
+
 export default function() {
 
 	const store = this.store.readState()
 
-	if (!store.city.readState().Input.errorRevision()) return false
-	if (!store.street.readState().Input.errorRevision()) return false
-	if (!store.building.readState().Input.errorRevision()) return false
-	if (!store.apartment.readState().Input.errorRevision()) return false
-	if (!store.family.readState().Input.errorRevision()) return false
-	if (!store.name.readState().Input.errorRevision()) return false
-	if (!store.phone.readState().Input.errorRevision()) return false
+
+	if (!fieldsRevision.call(this, ['city', 'street', 'building', 'apartment', 'family', 'name', 'phone'])) return false
+
 
 	const City = store.city.readState().current
 	const Street = store.street.readState().current
@@ -62,3 +80,5 @@ export default function() {
 		console.log(result)
 	})()
 }
+
+export { fieldsRevision }
