@@ -67,7 +67,6 @@ export default function(){
 
 			if (str.length) {
 				$(node).val(str[0].toUpperCase() + str.slice(1))
-				console.log('caret', caret)
 				setCaretPosition(node, caret)
 			}
 

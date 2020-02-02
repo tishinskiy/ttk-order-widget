@@ -5,6 +5,7 @@ import cityInit from './cityInit'
 import { Observable, Observer } from './Observer'
 import { Store } from './Store'
 import { Input } from './Input'
+import { showPreloader } from './messages'
 
 export class Widget {
 
@@ -45,6 +46,8 @@ export class Widget {
 			event: 'showError',
 			action: this.showError
 		})
+
+		this.showPreloader = showPreloader
 	}
 	
 	createInput(node = $('<input>'), name = 'undefined') {
