@@ -1,5 +1,5 @@
-@keyframes ttk__preloader 
-	from 
+@keyframes ttk__preloader
+	from
 		transform: rotate(0deg)
 
 	to
@@ -17,6 +17,9 @@
 		height: 100%
 		// background: rgba(255, 255, 255, 0.85)
 		z-index: 1
+		display: flex
+		justify-content: center
+		align-items: center
 
 		.ttk__preloader
 			position: absolute
@@ -36,3 +39,27 @@
 			animation-name: ttk__preloader
 			animation-iteration-count: infinite
 			animation-timing-function: linear
+
+	.ttk__message
+		margin: 0 20px
+		text-align: center
+		background: #fff
+		padding: 20px
+		box-shadow: 0px 10px 10px 5px rgba(0, 0, 0, 0.5)
+		position: relative
+
+		&:before,
+		&:after
+			content: ''
+			position: absolute
+			top: 15px
+			right: 10px
+			width: 15px
+			height: 2px
+			background: #444
+
+		&:before
+			transform: rotate(45deg)
+		&:after
+			transform: rotate(-45deg)
+

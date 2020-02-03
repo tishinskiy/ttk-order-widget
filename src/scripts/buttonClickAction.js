@@ -1,5 +1,7 @@
 import jsonpRequest from './jsonpRequest'
 import fieldsRevision from './fieldsRevision'
+import { showPreloader, showMessage } from './messages'
+import changeCity from './changeCity'
 
 const sendWidget = async (data, url) => {
 	try {
@@ -39,7 +41,7 @@ export default function() {
 		phone: store.phone.readState().node.value,
 	}
 
-	this.showPreloader()
+	showPreloader.call(this)
 
 	const params = this.store.readState().params
 
@@ -58,9 +60,18 @@ export default function() {
 
 	;(async () => {
 
-		const result = await sendWidget(sendData, 'http://localhost:7000/jsonp/200')
-		console.log(result)
+		try {
+
+			const result = await sendWidget(sendData, 'http://localhost:7000/jsonp/200')
+
+			changeCity.call(this, false)
+
+			showMessage.call(this, 'В своём стремлении повысить качество жизни, они забывают, что социально-экономическое развитие говорит о возможностях существующих финансовых и административных условий.')
+
+		} catch(e) {
+			showMessage.call(this, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, similique. Distinctio eaque quos fuga, esse sequi dicta voluptatem quibusdam laborum provident officiis ex saepe, accusamus quam, aspernatur et earum mollitia.')
+		}
+
 	})()
 }
 
-export { fieldsRevision }
