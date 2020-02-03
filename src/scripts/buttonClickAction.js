@@ -1,7 +1,6 @@
 import jsonpRequest from './jsonpRequest'
 import fieldsRevision from './fieldsRevision'
 import { showPreloader, showMessage } from './messages'
-import changeCity from './changeCity'
 
 const sendWidget = async (data, url) => {
 	try {
@@ -9,7 +8,7 @@ const sendWidget = async (data, url) => {
 		const result = await jsonpRequest(url, data)
 		return result
 	} catch(e) {
-		console.log('err => ', e)
+
 		return e
 	}
 }
@@ -64,9 +63,16 @@ export default function() {
 
 			const result = await sendWidget(sendData, 'http://localhost:7000/jsonp/200')
 
-			changeCity.call(this, false)
 
 			showMessage.call(this, 'В своём стремлении повысить качество жизни, они забывают, что социально-экономическое развитие говорит о возможностях существующих финансовых и административных условий.')
+
+			if (!store.params.thankyouUrl) {
+
+				this.observable.eventEmitter('clearForm')
+
+			} else {
+				document.location.href = store.params.thankyouUrl
+			}
 
 		} catch(e) {
 			showMessage.call(this, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, similique. Distinctio eaque quos fuga, esse sequi dicta voluptatem quibusdam laborum provident officiis ex saepe, accusamus quam, aspernatur et earum mollitia.')

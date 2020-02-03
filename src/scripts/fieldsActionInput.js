@@ -76,6 +76,7 @@ export default function(){
 			break
 
 		case 'phone':
+
 			phoneMask.call(this)
 
 			break

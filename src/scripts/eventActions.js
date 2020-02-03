@@ -5,36 +5,71 @@ export default function() {
 	const store = input.store.readState()[input.name]
 	const inputCurrent = () => store.readState().current
 
+	const clear = () => {
+
+		if ($(node).val() != '') {
+
+			$(node).val('')
+			$(node).siblings('.ttk__input__label')
+				.removeClass('ttk__input__label--focused')
+
+			$(node).siblings('.ttk__input__fake').remove()
+
+		}
+
+		store.updateState(state => ({
+			...state,
+			current: false
+		}))
+	}
 
 	switch (input.name) {
 
 		case 'city':
 
-			return {
+			const go = (next) => {
+				$(node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
+				$(node).siblings('.ttk__input__droplist').hide()
+				$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
+				store.updateState(state => ({
+					...state,
+					itemClick: next
+				}))
+			}
+
+			return [{
 				event: 'changeCity',
 				action() {
 					const current = inputCurrent()
 					if (current) {
-						
 						$(node).val(current['EXTERNAL_NAME'])
 					}
 
-					$(node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
-					$(node).siblings('.ttk__input__droplist').hide()
-					$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
-					store.updateState(state => ({
-						...state,
-						itemClick: false
-					}))
+					go(current)
 				}
-			}
+			},
+			{
+				event: 'clearForm',
+				action() {
+					const stock = input.store.readState().params.currentCity
+					console.log('stock', stock)
+					if (stock) {
+
+						$(node).val(stock['EXTERNAL_NAME'])
+					} else {
+						$(node).val("")
+					}
+
+					go(stock)
+				}
+			}]
 			break
 
 		case 'street':
 
 			return [
 				{
-					event: 'changeCity',
+					event: ['changeCity', 'clearForm'],
 					action() {
 
 						$(node).val('')
@@ -57,7 +92,7 @@ export default function() {
 					action() {
 						const current = inputCurrent()
 						if (current) {
-							
+
 							$(node).val(current['STREET_NAME'])
 						}
 
@@ -80,21 +115,6 @@ export default function() {
 
 		case 'building':
 
-			const clear = () => {
-
-				if ($(node).val() != '') {
-
-					$(node).val('')
-					$(node).siblings('.ttk__input__label')
-						.removeClass('ttk__input__label--focused')
-				}
-
-				store.updateState(state => ({
-					...state,
-					current: false
-				}))
-			}
-
 			return [
 
 				{
@@ -103,7 +123,7 @@ export default function() {
 						const current = inputCurrent()
 
 						if (current) {
-							
+
 							$(node).val(current['FULL_NAME'])
 						}
 
@@ -139,11 +159,7 @@ export default function() {
 					}
 				},
 				{
-					event: 'changeCity',
-					action: clear
-				},
-				{
-					event: 'changeStreet',
+					event: ['changeCity', 'changeStreet', 'clearForm'],
 					action: clear
 				},
 			]
@@ -151,7 +167,11 @@ export default function() {
 			break
 
 		default:
-			return false
+
+			return {
+				event: 'clearForm',
+				action: clear
+			}
 			break
 	}
 }

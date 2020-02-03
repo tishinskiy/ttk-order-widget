@@ -7,7 +7,22 @@ export class Observable {
 
 	addObserver(observer) {
 
-		this.observers.add(observer);
+		if (typeof observer.event == 'string') {
+
+			this.observers.add(observer);
+		}
+
+		if (typeof observer.event == 'object' && !!observer.event.length) {
+
+			observer.event.forEach(event => {
+
+
+				this.addObserver({
+					event,
+					action: observer.action
+				})
+			})
+		}
 	}
 
 	removeObserver(observer) {
@@ -36,7 +51,6 @@ export class Observable {
 
 export const Observer = function( behavior ) {
 
-	console.log('behavior', behavior)
 	this.event = behavior.event
 	this.action = function(){
 		behavior.action()
