@@ -1,6 +1,6 @@
 import fieldsActionFocus from './fieldsActionFocus'
 import fieldsActionFocusout from './fieldsActionFocusout'
-import fieldsActionInpit from './fieldsActionInpit'
+import fieldsActionInput from './fieldsActionInput'
 import scrollDroplist from './scrollDroplist'
 
 let timer
@@ -13,7 +13,7 @@ export default function(e) {
 
 	$(node)
 
-		.on('input', fieldsActionInpit.bind(this))
+		.on('input', fieldsActionInput.bind(this))
 
 		.on('focus', fieldsActionFocus.bind(this))
 

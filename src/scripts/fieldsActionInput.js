@@ -11,9 +11,9 @@ export default function(){
 
 	const caret = getCaretPosition(node)
 
-	$(node).val($(node).val().replace(/^\s*/,''))
+	// $(node).val($(node).val().replace(/^\s*/,''))
 
-	setCaretPosition($(node), caret)
+	// setCaretPosition($(node), caret - 1)
 
 	const Store = this.store.readState()[this.name]
 
@@ -63,12 +63,14 @@ export default function(){
 			break
 		case 'family':
 		case 'name':
-		const str = $(node).val().replace(/\d/,'')
+
+			const str = $(node).val().replace(/^[\s|-]/gi, '').replace(/[^А-Яа-яЁё|\s|-]/gi, '').replace('  ', ' ').replace('--', '-')
 
 			if (str.length) {
 				$(node).val(str[0].toUpperCase() + str.slice(1))
-				console.log('caret', caret)
 				setCaretPosition(node, caret)
+			} else {
+				$(node).val('')
 			}
 
 			break
