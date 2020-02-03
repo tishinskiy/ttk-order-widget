@@ -39,6 +39,8 @@ export default function() {
 		phone: store.phone.readState().node.value,
 	}
 
+	this.showPreloader()
+
 	const params = this.store.readState().params
 
 	if (params.comment && (typeof params.comment === 'string') && params.comment !== '') {
