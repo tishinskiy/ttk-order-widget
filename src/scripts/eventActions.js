@@ -31,10 +31,6 @@ export default function() {
 				$(node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
 				$(node).siblings('.ttk__input__droplist').hide()
 				$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
-				store.updateState(state => ({
-					...state,
-					itemClick: next
-				}))
 			}
 
 			return [{
@@ -45,14 +41,24 @@ export default function() {
 						$(node).val(current['EXTERNAL_NAME'])
 					}
 
-					go(current)
+					go()
+
+					store.updateState(state => ({
+						...state,
+						itemClick: false
+					}))
+
 				}
 			},
 			{
 				event: 'clearForm',
 				action() {
 					const stock = input.store.readState().params.currentCity
-					console.log('stock', stock)
+					input.store.readState().city.updateState(state => ({
+						...state,
+						current: stock
+					}))
+
 					if (stock) {
 
 						$(node).val(stock['EXTERNAL_NAME'])
@@ -60,7 +66,7 @@ export default function() {
 						$(node).val("")
 					}
 
-					go(stock)
+					go()
 				}
 			}]
 			break
