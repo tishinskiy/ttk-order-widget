@@ -15,7 +15,6 @@ const sendWidget = async (data, url) => {
 	}
 }
 
-
 export default function() {
 
 	const store = this.store.readState()
@@ -60,11 +59,9 @@ export default function() {
 
 	;(async () => {
 
-		// try {
+		try {
 
 			let url = false
-
-			console.log('Building', Building)
 
 			if (Building['TC'] === null) {
 
@@ -90,19 +87,27 @@ export default function() {
 
 			showPreloader.call(this)
 
-			const ttkUserFields = {
-				city: City,
-				street: Street,
-				building: Building,
-				apartment: sendData.ofice,
-				family: sendData.family,
-				name: sendData.name,
-				phone: sendData.phone,
+
+			if (params.writeCookie) {
+
+				const ttkUserFields = {
+					city: City,
+					street: Street,
+					building: Building,
+					apartment: sendData.ofice,
+					family: sendData.family,
+					name: sendData.name,
+					phone: sendData.phone,
+				}
+
+				setCookie('ttk_user_fields', JSON.stringify(ttkUserFields));
 			}
 
-			setCookie('ttk_user_fields', JSON.stringify(ttkUserFields));
-
 			const result = await sendWidget(sendData, url)
+
+			if (params.onComplite && typeof params.onComplite === 'function') {
+				params.onComplite()
+			}
 
 			showMessage.call(this, 'В своём стремлении повысить качество жизни, они забывают, что социально-экономическое развитие говорит о возможностях существующих финансовых и административных условий.')
 
@@ -114,10 +119,10 @@ export default function() {
 				document.location.href = store.params.thankyouUrl
 			}
 
-		// } catch(e) {
+		} catch(e) {
 
-		// 	showMessage.call(this, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, similique. Distinctio eaque quos fuga, esse sequi dicta voluptatem quibusdam laborum provident officiis ex saepe, accusamus quam, aspernatur et earum mollitia.')
-		// }
+			showMessage.call(this, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, similique. Distinctio eaque quos fuga, esse sequi dicta voluptatem quibusdam laborum provident officiis ex saepe, accusamus quam, aspernatur et earum mollitia.')
+		}
 
 	})()
 }

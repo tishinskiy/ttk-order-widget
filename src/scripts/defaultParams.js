@@ -14,6 +14,7 @@ export const params = {
 	other: false,
 	readCoockie: true,
 	writeCoockie: true,
+	onComplite: false,
 }
 
 export const strict = {

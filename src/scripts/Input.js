@@ -13,9 +13,9 @@ let ttkUserFields = false
 try {
 
 	ttkUserFields = JSON.parse(getCookie('ttk_user_fields'))
-} catch(e) {
+} catch(err) {
 
-	console.log('ttkUserFields', ttkUserFields)
+	console.log(err)
 }
 
 

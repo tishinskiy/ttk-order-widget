@@ -33,12 +33,16 @@
 				ip:'46.241.21.65',
 				ip_city: 'Новосибирск',
 			},
+			onComplite: () => {
+				console.log('onComplite')
+			}
 			// thankyouUrl: 'https://www.youtube.com/watch?v=LBsTaYM0bzc'
 		})
 		$('#order_2').ttkOrderWidget({
-			test: 5,
 			clear: false,
 			styles: false,
+			readCoockie: false,
+			writeCoockie: false,
 		})
 	</script>
 </body>
