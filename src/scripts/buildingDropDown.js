@@ -3,6 +3,7 @@ import jsonpRequest from './jsonpRequest'
 import scrollDroplist from './scrollDroplist'
 import { typeInValue } from './streetTypes'
 import fieldsRevision from './fieldsRevision'
+import {strict} from './defaultParams'
 
 export default function() {
 
@@ -22,7 +23,7 @@ export default function() {
 
 		try {
 
-			const result = await jsonpRequest('https://gate.myttk.ru/gate/jsonp/building.php', {
+			const result = await jsonpRequest(strict.api[this.name], {
 					street: street['STREET_ID'],
 				})
 
@@ -95,9 +96,9 @@ export default function() {
 			Result = await findBuildingInAPI()
 		}
 
+		this.dropList.createDropList(Result)
 		if (Result.length) {
 
-			this.dropList.createDropList(Result)
 			this.dropList.filterDropList(list => {
 
 

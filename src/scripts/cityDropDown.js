@@ -1,6 +1,7 @@
 import jsonpRequest from './jsonpRequest'
 import addDropDown from './addDropDown'
 import scrollDroplist from './scrollDroplist'
+import {strict} from './defaultParams'
 
 
 export default function() {
@@ -24,7 +25,7 @@ export default function() {
 
 			try {
 
-				const result = await jsonpRequest('https://gate.myttk.ru/gate/jsonp/city.php', {name: Store.readState()['EXTERNAL_NAME']})
+				const result = await jsonpRequest(strict.api[this.name], {name: Store.readState()['EXTERNAL_NAME']})
 
 				const results = {}
 

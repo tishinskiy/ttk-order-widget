@@ -1,6 +1,8 @@
 import jsonpRequest from './jsonpRequest'
 import fieldsRevision from './fieldsRevision'
 import { showPreloader, showMessage } from './messages'
+import { setCookie } from './coockie'
+
 
 const sendWidget = async (data, url) => {
 	try {
@@ -17,6 +19,8 @@ const sendWidget = async (data, url) => {
 export default function() {
 
 	const store = this.store.readState()
+
+	const params = store.params
 
 
 	if (!fieldsRevision.call(this, ['city', 'street', 'building', 'apartment', 'family', 'name', 'phone'])) return false
@@ -40,9 +44,6 @@ export default function() {
 		phone: store.phone.readState().node.value,
 	}
 
-	showPreloader.call(this)
-
-	const params = this.store.readState().params
 
 	if (params.comment && (typeof params.comment === 'string') && params.comment !== '') {
 		sendData.comment = params.comment
@@ -59,10 +60,49 @@ export default function() {
 
 	;(async () => {
 
-		try {
+		// try {
 
-			const result = await sendWidget(sendData, 'http://localhost:7000/jsonp/200')
+			let url = false
 
+			console.log('Building', Building)
+
+			if (Building['TC'] === null) {
+
+				if (params.coverage) {
+
+					this.store.updateState(state => ({
+						...state,
+						error: {
+							code: 'err_7',
+						}
+					}))
+					this.observable.eventEmitter('showError')
+					return false
+
+				} else {
+
+					url = params.collector ? params.collectorUrl : params.requestUrl
+				}
+			} else {
+
+				url = params.requestUrl
+			}
+
+			showPreloader.call(this)
+
+			const ttkUserFields = {
+				city: City,
+				street: Street,
+				building: Building,
+				apartment: sendData.ofice,
+				family: sendData.family,
+				name: sendData.name,
+				phone: sendData.phone,
+			}
+
+			setCookie('ttk_user_fields', JSON.stringify(ttkUserFields));
+
+			const result = await sendWidget(sendData, url)
 
 			showMessage.call(this, 'В своём стремлении повысить качество жизни, они забывают, что социально-экономическое развитие говорит о возможностях существующих финансовых и административных условий.')
 
@@ -74,9 +114,10 @@ export default function() {
 				document.location.href = store.params.thankyouUrl
 			}
 
-		} catch(e) {
-			showMessage.call(this, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, similique. Distinctio eaque quos fuga, esse sequi dicta voluptatem quibusdam laborum provident officiis ex saepe, accusamus quam, aspernatur et earum mollitia.')
-		}
+		// } catch(e) {
+
+		// 	showMessage.call(this, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, similique. Distinctio eaque quos fuga, esse sequi dicta voluptatem quibusdam laborum provident officiis ex saepe, accusamus quam, aspernatur et earum mollitia.')
+		// }
 
 	})()
 }

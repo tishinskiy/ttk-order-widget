@@ -1,4 +1,4 @@
-import defaultParams from './defaultParams'
+import { params, strict } from './defaultParams'
 import buildWidget from './buildWidget'
 import showError from './showError'
 import cityInit from './cityInit'
@@ -9,11 +9,12 @@ import { Input } from './Input'
 
 export class Widget {
 
-	constructor(node = $('<div>'), params = {}) {
+	constructor(node = $('<div>'), data = {}) {
 
-		params = {
-			...defaultParams,
-			...params
+		const Params = {
+			...params,
+			...data,
+			...strict,
 		}
 
 		this.node = node;
@@ -21,7 +22,7 @@ export class Widget {
 		this.store.updateState(state => ({
 			...state,
 			Requests: new Store(),
-			params,
+			params: Params,
 			widget: this
 		}))
 

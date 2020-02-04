@@ -2,6 +2,7 @@ import sortItems from './sortItems'
 import jsonpRequest from './jsonpRequest'
 import scrollDroplist from './scrollDroplist'
 import { typeInValue } from './streetTypes'
+import {strict} from './defaultParams'
 
 export default function(){
 	const thas = this
@@ -37,7 +38,7 @@ export default function(){
 
 		try {
 
-			const result = await jsonpRequest('https://gate.myttk.ru/gate/jsonp/street.php', {
+			const result = await jsonpRequest(strict.api[this.name], {
 					city: city['INTERNAL_ID'],
 					search: str
 				})
@@ -113,9 +114,9 @@ export default function(){
 			Result = await findStreetInAPI(str)
 		}
 
+		this.dropList.createDropList(Result)
 		if (Result.length) {
 
-			this.dropList.createDropList(Result)
 			this.dropList.filterDropList(list => {
 
 				const newList = list.filter(item => {

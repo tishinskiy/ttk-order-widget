@@ -17,7 +17,6 @@ export default function(name){
 			// return false
 		} else {
 
-			console.log(77777777, $(node).val())
 			$(node).val() === '' ? func_2() : func_1()
 		}
 	}

@@ -42,7 +42,6 @@ export default function(){
 
 		case 'apartment':
 
-
 			if (!fieldsRevision.call(this, ['city', 'street', 'building'])) return false
 
 			break

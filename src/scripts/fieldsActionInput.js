@@ -17,6 +17,11 @@ export default function(){
 
 	const Store = this.store.readState()[this.name]
 
+	Store.updateState(state => ({
+		...state,
+		current: false
+	}))
+
 	if (this.lang) {
 
 		this.invertKeyboard()
