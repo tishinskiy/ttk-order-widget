@@ -2,7 +2,7 @@
 
 import path from 'path'
 // import nodeExternals from 'webpack-node-externals'
-// import TerserPlugin from 'terser-webpack-plugin'
+import TerserPlugin from 'terser-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 export default {
@@ -13,12 +13,30 @@ export default {
 		publicPath: '/',
 		contentBase: path.join(__dirname, 'public'),
 		port: 3000,
-		// hot: true
 	},
 
 	output: {
 		path: path.resolve(__dirname, './public'),
 		filename: 'order-widget_2.js'
+	},
+
+	optimization: {
+		minimize: true,
+		minimizer: [
+			new TerserPlugin({
+				extractComments: true,
+				// cache: true,
+				parallel: true,
+				// sourceMap: false,
+				terserOptions: {
+
+					extractComments: 'all',
+					compress: {
+						drop_console: true,
+					},
+				}
+			}),
+		],
 	},
 
 	module: {
@@ -35,21 +53,16 @@ export default {
 			{
 				test: /\.(c|s[ac])ss$/,
 				use: [
-					// MiniCssExtractPlugin.loader,
 					'style-loader',
 					'css-loader',
 					{
 						loader: 'sass-loader',
-						// options: {
-						// 	sourceMap: true,
-						// 	prependData: `@import "./__dev/styles/variables.scss";`
-						// }
 					}
 				]
 			},
 		]
 	},
-	
+
 	plugins: [
 		new HtmlWebpackPlugin({
 			template: path.join(__dirname, './public', 'index.html'),

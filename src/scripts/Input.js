@@ -49,7 +49,6 @@ export class Input {
 		if (this.store.readState().params.readCoockie && ttkUserFields && name in ttkUserFields) {
 
 			$(this.node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
-			$(this.node).closest('.ttk__input__wrap').addClass('ttk__input__wrap--focused')
 
 			if (typeof ttkUserFields[name] === 'string') {
 

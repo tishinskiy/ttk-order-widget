@@ -13,12 +13,21 @@ export default function(){
 
 	if (!this.store.readState().city.readState().Input.errorRevision()) return false
 
+	if ($(node).val().length == 0) {
+
+		$(node).siblings('label')
+			.html('Улица')
+			.removeClass('ttk__input__label--fixed')
+			this.type = null
+		return false
+	}
+
 	if ($(node).val().length < 3) {
 		$(node).siblings('.ttk__input__droplist').remove()
 		return false
 	}
 
-	let str = $(this.node).val()
+	let str = $(node).val()
 
 	const type = typeInValue(str)
 
@@ -29,8 +38,6 @@ export default function(){
 		$(node).val(str)
 		$(node).siblings('label').html(this.type[0].toUpperCase() + this.type.slice(1)).addClass('ttk__input__label--fixed')
 	}
-
-	if (str.length < 3) return false
 
 	const findStreetInAPI = async (str) => {
 

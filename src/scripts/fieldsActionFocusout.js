@@ -6,6 +6,8 @@ export default function(name){
 	const current = Store.readState().current
 	const changeEvent = `change${this.name[0].toUpperCase()}${this.name.slice(1)}`
 
+
+
 	const fieldAction = (func_1, func_2,) => {
 		if (Store.readState().itemClick) {
 			console.log(2222222)
@@ -44,6 +46,8 @@ export default function(name){
 
 		this.observable.eventEmitter(changeEvent)
 	}
+
+	// $(this.node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
 
 	switch (this.name) {
 		case 'city': {
