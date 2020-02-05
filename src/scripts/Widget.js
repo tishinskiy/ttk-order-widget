@@ -41,8 +41,11 @@ export class Widget {
 		}
 
 		buildWidget.call(this)
-		cityInit.call(this)
 
+		if (!this.store.readState().city.readState().current) {
+
+			cityInit.call(this)
+		}
 		this.addEmitter({
 			event: 'showError',
 			action: this.showError

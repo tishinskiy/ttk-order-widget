@@ -2,6 +2,8 @@ import buttonClickAction from './buttonClickAction'
 
 export default function(blocks) {
 
+	const params = this.store.readState().params
+
 	const form = $('<div>', {
 		class: 'ttk__form'
 	})
@@ -23,6 +25,17 @@ export default function(blocks) {
 	}).append(button)
 
 	for (let key in blocks) {
+
+		if (
+			key === 'city'
+			&& params.hideCity
+			&& typeof params.currentCity === 'object'
+			&& typeof params.currentCity['INTERNAL_ID'] === 'string'
+			&& typeof params.currentCity['EXTERNAL_ID'] === 'string'
+			&& typeof params.currentCity['EXTERNAL_NAME'] === 'string'
+		) {
+			blocks[key].css({display: 'none'})
+		}
 		form.append(blocks[key])
 	}
 

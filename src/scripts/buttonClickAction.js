@@ -88,7 +88,7 @@ export default function() {
 			showPreloader.call(this)
 
 
-			if (params.writeCookie) {
+			if (params.writeCoockie && !!Building && 'TC' in Building && Building['TC'] !== null) {
 
 				const ttkUserFields = {
 					city: City,
@@ -109,7 +109,7 @@ export default function() {
 				params.onComplite()
 			}
 
-			showMessage.call(this, 'В своём стремлении повысить качество жизни, они забывают, что социально-экономическое развитие говорит о возможностях существующих финансовых и административных условий.')
+			showMessage.call(this, '<h4>Спасибо! Мы приняли вашу заявку на подключение.</h4><br>Теперь просто дождитесь звонка - наш оператор позвонит вам в течении дня или в ближайший рабочий день, если вы оставили заявку в выходной.<br><a href="/">Перейти на главную страницу.</a>')
 
 			if (!store.params.thankyouUrl) {
 
@@ -121,7 +121,7 @@ export default function() {
 
 		} catch(e) {
 
-			showMessage.call(this, 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, similique. Distinctio eaque quos fuga, esse sequi dicta voluptatem quibusdam laborum provident officiis ex saepe, accusamus quam, aspernatur et earum mollitia.')
+			showMessage.call(this, 'Ошибка при создании заявки.<br>Попробуйте ещё раз.')
 		}
 
 	})()

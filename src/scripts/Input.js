@@ -7,15 +7,16 @@ import errorRevision from './errorsRevision'
 
 import addDropDown from './addDropDown'
 import { getCookie } from './coockie'
-let ttkUserFields = false
 
+let ttkUserFields = false
 
 try {
 
 	ttkUserFields = JSON.parse(getCookie('ttk_user_fields'))
+
 } catch(err) {
 
-	console.log(err)
+	console.log('Coockie ttk_user_fields not found !')
 }
 
 
