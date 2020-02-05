@@ -2,6 +2,7 @@ import { params, strict } from './defaultParams'
 import buildWidget from './buildWidget'
 import showError from './showError'
 import cityInit from './cityInit'
+import adaptation from './adaptation'
 import { Observable, Observer } from './Observer'
 import { Store } from './Store'
 import { Input } from './Input'
@@ -50,6 +51,11 @@ export class Widget {
 			event: 'showError',
 			action: this.showError
 		})
+
+		if (!!Params.styles) {
+
+			adaptation.call(this)
+		}
 
 	}
 

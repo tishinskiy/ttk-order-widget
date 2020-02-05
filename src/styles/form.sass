@@ -1,7 +1,12 @@
 .ttk__order-widget
-	
+
 	.ttk__form__wrap
 		transition: 0.2s linear
+
+	.ttk__form
+		display: flex
+		flex-flow: row wrap
+		justify-content: center
 
 	.ttk__input__wrap
 		position: relative
@@ -9,6 +14,7 @@
 		border-radius: 3px
 		margin: 10px 0
 		z-index: 1
+		flex-basis: 100%
 
 	.ttk__input__wrap--focused
 		z-index: 5
@@ -24,7 +30,7 @@
 		z-index: 3
 		background-color: transparent
 		border: 0
-		padding: 20px 15px 10px 
+		padding: 20px 15px 10px
 		border-radius: 3px
 		border: 1px solid #ccc
 		font-size: 16px
@@ -42,6 +48,8 @@
 		left: 0
 		color: #ccc
 		z-index: 1
+		border-color: transparent
+		padding-left: 16px
 
 	.ttk__input--error
 		border-color: #E21A1A
