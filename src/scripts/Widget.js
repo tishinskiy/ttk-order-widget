@@ -47,6 +47,7 @@ export class Widget {
 
 			cityInit.call(this)
 		}
+
 		this.addEmitter({
 			event: 'showError',
 			action: this.showError
@@ -55,6 +56,11 @@ export class Widget {
 		if (!!Params.styles) {
 
 			adaptation.call(this)
+		}
+
+		if (Params.hideCity === true && !!Params.styles === true) {
+
+			$(node).addClass('ttk__order-widget--hide-city')
 		}
 
 	}
