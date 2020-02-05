@@ -3,15 +3,12 @@
 
 	.ttk__input__wrap--building,
 	.ttk__input__wrap--apartment
-		flex-basis: 50%
+		flex-basis: calc(50% - 7px)
 
 	.ttk__input__wrap--building
-		padding-right: 7px
+		margin-right: 7px
 	.ttk__input__wrap--apartment
-		padding-left: 7px
-		.ttk__input__label
-			left: 22px
-
+		margin-left: 7px
 
 
 .ttk__order-widget--width-lm
@@ -24,20 +21,18 @@
 	.ttk__input__wrap--apartment,
 	.ttk__input__wrap--phone,
 	.ttk__input__wrap--button
-		flex-basis: 50%
+		flex-basis: calc(50% - 7px)
 
 	.ttk__input__wrap--city,
 	.ttk__input__wrap--building,
 	.ttk__input__wrap--family,
 	.ttk__input__wrap--phone
-		padding-right: 7px
+		margin-right: 7px
 	.ttk__input__wrap--street,
 	.ttk__input__wrap--apartment,
 	.ttk__input__wrap--name,
 	.ttk__input__wrap--button
-		padding-left: 7px
-		.ttk__input__label
-			left: 22px
+		margin-left: 7px
 
 
 .ttk__order-widget--width-md,
@@ -47,18 +42,19 @@
 	margin: 0 auto
 
 	.ttk__input__wrap--city,
-	.ttk__input__wrap--street,
-	.ttk__input__wrap--name,
 	.ttk__input__wrap--family,
-	.ttk__input__wrap--phone,
-	.ttk__input__wrap--button
-		flex-basis: 33.33%
+	.ttk__input__wrap--phone
+		flex-basis: calc(33.33% - 7px)
 
+	.ttk__input__wrap--name,
+	.ttk__input__wrap--button,
+	.ttk__input__wrap--street
+		flex-basis: calc(33.33% - 14px)
 	.ttk__input__wrap--building,
-		flex-basis: calc(20%)
+		flex-basis: calc(20% - 14px)
 
 	.ttk__input__wrap--apartment
-		flex-basis: calc(13.33%)
+		flex-basis: calc(13.33% - 7px)
 
 
 	.ttk__input__wrap--city,
@@ -67,7 +63,7 @@
 	.ttk__input__wrap--street,
 	.ttk__input__wrap--name,
 	.ttk__input__wrap--button
-		padding-right: 7px
+		margin-right: 7px
 
 	.ttk__input__wrap--phone,
 	.ttk__input__wrap--building,
@@ -75,9 +71,4 @@
 	.ttk__input__wrap--apartment,
 	.ttk__input__wrap--name,
 	.ttk__input__wrap--button
-		padding-left: 7px
-		.ttk__input__label
-			left: 22px
-		.ttk__input__fake
-			left: 7px
-			width: calc(100% - 7px)
+		margin-left: 7px
