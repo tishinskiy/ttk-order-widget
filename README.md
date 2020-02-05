@@ -2,7 +2,7 @@
 ### Описание
 Виджет для добавления на web страницах форм оформления заявки на подключение к сети ТТК.
 
-[Demo]: https://gate.myttk.ru/test/order_widget_2/
+[Demo](https://gate.myttk.ru/test/order_widget_2/)
 
 ### Подключение
 #### Требования:
