@@ -74,7 +74,7 @@ export default function() {
 						}
 					}))
 					this.observable.eventEmitter('showError')*/
-					showMessage.call(this, '<h4>Проверено</h4><br>Указанный адрес не подключен к сети.</a>')
+					showMessage.call(this, '<div class="ttk__modal__header">Проверено</div>Указанный адрес не подключен к сети.</a>')
 					return false
 
 				// } else {
@@ -135,7 +135,7 @@ export default function() {
 				button.on('click', params.onButtonAction)
 			}
 
-			showMessage.call(this, '<h4>Проверено</h4><br>По вашему адресу доступно подключение услуг ТТК.</a><br>', block.append(button)
+			showMessage.call(this, '<div class="ttk__modal__header">Проверено</div><br>По вашему адресу доступно подключение услуг ТТК.</a><br>', block.append(button)
 				)
 
 			if (params.onComplite) {
