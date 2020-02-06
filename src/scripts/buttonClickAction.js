@@ -33,7 +33,6 @@ export default function() {
 	}
 
 	const coockie = getCookie('ttk_user_fields')
-
 	const oldCoockie = !!coockie ? JSON.parse(coockie) : {}
 
 	setCookie('ttk_user_fields', JSON.stringify({
@@ -42,20 +41,18 @@ export default function() {
 	}));
 
 	const button = $('<button>', {
-
 		html: 'Выбрать тариф',
 		class: 'ttk__button ttk__button--modal',
 	})
 
 	const block = $('<div>', {
-
 		class: 'ttk__modal__button-wrap',
 	})
 
-	if (params.onButtonAction) {
-
+	if (typeof params.onButtonAction == 'function') {
+		console.log(1111111111)
 		button.on('click', () => {
-			params.onButtonAction
+			params.onButtonAction()
 			hideModal.call(this)
 		})
 	}
@@ -67,6 +64,4 @@ export default function() {
 
 		params.onComplite()
 	}
-
 }
-
