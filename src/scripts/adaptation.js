@@ -36,15 +36,15 @@ export default function() {
 
 	$(window).on('load resize', () => {
 
-		const newClass = `ttk__order-widget--width-${getStyle($(node).width())}`
+		const newClass = `ttk__coverage-widget--width-${getStyle($(node).width())}`
 
 		if (!($(node)).hasClass(newClass)) {
 
 			$(node)
 				.removeClass((index, className) => {
-					return (className.match (/(^|\s)ttk__order-widget--width-\S+/g) || []).join(' ');
+					return (className.match (/(^|\s)ttk__coverage-widget--width-\S+/g) || []).join(' ');
 				})
-				.addClass(`ttk__order-widget--width-${getStyle($(node).width())}`)
+				.addClass(`ttk__coverage-widget--width-${getStyle($(node).width())}`)
 		}
 	})
 }

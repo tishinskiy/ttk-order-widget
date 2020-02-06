@@ -27,7 +27,7 @@ export const fields = [
 		language: 'ru',
 		droplist: false
 	},
-	{
+/*	{
 		name: 'family',
 		label: 'Фамилия',
 		minLength: 2,
@@ -48,5 +48,5 @@ export const fields = [
 		label: 'Телефон',
 		minLength: 17,
 		droplist: false
-	}
+	}*/
 ]

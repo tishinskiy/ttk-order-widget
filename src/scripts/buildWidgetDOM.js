@@ -16,7 +16,8 @@ export default function(blocks) {
 	const button = $('<button>', {
 
 		class: 'ttk__button',
-		html: 'Отправить заявку',
+		html: 'Проверить',
+		tabindex: 920
 	})
 
 	const buttonBlock = $('<div>', {

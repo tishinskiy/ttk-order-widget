@@ -60,7 +60,7 @@ export class Widget {
 
 		if (Params.hideCity === true && !!Params.styles === true) {
 
-			$(node).addClass('ttk__order-widget--hide-city')
+			$(node).addClass('ttk__coverage-widget--hide-city')
 		}
 
 	}

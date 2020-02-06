@@ -1,10 +1,10 @@
-import jsonpRequest from './jsonpRequest'
+// import jsonpRequest from './jsonpRequest'
 import fieldsRevision from './fieldsRevision'
-import { showPreloader, showMessage } from './messages'
-import { setCookie } from './coockie'
+import { showMessage } from './messages'
+import { setCookie, getCookie } from './coockie'
 
 
-const sendWidget = async (data, url) => {
+/*const sendWidget = async (data, url) => {
 	try {
 
 		const result = await jsonpRequest(url, data)
@@ -13,7 +13,7 @@ const sendWidget = async (data, url) => {
 
 		return e
 	}
-}
+}*/
 
 export default function() {
 
@@ -22,7 +22,7 @@ export default function() {
 	const params = store.params
 
 
-	if (!fieldsRevision.call(this, ['city', 'street', 'building', 'apartment', 'family', 'name', 'phone'])) return false
+	if (!fieldsRevision.call(this, ['city', 'street', 'building', 'apartment'])) return false
 
 
 	const City = store.city.readState().current
@@ -30,7 +30,7 @@ export default function() {
 	const Building = store.building.readState().current
 
 
-	const sendData = {
+/*	const sendData = {
 
 		city: City['EXTERNAL_NAME'],
 		City_ID: City['EXTERNAL_ID'],
@@ -61,26 +61,28 @@ export default function() {
 
 		try {
 
-			let url = false
+			let url = false*/
 
 			if (Building['TC'] === null) {
 
-				if (params.coverage) {
+				// if (params.coverage) {
 
-					this.store.updateState(state => ({
+					/*this.store.updateState(state => ({
 						...state,
 						error: {
 							code: 'err_7',
 						}
 					}))
-					this.observable.eventEmitter('showError')
+					this.observable.eventEmitter('showError')*/
+					showMessage.call(this, '<h4>Проверено</h4><br>Указанный адрес не подключен к сети.</a>')
 					return false
 
-				} else {
+				// } else {
 
-					url = params.collector ? params.collectorUrl : params.requestUrl
-				}
-			} else {
+/*					url = params.collector ? params.collectorUrl : params.requestUrl
+				}*/
+			}
+/*			} else {
 
 				url = params.requestUrl
 			}
@@ -88,42 +90,72 @@ export default function() {
 			showPreloader.call(this)
 
 
-			if (params.writeCoockie && !!Building && 'TC' in Building && Building['TC'] !== null) {
+			if (params.writeCoockie && !!Building && 'TC' in Building && Building['TC'] !== null) {*/
 
 				const ttkUserFields = {
 					city: City,
 					street: Street,
 					building: Building,
-					apartment: sendData.ofice,
-					family: sendData.family,
+					apartment: store.apartment.readState().node.value,
+/*					family: sendData.family,
 					name: sendData.name,
-					phone: sendData.phone,
+					phone: sendData.phone,*/
 				}
 
-				setCookie('ttk_user_fields', JSON.stringify(ttkUserFields));
-			}
+
+				const coockie = getCookie('ttk_user_fields')
+
+				const oldCoockie = !!coockie ? JSON.parse(coockie) : {}
+
+				setCookie('ttk_user_fields', JSON.stringify({
+					...oldCoockie,
+					...ttkUserFields
+				}));
+/*			}
 
 			const result = await sendWidget(sendData, url)
 
 			if (params.onComplite && typeof params.onComplite === 'function') {
 				params.onComplite()
+			}*/
+
+			const button = $('<button>', {
+
+				html: 'Выбрать тариф',
+				class: 'ttk__button ttk__button--modal',
+			})
+
+			const block = $('<div>', {
+
+				class: 'ttk__modal__button-wrap',
+			})
+
+			if (params.onButtonAction) {
+
+				button.on('click', params.onButtonAction)
 			}
 
-			showMessage.call(this, '<h4>Спасибо! Мы приняли вашу заявку на подключение.</h4><br>Теперь просто дождитесь звонка - наш оператор позвонит вам в течении дня или в ближайший рабочий день, если вы оставили заявку в выходной.<br><a href="/">Перейти на главную страницу.</a>')
+			showMessage.call(this, '<h4>Проверено</h4><br>По вашему адресу доступно подключение услуг ТТК.</a><br>', block.append(button)
+				)
 
-			if (!store.params.thankyouUrl) {
+			if (params.onComplite) {
 
-				this.observable.eventEmitter('clearForm')
-
-			} else {
-				document.location.href = store.params.thankyouUrl
+				params.onComplite()
 			}
 
-		} catch(e) {
+	// 		if (!store.params.thankyouUrl) {
 
-			showMessage.call(this, 'Ошибка при создании заявки.<br>Попробуйте ещё раз.')
-		}
+	// 			this.observable.eventEmitter('clearForm')
 
-	})()
+	// 		} else {
+	// 			document.location.href = store.params.thankyouUrl
+	// 		}
+
+	// 	} catch(e) {
+
+	// 		showMessage.call(this, 'Ошибка при создании заявки.<br>Попробуйте ещё раз.')
+	// 	}
+
+	// })()
 }
 

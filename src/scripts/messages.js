@@ -35,7 +35,7 @@ export const hideModal = function() {
 	$(this.node).removeClass('ttk__order-widget--modal')
 }
 
-export const showMessage = function(message) {
+export const showMessage = function(message, obj) {
 
 	const content = $('<div>', {
 		class: 'ttk__message',
@@ -43,6 +43,12 @@ export const showMessage = function(message) {
 	})
 
 	hidePreloader.call(this)
+
+	if(typeof this.store.readState().params.onButtonAction === 'function' && !!obj) {
+
+		content.append(obj)
+	}
+
 
 	getModalWrap.call(this).html(content).on('click', hideModal.bind(this))
 }

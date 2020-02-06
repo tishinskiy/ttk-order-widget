@@ -1,17 +1,37 @@
-.ttk__order-widget--hide-city
+.ttk__coverage-widget--hide-city
 
-	&.ttk__order-widget--width-lm
+	&.ttk__coverage-widget--width-lm
 		.ttk__input__wrap--street
-			flex-basis: 100%
+			flex-basis: calc(50% - 7px)
 			margin-left: 0
+			margin-right: 7px
+
+		.ttk__input__wrap--building
+			flex-basis: calc(25% - 14px)
+			margin-left: 7px
+		.ttk__input__wrap--apartment
+			flex-basis: calc(25% - 7px)
 			margin-right: 0
 
+		.ttk__input__wrap--button
+			flex-basis: calc(50% - 14px)
 
-	&.ttk__order-widget--width-md,
-	&.ttk__order-widget--width-ld
+
+	&.ttk__coverage-widget--width-md,
+	&.ttk__coverage-widget--width-ld
 
 		.ttk__input__wrap--street
-			flex-basis: calc(66.66% - 7px)
+			flex-basis: calc(50% - 7px)
 			margin-right: 7px
 			margin-left: 0
+
+		.ttk__input__wrap--building,
+		.ttk__input__wrap--apartment
+			flex-basis: calc(50% / 3 - 14px)
+			margin-left: 7px
+			margin-right: 7px
+
+		.ttk__input__wrap--button
+			flex-basis: calc(50% / 3 - 7px)
+			margin-right: 0
 

@@ -1,4 +1,4 @@
-let tabindex = 1000
+let tabindex = 900
 const time = (new Date()).getTime()
 const createInput = (field,) => {
 

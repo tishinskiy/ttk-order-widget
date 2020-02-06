@@ -141,7 +141,7 @@ export default function() {
 							itemClick: false
 						}))
 
-						if(current['TC'] === null ) {
+/*						if(current['TC'] === null ) {
 
 							if (input.store.readState().params.collector) {
 
@@ -161,7 +161,7 @@ export default function() {
 								return false
 							}
 
-						}
+						}*/
 					}
 				},
 				{

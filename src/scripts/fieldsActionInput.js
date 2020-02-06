@@ -1,7 +1,7 @@
 import sortItems from './sortItems'
 import streetDropDown from './streetDropDown'
 import buildingDropDown from './buildingDropDown'
-import phoneMask from './phoneMask'
+// import phoneMask from './phoneMask'
 import { getCaretPosition, setCaretPosition } from './inputCaretPosition'
 
 export default function(){
@@ -80,11 +80,11 @@ export default function(){
 
 			break
 
-		case 'phone':
+		// case 'phone':
 
-			phoneMask.call(this)
+		// 	phoneMask.call(this)
 
-			break
+		// 	break
 
 		default:
 

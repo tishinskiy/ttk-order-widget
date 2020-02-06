@@ -7,7 +7,7 @@
 
 
 
-.ttk__order-widget
+.ttk__coverage-widget
 
 	.ttk__modal__wrap
 		position: absolute
@@ -42,11 +42,12 @@
 
 	.ttk__message
 		margin: 0 20px
-		text-align: center
+		text-align: left
 		background: #fff
-		padding: 20px
+		padding: 40px
 		box-shadow: 0px 10px 10px 5px rgba(0, 0, 0, 0.5)
 		position: relative
+		max-width: 400px
 
 		&:before,
 		&:after
@@ -62,4 +63,18 @@
 			transform: rotate(45deg)
 		&:after
 			transform: rotate(-45deg)
+
+		h4
+			text-transform: uppercase
+			font-size: 40px
+
+
+
+	.ttk__button--modal
+		display: inline-block
+		width: auto
+
+	.ttk__modal__button-wrap
+		// text-align: center
+		margin-top: 30px
 

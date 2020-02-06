@@ -17,7 +17,7 @@ export default {
 
 	output: {
 		path: path.resolve(__dirname, './public'),
-		filename: 'order-widget_2.js'
+		filename: 'coverage-widget.js'
 	},
 
 	optimization: {

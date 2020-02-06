@@ -10,13 +10,12 @@ export default function(name){
 
 	const fieldAction = (func_1, func_2,) => {
 		if (Store.readState().itemClick) {
-			console.log(2222222)
+
 			Store.updateState(state => ({
 				...state,
 				itemClick: false
 			}))
 
-			// return false
 		} else {
 
 			$(node).val() === '' ? func_2() : func_1()
@@ -47,7 +46,6 @@ export default function(name){
 		this.observable.eventEmitter(changeEvent)
 	}
 
-	// $(this.node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
 
 	switch (this.name) {
 		case 'city': {
@@ -60,7 +58,6 @@ export default function(name){
 
 			() => {
 
-				console.log(44444444)
 				$(node).val('current' in Store.readState() ? Store.readState().current['EXTERNAL_NAME'] : '')
 			})
 
@@ -110,13 +107,13 @@ export default function(name){
 			break
 		}
 
-		case 'phone':
+/*		case 'phone':
 			if ($(node).val() === '+7 (') {
 				$(node).val('')
 				$(node).next('.ttk__input__fake').remove()
 			}
 
-			break
+			break*/
 
 		default:
 			break

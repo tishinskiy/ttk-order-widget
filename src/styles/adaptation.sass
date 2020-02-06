@@ -1,5 +1,5 @@
-.ttk__order-widget--width-xs
-.ttk__order-widget--width-sm
+.ttk__coverage-widget--width-xs
+.ttk__coverage-widget--width-sm
 
 	.ttk__input__wrap--building,
 	.ttk__input__wrap--apartment
@@ -11,42 +11,36 @@
 		margin-left: 7px
 
 
-.ttk__order-widget--width-lm
+.ttk__coverage-widget--width-lm
 
 	.ttk__input__wrap--city,
 	.ttk__input__wrap--street,
-	.ttk__input__wrap--building,
-	.ttk__input__wrap--name,
-	.ttk__input__wrap--family,
-	.ttk__input__wrap--apartment,
-	.ttk__input__wrap--phone,
-	.ttk__input__wrap--button
 		flex-basis: calc(50% - 7px)
+	.ttk__input__wrap--building,
+	.ttk__input__wrap--apartment,
+	.ttk__input__wrap--button
+		flex-basis: calc(33% - 7px)
+	.ttk__input__wrap--apartment,
+		flex-basis: calc(33% - 14px)
 
 	.ttk__input__wrap--city,
 	.ttk__input__wrap--building,
-	.ttk__input__wrap--family,
-	.ttk__input__wrap--phone
+	.ttk__input__wrap--apartment,
 		margin-right: 7px
 	.ttk__input__wrap--street,
 	.ttk__input__wrap--apartment,
-	.ttk__input__wrap--name,
 	.ttk__input__wrap--button
 		margin-left: 7px
 
 
-.ttk__order-widget--width-md,
-.ttk__order-widget--width-ld
+.ttk__coverage-widget--width-md,
 
 	max-width: 1000px
 	margin: 0 auto
 
 	.ttk__input__wrap--city,
-	.ttk__input__wrap--family,
-	.ttk__input__wrap--phone
 		flex-basis: calc(33.33% - 7px)
 
-	.ttk__input__wrap--name,
 	.ttk__input__wrap--button,
 	.ttk__input__wrap--street
 		flex-basis: calc(33.33% - 14px)
@@ -58,17 +52,44 @@
 
 
 	.ttk__input__wrap--city,
-	.ttk__input__wrap--family,
 	.ttk__input__wrap--building,
 	.ttk__input__wrap--street,
-	.ttk__input__wrap--name,
 	.ttk__input__wrap--button
 		margin-right: 7px
 
-	.ttk__input__wrap--phone,
+	.ttk__input__wrap--street,
+	.ttk__input__wrap--building,
+	.ttk__input__wrap--apartment,
+	.ttk__input__wrap--button
+		margin-left: 7px
+
+.ttk__coverage-widget--width-ld
+
+	max-width: 1000px
+	margin: 0 auto
+
+	.ttk__input__wrap--city,
+		flex-basis: calc(55% / 2 - 7px)
+
+	.ttk__input__wrap--street
+		flex-basis: calc(55% / 2 - 14px)
+
+	.ttk__input__wrap--building,
+	.ttk__input__wrap--apartment
+		flex-basis: calc(15% - 14px)
+
+	.ttk__input__wrap--button
+		flex-basis: calc(15% - 7px)
+
+
+	.ttk__input__wrap--city,
+	.ttk__input__wrap--building,
+	.ttk__input__wrap--street,
+	.ttk__input__wrap--apartment
+		margin-right: 7px
+
 	.ttk__input__wrap--building,
 	.ttk__input__wrap--street,
 	.ttk__input__wrap--apartment,
-	.ttk__input__wrap--name,
 	.ttk__input__wrap--button
 		margin-left: 7px

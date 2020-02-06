@@ -4,11 +4,11 @@ import { Widget } from './scripts/Widget'
 
 ;(function($) {
 
-	$.fn.ttkOrderWidget = function(params) {
+	$.fn.ttkCoverageWidget = function(params) {
 
 
 		if ( params.styles !== false ) {
-			this.addClass('ttk__order-widget')
+			this.addClass('ttk__coverage-widget')
 		}
 		if ( params.clear !== false ) {
 			this.html('')
