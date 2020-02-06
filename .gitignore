@@ -3,3 +3,4 @@ dist/
 *sublime*
 *yarn*
 public/order-widget_2.js
+public/coverage-widget.js

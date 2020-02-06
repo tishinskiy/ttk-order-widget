@@ -14,6 +14,7 @@
 	<div id="order_2" class="order">hello</div>
 	<script src="jquery-3.4.1.min.js"></script>
 	<script src="order-widget_2.js"></script>
+	<script src="coverage-widget.js"></script>
 	<script>
 
 
@@ -31,17 +32,30 @@
 				ip:'46.241.21.65',
 				ip_city: 'Новосибирск',
 			},
-			hideCity: true,
+			// hideCity: true,
 			// readCoockie: false,
 			onComplite: () => {
 				console.log('onComplite')
 			}
 		})
-		$('#order_2').ttkOrderWidget({
-			clear: false,
-			styles: false,
-			readCoockie: false,
-			writeCoockie: false,
+		$('#order_2').ttkCoverageWidget({
+			hideCity: true,
+			currentCity: {
+				'INTERNAL_ID': "0000000005041083",
+				'EXTERNAL_ID': "7100150000000001761652",
+				'EXTERNAL_NAME': "Новосибирск",
+			},
+			// clear: false,
+			// styles: false,
+			// readCoockie: false,
+			// writeCoockie: false,
+			onComplite: () => {
+				console.log('onComplite')
+			},
+
+			onButtonAction: () => {
+				console.log('onButtonAction')
+			},
 		})
 	</script>
 </body>
