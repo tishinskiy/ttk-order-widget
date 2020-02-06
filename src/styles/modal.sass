@@ -16,10 +16,11 @@
 		width: 100%
 		height: 100%
 		// background: rgba(255, 255, 255, 0.85)
-		z-index: 1
+		z-index: 100
 		display: flex
 		justify-content: center
 		align-items: center
+		box-shadow: 0px 0px 0px 50000px rgba(0, 0, 0, 0.5), inset 0px 0px 0px 50000px rgba(0, 0, 0, 0.5)
 
 		.ttk__preloader
 			position: absolute
@@ -44,26 +45,49 @@
 		margin: 0 20px
 		text-align: left
 		max-width: 400px
-		background: #fff
 		padding: 40px
-		box-shadow: 0px 10px 10px 5px rgba(0, 0, 0, 0.5)
 		position: relative
+		background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHhtbDpzcGFjZT0ncHJlc2VydmUnIHdpZHRoPSc0MTY3cHgnIGhlaWdodD0nNDE2N3B4JyB2ZXJzaW9uPScxLjEnIHN0eWxlPSdzaGFwZS1yZW5kZXJpbmc6Z2VvbWV0cmljUHJlY2lzaW9uOyB0ZXh0LXJlbmRlcmluZzpnZW9tZXRyaWNQcmVjaXNpb247IGltYWdlLXJlbmRlcmluZzpvcHRpbWl6ZVF1YWxpdHk7IGZpbGwtcnVsZTpldmVub2RkOyBjbGlwLXJ1bGU6ZXZlbm9kZCcgdmlld0JveD0nMCAwIDIyNjgyMyAyMjY4MjMnIHhtbG5zOnhsaW5rPSdodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rJz48ZGVmcz48c3R5bGUgdHlwZT0ndGV4dC9jc3MnPjwhW0NEQVRBWy5maWwwIHtmaWxsOiNGRkZ9XV0+PC9zdHlsZT48L2RlZnM+PGc+IDxwb2x5Z29uIGNsYXNzPSdmaWwwJyBwb2ludHM9JzIwNzU0OCwwIDAsMCAwLDIyNjgyMyAyMjY4MjMsMjI2ODIzIDIyNjgyMywxOTI4OSAnLz48L2c+PC9zdmc+")
+		background-size: 750px 750px
+		background-position: top right
+		border-radius: 6px
 
+
+	.ttk__message__close
+		display: block
+		position: absolute
+		width: 30px
+		height: 30px
+		border: 0
+		border-radius: 50%
+		background: #fff
+		top: 0
+		right: 0
+		cursor: pointer
 
 		&:before,
 		&:after
 			content: ''
 			position: absolute
 			top: 15px
-			right: 10px
-			width: 15px
+			right: 15px
+			width: 16px
+			margin-top: -1px
+			margin-right: -8px
 			height: 2px
 			background: #444
 
-		&:before
+		&::before
 			transform: rotate(45deg)
-		&:after
+		&::after
 			transform: rotate(-45deg)
+
+		&:hover
+			background-color: #E21A1A
+
+			&::before,
+			&::after
+				background-color: #fff
 
 
 	.ttk__modal__header

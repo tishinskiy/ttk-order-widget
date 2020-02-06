@@ -37,19 +37,38 @@ export const hideModal = function() {
 
 export const showMessage = function(message, obj) {
 
+
 	const content = $('<div>', {
 		class: 'ttk__message',
 		html: message
 	})
 
+	const close = $('<button>', {
+		class: 'ttk__message__close'
+	})
+	close.on('click', () => {
+		hideModal.call(this)
+	})
+
 	hidePreloader.call(this)
+	content.append(close)
 
 	if(typeof this.store.readState().params.onButtonAction === 'function' && !!obj) {
 
 		content.append(obj)
 	}
 
+	getModalWrap.call(this).html(content)
 
-	getModalWrap.call(this).html(content).on('click', hideModal.bind(this))
+	setTimeout(() => {
+
+		$(window).on('click', (e) => {
+
+			if (!$(e.target).closest(content).length && content.is(':visible')) {
+
+				hideModal.call(this)
+			}
+		})
+	}, 0)
 }
 
