@@ -15,7 +15,10 @@ export default function() {
 	let str = $(node).val()
 
 
-	if (!fieldsRevision.call(this, ['city', 'street'])) return false
+	if (!fieldsRevision.call(this, ['city', 'street'])) {
+		$(node).blur()
+		return false
+	}
 
 	if (str.length < 1) return false
 

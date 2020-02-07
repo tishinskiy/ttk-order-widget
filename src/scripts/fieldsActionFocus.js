@@ -42,7 +42,11 @@ export default function(){
 
 		case 'apartment':
 
-			if (!fieldsRevision.call(this, ['city', 'street', 'building'])) return false
+			if (!fieldsRevision.call(this, ['city', 'street', 'building'])) {
+
+				$(this.node).blur()
+				return false
+			}
 
 			break
 
