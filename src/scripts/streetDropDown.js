@@ -11,7 +11,10 @@ export default function(){
 	const city =  this.store.readState().city.readState().current
 	const requests = this.store.readState().Requests
 
-	if (!this.store.readState().city.readState().Input.errorRevision()) return false
+	if (!this.store.readState().city.readState().Input.errorRevision()) {
+		$(node).blur()
+		return false
+	}
 
 	if ($(node).val().length == 0) {
 
