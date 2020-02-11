@@ -23,6 +23,6 @@ export const strict = {
 	},
 	requestUrl:   'https://myttk.ru/gate/jsonp/send.php',
 	// requestUrl: 'http://localhost:7000/jsonp/200',
-	collectorUrl: 'https://myttk.ru/gate/jsonp/send.php',
+	collectorUrl: 'https://myttk.ru/gate/jsonp/wrong.php',
 	// collectorUrl: 'http://localhost:7000/collector/200',
 }
