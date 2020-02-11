@@ -21,11 +21,12 @@ export default function(){
 		$(node).siblings('label')
 			.html('Улица')
 			.removeClass('ttk__input__label--fixed')
-			this.type = null
+			this.type = false
+			$(node).siblings('.ttk__input__droplist').remove()
 		return false
 	}
-
-	if ($(node).val().length < 3) {
+	console.log(44, this.type);
+	if ($(node).val().length < 3 && !this.type) {
 		$(node).siblings('.ttk__input__droplist').remove()
 		return false
 	}
@@ -40,6 +41,11 @@ export default function(){
 		str = str.slice(this.type.length + 1)
 		$(node).val(str)
 		$(node).siblings('label').html(this.type[0].toUpperCase() + this.type.slice(1)).addClass('ttk__input__label--fixed')
+	}
+
+	if ($(node).val().length < 3 && !this.type) {
+		$(node).siblings('.ttk__input__droplist').remove()
+		return false
 	}
 
 	const findStreetInAPI = async (str) => {
@@ -108,10 +114,13 @@ export default function(){
 
 		let Result
 
+
 		if ('street' in requests.readState()) {
 
+			const _str = !!this.type ? this.type.slice(0, 3).toLowerCase() : str.slice(0, 3).toLowerCase()
+			console.log('_str', _str);
 			const arr = requests.readState().street.filter(item => {
-				return item.city === city['EXTERNAL_ID'] && item.search === str.slice(0, 3).toLowerCase()
+				return item.city === city['EXTERNAL_ID'] && item.search === _str.slice(0, 3).toLowerCase()
 			})
 
 			if (arr.length) {
@@ -129,15 +138,25 @@ export default function(){
 
 			this.dropList.filterDropList(list => {
 
-				const newList = list.filter(item => {
-					return (item['STREET_NAME'].toLowerCase().indexOf(str.toLowerCase().slice(0, 3)) != -1)
+				const lastName = list.filter(item => {
+					return (item['STREET_NAME'].toLowerCase().indexOf(str.toLowerCase().slice(0, 3)) !== -1)
 				})
+				// console.log('newList', newList);
 
-				const sortArr = sortItems(newList, str, 'STREET_NAME')
-				const sortArrType = sortArr.filter(item => item['TYPE_NAME'].toLowerCase() === this.type)
-				const sortArrName = sortArr.filter(item => item['TYPE_NAME'].toLowerCase() !== this.type)
+				const listType = list.filter(item => {
+					return (item['TYPE_NAME'].toLowerCase().indexOf(str.toLowerCase()) === 0 && item['STREET_NAME'].toLowerCase().indexOf(str.toLowerCase().slice(0, 3)) === -1)
+				})
+				// console.log('listType', listType);
 
-				return !!this.type ? [...sortArrType, ...sortArrName] : [ ...sortArrName, ...sortArrType]
+				const sortArrName = sortItems(lastName, str, 'STREET_NAME')
+				const sortArrType = sortItems(listType, false, 'STREET_NAME')
+
+				// console.log('sortArrName', sortArrName);
+				// console.log('sortArrType', sortArrType);
+				// const sortArrType = sortArr2.filter(item => item['TYPE_NAME'].toLowerCase() === this.type)
+				// const sortArrName = sortArr.filter(item => item['TYPE_NAME'].toLowerCase() !== this.type)
+
+				return !!this.type ? [...sortArrType, ...sortArrName].slice(0, 300) : [ ...sortArrName, ...sortArrType].slice(0, 300)
 
 			})
 
