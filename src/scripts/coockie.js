@@ -9,6 +9,7 @@ const setCookie = (name, value, options = {}) => {
 
 	options = {
 		path: '/',
+		'max-age': 3600 * 24 * 30,
 		// при необходимости добавьте другие значения по умолчанию
 		...options
 	};
