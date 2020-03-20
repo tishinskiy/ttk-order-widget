@@ -1,4 +1,4 @@
-const getCookie = (name) => {
+const getCookie = (name, age=false) => {
 	let matches = document.cookie.match(new RegExp(
 		"(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
 	));
@@ -9,13 +9,12 @@ const setCookie = (name, value, options = {}) => {
 
 	options = {
 		path: '/',
-		'max-age': 3600 * 24 * 30,
-		// при необходимости добавьте другие значения по умолчанию
+		// 'max-age': 0,
 		...options
 	};
 
 	if ('expires' in options && options.expires.toUTCString) {
-	  options.expires = options.expires.toUTCString();
+		options.expires = options.expires.toUTCString();
 	}
 
 	let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);

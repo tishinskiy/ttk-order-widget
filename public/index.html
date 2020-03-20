@@ -8,10 +8,11 @@
 </head>
 <body>
 	<h1>12345</h1>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ea officia quibusdam, autem soluta dignissimos illum vitae pariatur quasi, temporibus quidem. Obcaecati impedit nam pariatur animi, eos maxime reiciendis culpa?</p>
-	<div id="order_1" class="order">hello</div>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, nihil quasi quos laboriosam delectus at ad reiciendis enim maxime, excepturi tempore corporis incidunt reprehenderit consectetur tempora suscipit temporibus aut obcaecati.</p>
 	<div id="order_2" class="order">hello</div>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ea officia quibusdam, autem soluta dignissimos illum vitae pariatur quasi, temporibus quidem. Obcaecati impedit nam pariatur animi, eos maxime reiciendis culpa?</p>
+	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, nihil quasi quos laboriosam delectus at ad reiciendis enim maxime, excepturi tempore corporis incidunt reprehenderit consectetur tempora suscipit temporibus aut obcaecati.</p>
+	<div id="order_1" class="order">hello</div>
+	<a href="ya.ru">ya.ru</a>
 	<script src="jquery-3.4.1.min.js"></script>
 	<script src="order-widget_2.js"></script>
 	<script src="coverage-widget.js"></script>
@@ -34,6 +35,9 @@
 			},
 			// hideCity: true,
 			// readCoockie: false,
+			readCoockie: false,
+			writeCoockie: false,
+			coockieAge: 3600 * 24 * 30,
 			onComplite: () => {
 				console.log('onComplite')
 			}
@@ -45,6 +49,7 @@
 				'EXTERNAL_ID': "7100150000000001761652",
 				'EXTERNAL_NAME': "Новосибирск",
 			},
+			coockieAge: 3600 * 24 * 30,
 			// clear: false,
 			// styles: false,
 			// readCoockie: false,

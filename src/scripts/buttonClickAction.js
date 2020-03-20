@@ -100,13 +100,21 @@ export default function() {
 					phone: sendData.phone,
 				}
 
-				setCookie('ttk_user_fields', JSON.stringify(ttkUserFields));
+				const options = 'coockieAge' in params ? {"max-age": params['coockieAge']} : {}
+
+				setCookie('ttk_user_fields', JSON.stringify(ttkUserFields), options);
 			}
 
 			const result = await sendWidget(sendData, url)
 
 			if (params.onComplite && typeof params.onComplite === 'function') {
-				params.onComplite()
+
+				try {
+
+					params.onComplite()
+				} catch(e) {
+					console.log(e)
+				}
 			}
 
 			showMessage.call(this, '<div class="ttk__modal__header">Отправлено</div>Спасибо! Мы приняли вашу заявку на подключение.<br>Теперь просто дождитесь звонка - наш оператор позвонит вам в течении дня или в ближайший рабочий день, если вы оставили заявку в выходной.<br><a href="/">Перейти на главную страницу.</a>')
@@ -120,7 +128,7 @@ export default function() {
 			}
 
 		} catch(e) {
-
+			console.log(e)
 			showMessage.call(this, '<div class="ttk__modal__header">Ошибка</div>При создании заявки что-то пошло не так.<br>Попробуйте ещё раз.')
 		}
 
