@@ -13,13 +13,11 @@ export default function () {
 
 	const lang = this.lang == 'ru' ? [en, ru] : [ru, en]
 
-	str = str.replace(/[!@#$%^&*+="~_`'"№;:?*{}\[\]<>|]/g, '')
-
 	let result = ''
 
 	str.split('').forEach(function(item, i, arr){
 
-		const pos = lang[0].indexOf(item.toLowerCase()) 
+		const pos = lang[0].indexOf(item.toLowerCase())
 
 		if (pos !== -1) {
 
@@ -30,5 +28,5 @@ export default function () {
 		}
 	})
 
-	$(this.node).val(result)
+	$(this.node).val(result.replace(/[!@#$%^&*+="~_`'"№;:?*{}\[\]<>|]/g, ''))
 }
