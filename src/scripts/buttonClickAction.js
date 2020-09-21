@@ -35,7 +35,10 @@ export default function() {
 	const coockie = getCookie('ttk_user_fields')
 	const oldCoockie = !!coockie ? JSON.parse(coockie) : {}
 
+	const options = 'coockieAge' in params ? {coockieAge: params['coockieAge']} : {}
+
 	setCookie('ttk_user_fields', JSON.stringify({
+		...params,
 		...oldCoockie,
 		...ttkUserFields
 	}));
@@ -50,7 +53,7 @@ export default function() {
 	})
 
 	if (typeof params.onButtonAction == 'function') {
-		console.log(1111111111)
+
 		button.on('click', () => {
 			params.onButtonAction()
 			hideModal.call(this)
@@ -61,7 +64,11 @@ export default function() {
 		)
 
 	if (params.onComplite) {
+		try {
 
-		params.onComplite()
+			params.onComplite()
+		} catch (e) {
+			console.log(e)
+		}
 	}
 }
