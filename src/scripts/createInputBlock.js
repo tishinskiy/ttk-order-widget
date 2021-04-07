@@ -15,6 +15,7 @@ const createInput = (field,) => {
 export default function(field) {
 
 	const input = createInput(field);
+	let timer
 
 	const block = $('<div>', {
 
@@ -22,7 +23,17 @@ export default function(field) {
 	}).append(input, $('<label>', {
 		html: field.label,
 		class: `ttk__input__label ttk__input__label--${field.name}`
-	}))
+	})).focusout((e) => {
+
+	timer = setTimeout(() => {
+		$(block).removeClass('ttk__input__wrap--focused')
+
+		$(block).find('.ttk__input__droplist').hide()
+	}, 500)
+
+	}).click(() => {
+		clearTimeout(timer)
+	})
 
 	return { input, block }
 }

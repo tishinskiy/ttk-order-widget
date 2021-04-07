@@ -37,12 +37,17 @@ export default function () {
 					key: item['EXTERNAL_ID']
 				})
 
+				// var evObj = document.createEvent('MouseEvents');
+				// evObj.initEvent( 'click', true, true );
+				// link[0].dispatchEvent(evObj);
 				link
-					.click(function() {
+					.click(function(e) {
+						setTimeout(() => {
 
-						$(this).closest('.ttk__input__droplist').css({
-							display: 'none'
-						})
+							$(this).closest('.ttk__input__droplist').css({
+								display: 'none'
+							})
+						}, 0)
 
 						changeCity.call(thas, item)
 
@@ -80,9 +85,12 @@ export default function () {
 				link
 					.click(function() {
 
-						$(this).closest('.ttk__input__droplist').css({
-							display: 'none'
-						})
+						setTimeout(() => {
+
+							$(this).closest('.ttk__input__droplist').css({
+								display: 'none'
+							})
+						}, 100)
 
 						changeStreet.call(thas, item)
 
@@ -118,9 +126,12 @@ export default function () {
 				link
 					.click(function() {
 
-						$(this).closest('.ttk__input__droplist').css({
-							display: 'none'
-						})
+						setTimeout(() => {
+
+							$(this).closest('.ttk__input__droplist').css({
+								display: 'none'
+							})
+						}, 100)
 
 						changeBuilding.call(thas, item)
 

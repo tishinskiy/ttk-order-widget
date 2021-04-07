@@ -32,7 +32,7 @@ export default function(name){
 
 		if (current && arr.length && arr[0][fieldId] === current[fieldId]) {
 			$(node).val(arr[0][fieldName])
-			$(node).siblings('.ttk__droplist').remove()
+			// $(node).siblings('.ttk__droplist').remove()
 			return false
 		}
 

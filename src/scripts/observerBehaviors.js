@@ -1,11 +1,11 @@
-import getObserver from './observer'
+import { Observer, Observable } from './observer'
 import { readStore } from './Store'
 
 export default function( inputs ) {
 
 	const Store = readStore.call(this)
 
-	const { Observer, Observable } = getObserver.call(this)
+	// const { Observer, Observable } = getObserver.call(this)
 
 	const changeCity = new Observer({
 		event: 'changeCity',
