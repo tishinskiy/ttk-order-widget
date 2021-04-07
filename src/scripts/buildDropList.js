@@ -31,18 +31,23 @@ export default function () {
 				const html = !!str ? buildValue(item['EXTERNAL_NAME'], str) : item['EXTERNAL_NAME']
 				const link = $('<a>', {
 
-					href: 'javascript:;',
+					href: 'javascript:void(0);',
 					html,
 					class:`ttk__droplist__item ttk__droplist__item--${name} ${item['EXTERNAL_ID'] === current['EXTERNAL_ID'] ? 'ttk__droplist__item--selected ttk__droplist__item--focused' : ''}`,
 					key: item['EXTERNAL_ID']
 				})
 
+				// var evObj = document.createEvent('MouseEvents');
+				// evObj.initEvent( 'click', true, true );
+				// link[0].dispatchEvent(evObj);
 				link
-					.click(function() {
+					.click(function(e) {
+						setTimeout(() => {
 
-						$(this).closest('.ttk__input__droplist').css({
-							display: 'none'
-						})
+							$(this).closest('.ttk__input__droplist').css({
+								display: 'none'
+							})
+						}, 0)
 
 						changeCity.call(thas, item)
 
@@ -80,9 +85,12 @@ export default function () {
 				link
 					.click(function() {
 
-						$(this).closest('.ttk__input__droplist').css({
-							display: 'none'
-						})
+						setTimeout(() => {
+
+							$(this).closest('.ttk__input__droplist').css({
+								display: 'none'
+							})
+						}, 100)
 
 						changeStreet.call(thas, item)
 
@@ -118,9 +126,12 @@ export default function () {
 				link
 					.click(function() {
 
-						$(this).closest('.ttk__input__droplist').css({
-							display: 'none'
-						})
+						setTimeout(() => {
+
+							$(this).closest('.ttk__input__droplist').css({
+								display: 'none'
+							})
+						}, 100)
 
 						changeBuilding.call(thas, item)
 

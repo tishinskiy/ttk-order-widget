@@ -29,8 +29,8 @@ export default function() {
 
 			const go = (next) => {
 				$(node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
-				$(node).siblings('.ttk__input__droplist').hide()
-				$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
+				// $(node).siblings('.ttk__input__droplist').hide()
+				// $(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
 			}
 
 			return [{
@@ -106,8 +106,11 @@ export default function() {
 							.addClass('ttk__input__label--focused')
 							.removeClass('.ttk__input__label--fixed')
 							.html(current['TYPE_NAME'])
-						$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
-						$(node).siblings('.ttk__input__droplist').hide()
+						// setTimeout(() => {
+
+						// 	$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
+						// 	$(node).siblings('.ttk__input__droplist').hide()
+						// },100)
 
 						store.updateState(state => ({
 							...state,
@@ -134,8 +137,8 @@ export default function() {
 						}
 
 						$(node).siblings('.ttk__input__label').addClass('ttk__input__label--focused')
-						$(node).siblings('.ttk__input__droplist').hide()
-						$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
+						// $(node).siblings('.ttk__input__droplist').hide()
+						// $(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
 						store.updateState(state => ({
 							...state,
 							itemClick: false

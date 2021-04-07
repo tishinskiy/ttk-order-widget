@@ -1,6 +1,11 @@
-node_modules/
-dist/
+# Folders
+/node_modules/
+/dist/
+
+# Files
 *sublime*
-*yarn*
 public/order-widget_2.js
 public/coverage-widget.js
+*.ini
+*.code-workspace
+*.ico

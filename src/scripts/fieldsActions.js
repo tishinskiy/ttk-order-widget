@@ -36,9 +36,9 @@ export default function(e) {
 				$(node).siblings('.ttk__input__label').removeClass('ttk__input__label--focused')
 			}
 
-			$(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
+			// $(node).closest('.ttk__input__wrap').removeClass('ttk__input__wrap--focused')
 
-			$(node).siblings('.ttk__input__droplist').hide()
+			// $(node).siblings('.ttk__input__droplist').hide()
 
 		})
 
